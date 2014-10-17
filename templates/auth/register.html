@@ -1,0 +1,61 @@
+{% extends "/base.html" %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/profile.css"/>
+{% endblock %}
+
+{% block left_menu %}{% endblock%}
+
+{% block content %}
+<div>
+    <h1>Регистрация</h1>
+
+    {% include "/auth/_errors.html" %}
+
+    <form id="profile-form" action="/register" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="label">Ник</div>
+            <div class="value"><input type="text" name="login" required="required" value="{{ info.login }}"/></div>
+        </div>
+
+        <div class="row">
+            <div class="label">Пароль</div>
+            <div class="value"><input type="password" name="password" value=""/></div>
+        </div>
+        <div class="row">
+            <div class="label">Ещё раз</div>
+            <div class="value"><input type="password" name="confirm" value=""/></div>
+        </div>
+
+        <div class="row">
+            <div class="label">Введите текст с&nbsp;картинки</div>
+            <div class="value">
+                <script type="text/javascript" src="{{env.request.protocol}}://www.google.com/recaptcha/api/challenge?k={{settings.recaptcha_public_key}}"></script>
+                <noscript>
+                    <iframe src="{{env.request.protocol}}://www.google.com/recaptcha/api/noscript?k={{settings.recaptcha_public_key}}" height="300" width="500" frameborder="0"></iframe><br>
+                    <textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
+                    <input type="hidden" name="recaptcha_response_field" value="manual_challenge">
+                </noscript>
+            </div>
+        </div>
+
+        {% include "/auth/_info.html" %}
+        </div>
+
+        <div class="row">
+            <div class="label"></div>
+            <div class="value">
+                <br/><br/>
+                <i>Регистрируясь на point.im, Вы автоматически принимаете <a href="//{{settings.domain}}/tos">Правила использования</a>.</i>
+            </div>
+        <div class="row">
+            <div class="label"></div>
+            <div class="value">
+                <input type="submit" value="Зарегистрироваться"/>
+            </div>
+        </div>
+    </form>
+
+    {% include "/auth/_ulogin.html" %}
+</div>
+{% endblock %}

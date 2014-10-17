@@ -1,0 +1,20 @@
+{% extends "/base.html" %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="/css/doc.css"/>
+{% endblock %}
+
+{% block title %}Контакты{% endblock %}
+
+{% block subheader %}
+    <a href="{{env.request.protocol}}://{{settings.domain}}/about">О проекте</a>
+    <a href="{{env.request.protocol}}://{{settings.domain}}/tos">Правила</a>
+    <a href="{{env.request.protocol}}://{{settings.domain}}/donate">Добро</a>
+    <span class="active">Контакты</span>
+{% endblock %}
+
+{% block content %}
+<h1>Контакты</h1>
+
+<p>По любым вопросам, связанным с проектом, Вы можете связаться с автором, написав ему на электропочту <a href="mailto:arts@point.im?Subject=Point.im">arts@point.im</a>, либо по тому же JID.</p>
+{% endblock %}

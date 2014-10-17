@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]>    <html class="no-js iem7"> <![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}POINT{% endblock %}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content=""/>
+        <meta name="MobileOptimized" content="176"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+        <link rel="shortcut icon" sizes="196x196" href="{{env.request.protocol}}://i.{{settings.domain}}/icon-196.png"/>
+        <link rel="shortcut icon" sizes="128x128" href="{{env.request.protocol}}://i.{{settings.domain}}/icon-128.png"/>
+        <link rel="apple-touch-icon" sizes="128x128" href="{{env.request.protocol}}://i.{{settings.domain}}/icon-128.png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="128x128" href="{{env.request.protocol}}://i.{{settings.domain}}/icon-128.png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{env.request.protocol}}://i.{{settings.domain}}/icon-144.png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{env.request.protocol}}://i.{{settings.domain}}/icon-114.png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{env.request.protocol}}://i.{{settings.domain}}/icon-72.png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{env.request.protocol}}://i.{{settings.domain}}/icon-57.png"/>
+
+        <!-- Tile icon for Win8 (144x144 + tile color) -->
+        <meta name="msapplication-TileImage" content="img/touch/apple-touch-icon-144x144-precomposed.png">
+        <meta name="msapplication-TileColor" content="#222222">
+
+
+        <link rel="stylesheet" href="{{env.request.protocol}}://{{settings.domain}}/css/normalize.css">
+        <link rel="stylesheet" href="{{env.request.protocol}}://{{settings.domain}}/css/main.css">
+        <!--[if IE]>
+        <style>
+            body {font-size:13px}
+        </style>
+        <![endif]-->
+        <!--<script src="{{env.request.protocol}}://{{settings.domain}}/js/modernizr-2.6.2.min.js"></script>-->
+        <script src="{{env.request.protocol}}://{{settings.domain}}/js/jquery-1.9.1.min.js"></script>
+        <script src="{{env.request.protocol}}://{{settings.domain}}/js/blog.js"></script>
+        <link rel="icon" type="image/png" href="{{env.request.protocol}}://{{settings.domain}}/img/favicon.png"/>
+
+
+        <link id="usercss-link" rel="stylesheet" type="text/css" href="{{ env.request.protocol }}{{settings.usercss_root}}/{{env.user.login}}.css"/>
+        {% block extra_head %}{% endblock %}
+    </head>
+    <body>
+        <div id="header-wrap">
+            <div id="header">
+                <a id="logo"{% if not env.user.id %} class="visible"{% endif %} href="{{env.request.protocol}}://{{settings.domain}}"><img src="/img/logo.png" alt="point.im"/></a>
+                {% if env.user.id %}
+                <label id="user-menu-label" for="user-menu-cb">
+                    <img class="avatar" src="{% if env.user.avatar %}{{ env.request.protocol }}{{ settings.avatars_root }}/24/{{env.user.avatar}}{% else %}/img/a/av24.png{% endif %}" alt="@{{env.user.login}}"/>
+                    <div id="name">
+                        <h1>{{ env.user.login }}</h1>
+                        <span>{{ env.user.get_info('name') }}</span>
+                    </div>
+                </label>
+                <input type="checkbox" id="user-menu-cb"/>
+                <div id="user-menu">
+                    <label id="user-menu-hide-label" for="user-menu-cb"></label>
+                    <div id="sections-menu">
+                        <a id="menu-recent"{% if section in ['recent_all', 'recent_posts', 'feeds'] and env.user==env.owner %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/recent">Лента</a>
+                        <a id="menu-blog"{% if section=='blog' and env.user==env.owner %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/">Блог</a>
+                        {#<a id="menu-feeds"{% if section=='feeds' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/feeds">Фиды</>#}
+                        <a id="menu-comments"{% if section=='comments' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/comments">Комментарии</a>
+                        <a id="menu-messages"{% if section=='messages' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/messages">Сообщения</a>
+                        <a id="menu-bookmarks"{% if section=='bookmarks' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/bookmarks">Закладки</a>
+                    </div>
+                    <a id="menu-profile" href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/profile">Профиль</a>
+                    <a id="menu-logout" href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/logout?csrf_token={{csrf_token()}}">Выйти</a>
+                </div>
+                <label id="user-menu-hide-back-label" for="user-menu-cb"></label>
+
+                <label id="new-post-label" for="new-post-cb" title="Новый пост"></label>
+
+                <label id="search-label" for="search-cb" title="Поиск"></label>
+                <input type="checkbox" id="search-cb"/>
+                <form class="search-form" action="{{env.request.protocol}}://{{settings.domain}}/search">
+                    <input type="submit" value=""/>
+                    <div>
+                        <input type="text" name="text" value="{{ search_text }}" placeholder="Поиск"/>
+                    </div>
+                    <label id="search-hide-label" for="search-cb"></label>
+                </form>
+
+                {% else %}
+                <div id="login-menu">
+                    <a id="menu-login" href="{{env.request.protocol}}://{{settings.domain}}/login" title="Войти"></a>
+                    <a id="menu-register" href="{{env.request.protocol}}://{{settings.domain}}/register" title="Зарегистрироваться"></a>
+                </div>
+                {% endif %}
+
+                <a id="top-link" href="#" title="Наверх"></a>
+            </div>
+        </div>
+        <div id="subheader-wrap">
+            <div id="subheader">
+                {% block subheader %}{% endblock %}
+            </div>
+        </div>
+
+        <div id="main-wrap" class="clearfix">
+            <div id="main">
+                {% block left_menu %}
+                <div id="left-menu">
+                    {% if env.user.id %}
+                        <h3 id="left-menu-my">Моё</h3>
+                        <a id="menu-recent"{% if section in ['recent_all', 'recent_posts', 'feeds'] and env.user==env.owner %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/recent">Лента</a>
+                        <a id="menu-blog"{% if section=='blog' and env.user==env.owner %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/">Блог</a>
+                        <a id="menu-comments"{% if section=='comments' %} class="active"{% endif %}  href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/comments">Комментарии</a>
+                        <a id="menu-messages"{% if section=='messages' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/messages">Сообщения</a>
+                        <a id="menu-bookmarks"{% if section=='bookmarks' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/bookmarks">Закладки</a>
+
+                        {% if False and section != 'feeds' and env.user.id==1 %}
+                        <h3 id="left-menu-feeds"><a href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/feeds">Фиды</a></h3>
+                        {% set feeds = env.user.subscriptions('feed') %}
+                        {% for feed in feeds|shuffle(10) %}
+                        <a class="left-menu-feed" href="{{env.request.protocol}}://{{feed.login|lower}}.{{settings.domain}}/">{{feed.info.name or feed.login}}</a>
+                        {% endfor %}
+                        <a class="left-menu-feed" id="left-menu-new-feed" href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/feeds/add">Добавить фид</a>
+                        {% if feeds|count > 2 %}
+                        <a class="more" href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/feeds">все фиды</a>
+                        {% endif %}
+                        {% endif %}
+
+                    {% else %}
+                        <a id="menu-login" href="{{env.request.protocol}}://{{settings.domain}}/login">Войти</a>
+                        <a id="menu-register" href="{{env.request.protocol}}://{{settings.domain}}/register">Зарегистрироваться</a>
+                    {% endif %}
+                    <a id="top-link" href="#" title="Наверх"></a>
+                </div>
+                {% endblock %}
+
+                <input type="checkbox" id="aside-toggle-cb"/>
+                {% block aside %}{% endblock %}
+
+                <div id="content">
+                    <div class="content-wrap">
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer">
+            <div id="menu">
+                <div>
+                    <a href="{{env.request.protocol}}://{{settings.domain}}/about">О проекте</a>
+                    {#<a href="{{env.request.protocol}}://{{settings.domain}}/blog">Блог</a>#}
+                    <a href="{{env.request.protocol}}://{{settings.domain}}/tos">Правила</a>
+                    <a href="{{env.request.protocol}}://{{settings.domain}}/donate">Добро</a>
+                </div>
+                <div>
+                    <a href="{{env.request.protocol}}://{{settings.domain}}/help/">Справка</a>
+                    <a href="{{env.request.protocol}}://{{settings.domain}}/help/apps">Приложения</a>
+                    <a href="{{env.request.protocol}}://{{settings.domain}}/help/commands">Команды</a>
+                    <a href="{{env.request.protocol}}://{{settings.domain}}/help/api">API</a>
+                    <a href="{{env.request.protocol}}://{{settings.domain}}/help/markdown">Markdown</a>
+                </div>
+                <div>
+                    <a href="{{env.request.protocol}}://{{settings.domain}}/contacts">Контакты</a>
+                    <a href="{{env.request.protocol}}://bitbucket.org/arts/point-issues">Сообщить об ошибке</a>
+                </div>
+                <div class="secret">
+                    <a href="{{env.request.protocol}}://{{settings.domain}}/all">Всё подряд</a>
+                </div>
+            </div>
+            <div id="copyright">
+                &copy; 2010&ndash;2014 A. Sazhin
+            </div>
+        </div>
+        {% block templates %}{% endblock %}
+
+        <input type="checkbox" id="new-post-cb"/>
+        <div id="new-post-wrap">
+            <form id="new-post-form" class="post-form" action="/post" method="post" enctype="multipart/form-data" autocomplete="off">
+                <h1>Добавить пост</h1>
+                <input type="checkbox" name="private" id="new-post-private-cb"/>
+                <label id="new-post-private-label" for="new-post-private-cb">Приватный</label>
+                <textarea id="text-input" name="text" placeholder="Текст">{% if env.owner and env.owner.id != env.user.id and env.owner.login %}@{{env.owner.login}}, {% endif %}</textarea>
+                <textarea id="tags-input" name="tags" placeholder="Теги (разделяются запятыми)"></textarea>
+                <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
+                <div class="attach">
+                    <input type="file" name="attach" multiple/>
+                    <div class="descr">Вы можете выбрать до 10 файлов общим размером не более 10 МБ.</div>
+                </div>
+                <div class="buttons">
+                    <label id="new-post-hide-label" for="new-post-cb">Отменить</label>
+                    <input type="submit" value="Создать"/>
+                </div>
+                <div class="footnote">
+                    Для форматирования текста используется <a href="{{env.request.protocol}}://{{settings.domain}}/help/markdown">Markdown</a>.
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

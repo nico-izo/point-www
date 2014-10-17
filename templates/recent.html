@@ -1,0 +1,54 @@
+{% extends "/blog.html" %}
+
+{% block title %}Лента подписок {{env.user.login}}{% if section=='recent_posts' %}: посты{% endif %}{% endblock %}
+
+{% block subheader %}
+{% if env.user and env.user.id==1 %}
+{% if section=='recent_all' %}
+<span class="active">Всё</span>
+{% else %}
+<a href="/">Всё</a>
+{% endif %}
+
+{% if section=='recent_posts' %}
+<span class="active">Посты</span>
+{% else %}
+<a href="/posts">Посты</a>
+{% endif %}
+
+{% if section=='feeds' %}
+<span class="active">Фиды</span>
+{% else %}
+<a href="/feeds">Фиды</a>
+{% endif %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+    {% if posts|count == 0 %}
+    <div class="no-posts">
+        <h2>Добро пожаловать в уютный поинт!</h2>
+        {% if env.owner.subs_count() == 0 %}
+        Вы ещё ни на кого не подписались, поэтому Ваша лента пуста.
+        {% else %}
+        Люди, на которых Вы подписаны, ещё ничего не написали, поэтому Ваша лента пуста.
+        {% endif %}
+        Вы можете воспользоваться <a href="{{env.request.protocol}}://{{settings.domain}}/search">поиском</a>,
+        чтобы найти посты на интересующие Вас темы, или посмотреть <a href="{{env.request.protocol}}://{{settings.domain}}/all">общую ленту постов</a>.
+    </div>
+    {% else %}
+    {{ post_list(posts) }}
+    {% endif %}
+
+    <div class="pager clearfix">
+        {% if section in ['recent', 'recent_all'] or not section %}
+            {% if page > 1 %}<a id="newer" href="/recent/{{page-1}}">Следующие</a>{% endif %}
+            {% if posts|count > settings.page_limit %}
+            <a id="older" href="/recent/{{page+1}}">Предыдущие</a>
+            <a id="more" href="/recent" data-page="{{page}}" data-page-limit="{{settings.page_limit}}">Ещё</a>
+            {% endif %}
+        {% endif %}
+    </div>
+
+{% endblock %}
