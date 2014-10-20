@@ -1,6 +1,6 @@
 workers = 8
 
-libs = ['/home/point/point/lib']
+libs = ['/home/point/core/lib']
 
 apps = ['views', 'api']
 
@@ -42,22 +42,22 @@ domain = 'point.im'
 lang = 'en'
 timezone = 'Europe/Moscow'
 
-template_path = '/home/point/point/www/templates'
+template_path = '/home/point/www/templates'
 
-avatars_path = '/home/point/point/www/static/img/a'
+avatars_path = '/home/point/img/a'
 avatars_root = '://i.point.im/a'
 
-thumbnail_path = '/home/point/point/www/static/img/t'
+thumbnail_path = '/home/point/img/t'
 thumbnail_root = '://i.point.im/t'
 thumbnail_size = [400, 300]
 
-media_path = '/home/point/point/www/static/img/m'
+media_path = '/home/point/img/m'
 media_root = '://i.point.im/m'
 
-blogcss_path = '/home/point/point/www/static/css/blogcss'
+blogcss_path = '/home/point/www/static/css/blogcss'
 blogcss_root = '://point.im/blogcss'
 
-usercss_path = '/home/point/point/www/static/css/usercss'
+usercss_path = '/home/point/www/static/css/usercss'
 usercss_root = '://point.im/usercss'
 
 imgproc_sock = '/tmp/imgproc.sock'
@@ -85,7 +85,7 @@ edit_distance = 10
 
 user_rename_timeout = 60 * 60 * 24
 
-stoplist_file = '/home/point/point/common/stoplist.txt'
+stoplist_file = '/home/point/core/stoplist.txt'
 stoplist_expire = 600 # 10 minutes
 
 doc_path = '/home/point/point-doc'
