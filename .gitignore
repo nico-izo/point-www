@@ -1,3 +1,5 @@
 *.pyc
 settings_local.py
 .vimrc
+
+static/files
