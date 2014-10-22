@@ -207,7 +207,7 @@
                 {% endif %}
             </div>
 
-            {% if post.author.login==env.user.login %}
+            {% if post.author.id==env.user.id %}
             <div class="edit-buttons">
                 {% if post.editable %}<a class="edit" href="{{env.request.protocol}}://{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/e" title="Редактировать"></a>{% endif %}
                 <a class="del" href="{{env.request.protocol}}://{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/d?csrf_token={{csrf_token()}}" title="Удалить пост" data-confirm="Вы действительно хотите удалить пост #{{post.id}}?"></a>
