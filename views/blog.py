@@ -456,13 +456,9 @@ def add_post():
 def add_comment(id):
     to_comment_id = env.request.args('comment_id')
     text = env.request.args('text', '').strip()
+    files = _files([])
 
     try:
-        if not text:
-            raise PostTextError
-
-        files = _files([])
-
         comment_id = posts.add_comment(id, to_comment_id, text, files=files)
     except PostTextError:
         return render('/comment-error.html')
