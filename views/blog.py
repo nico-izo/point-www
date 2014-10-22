@@ -396,10 +396,10 @@ def edit_post(id):
     def save(post):
         text = env.request.args('text', '').strip()
 
-        tags = env.request.args('tags', '').strip()
+        tags = env.request.args('tags', '').strip(' \t*,;')
         if isinstance(tags, str):
             tags = tags.decode('utf-8')
-        tags = [t.replace(u"\xa0", " ") for t in re.split(r'\s*[,;]\s*', tags)]
+        tags = [t.replace(u"\xa0", " ") for t in re.split(r'\s*[,;*]\s*', tags)]
 
         private = bool(env.request.args('private'))
 
@@ -428,10 +428,10 @@ def edit_post(id):
 def add_post():
     text = env.request.args('text', '').strip()
 
-    tags = env.request.args('tags', '').strip()
+    tags = env.request.args('tags', '').strip(' \t*,;')
     if isinstance(tags, str):
         tags = tags.decode('utf-8')
-    tags = [t.replace(u"\xa0", " ") for t in re.split(r'\s*[,;]\s*', tags)]
+    tags = [t.replace(u"\xa0", " ") for t in re.split(r'\s*[,;*]\s*', tags)]
 
     private = bool(env.request.args('private'))
 
