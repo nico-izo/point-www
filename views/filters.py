@@ -62,7 +62,7 @@ class UrlPattern(Pattern):
     def handleMatch(self, m):
         url = m.group('url')
 
-        imgm = re.search(r'\.(?P<ext>jpe?g|png|gif)(:large)?$', m.group('path'), re.I)
+        imgm = re.search(r'\.(?P<ext>jpe?g|png|gif)((:|%3a)large)?$', m.group('path'), re.I)
         if (imgm \
         or re.search("^http://ompldr.org/v[A-Z][a-zA-Z0-9]+$", url, re.I) \
         or url.startswith("http://img.leprosorium.com") \
@@ -78,7 +78,7 @@ class UrlPattern(Pattern):
                 a.set('class', 'postimg')
 
             img = etree.SubElement(a, 'img')
-            img.set('src', imgproc_url(url))
+            img.set('src', imgproc_url(re.sub(r'%3alarge', ':large', url, re.I)))
 
             return wrap
 
