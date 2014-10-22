@@ -1,8 +1,5 @@
 *.pyc
 settings_local.py
 .vimrc
-static/img/a
-static/img/t
-static/img/m
 static/css/usercss
 static/files
