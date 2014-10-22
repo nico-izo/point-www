@@ -4,7 +4,8 @@ from urllib import unquote_plus
 from hashlib import md5
 from point.util.env import env
 from point.core.user import User, UserNotFound
-from point.util import cache_get, cache_store, imgproc_url
+from point.util import cache_get, cache_store
+from point.util.imgproc import imgproc_url
 from point.util.md import CodeBacktick, SharpHeader, QuoteBlock, UrlColons, \
                           StrikePattern
 from geweb import log
