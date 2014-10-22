@@ -20,6 +20,11 @@
             <div class="value"><input type="text" name="login" required="required" value="{{ info.login }}"/></div>
         </div>
 
+        <div class="row">
+            <div class="label">E-mail</div>
+            <div class="value"><input type="text" name="email" value="{{ info.email or '' }}"/></div>
+        </div>
+
         {% include "/auth/_info.html" %}
 
         <div class="row">

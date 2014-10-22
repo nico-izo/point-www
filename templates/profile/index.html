@@ -106,18 +106,11 @@
         </div>
         <div class="row">
             <div class="label">E-mail</div>
-            <div class="value">
-            <input type="text" name="email" value="{% if info.email %}{{info.email}}{% endif %}"/>
-            <p class="descr">Это публичный e-mail, который отображается в информации о пользователе. Не обязателен.</p>
-            </div>
+            <div class="value"><input type="text" name="email" value="{% if info.email %}{{info.email}}{% endif %}"/></div>
         </div>
         <div class="row">
             <div class="label">JID</div>
-            <div class="value">
-                <input type="text" name="xmpp" value="{% if info.xmpp %}{{info.xmpp}}{% endif %}"/>
-                <p class="descr">Это публичный JID, который отображается в информации о пользователе, он не привязывается к аккаунту.<br/>
-                Для привязки JID'ов используйте вкладку <a href="/profile/accounts">&laquo;Аккаунты&raquo;</a>.</p>
-            </div>
+            <div class="value"><input type="text" name="xmpp" value="{% if info.xmpp %}{{info.xmpp}}{% endif %}"/></div>
         </div>
         <div class="row">
             <div class="label">Skype</div>

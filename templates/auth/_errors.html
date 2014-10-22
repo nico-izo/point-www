@@ -4,6 +4,11 @@
         {% if e=='login-empty' %}<li>Вы не ввели ник.</li>{% endif %}
         {% if e=='login-invalid' %}<li>Недопустимый ник. Используйте латинские буквы, цифры и знак "-" (дефис).</li>{% endif %}
         {% if e=='login-in-use' %}<li>Этот ник уже занят.</li>{% endif %}
+        {% if e=='email-empty' %}<li>Нужно ввести e-mail или JID.</li>{% endif %}
+        {% if e=='email-in-use' %}<li>Этот e-mail уже используется.</li>{% endif %}
+        {% if e=='invalid-email' %}<li>Недопустимый e-mail.</li>{% endif %}
+        {% if e=='jid-in-use' %}<li>Этот JID уже используется.</li>{% endif %}
+        {% if e=='invalid-jid' %}<li>Недопустимый JID.</li>{% endif %}
         {% if e=='password' %}<li>Вы не ввели пароль.</li>{% endif %}
         {% if e=='confirm' %}<li>Неверное подтверждение пароля.</li>{% endif %}
         {% if e=='captcha' %}<li>Неверный текст.</li>{% endif %}

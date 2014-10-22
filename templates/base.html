@@ -172,6 +172,7 @@
 
         <input type="checkbox" id="new-post-cb"/>
         <div id="new-post-wrap">
+            {% if env.user.is_activated() %}
             <form id="new-post-form" class="post-form" action="/post" method="post" enctype="multipart/form-data" autocomplete="off">
                 <h1>Добавить пост</h1>
                 <input type="checkbox" name="private" id="new-post-private-cb"/>
@@ -191,6 +192,20 @@
                     Для форматирования текста используется <a href="{{env.request.protocol}}://{{settings.domain}}/help/markdown">Markdown</a>.
                 </div>
             </form>
+            {% else %}
+            <form id="new-post-form" class="post-form">
+                <h1>Активация</h1>
+                <div class="clearfix" style="clear:both">
+                Для того, чтобы начать писать, Вам необходимо активировать аккаунт.<br/>
+                Пожалуйста, пройдите по ссылке, которую мы отправили при регистрации на Ваш {% if env.user.get_accounts('xmpp') %}JID{% else %}E-mail{% endif %}.
+                </div>
+
+                <div class="buttons">
+                    <label id="new-post-hide-label" for="new-post-cb">Понятно</label>
+                    <input type="submit" value="Отправить повторно"/>
+                </div>
+            </form>
+            {% endif %}
         </div>
     </body>
 </html>

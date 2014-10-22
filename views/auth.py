@@ -1,7 +1,8 @@
 from point.core.user import User, UserNotFound, UserExists, \
                             NotAuthorized, AlreadyAuthorized, \
-                            AddressNotFound
+                            AddressNotFound, AccountExists
 from point.app import users
+from point.util import parse_email
 from point.util.env import env
 from point.util.www import check_referer
 from point.util.redispool import RedisPool
@@ -211,7 +212,7 @@ def register():
 
     errors = []
 
-    for p in ['login', 'name', 'email', 'birthdate', 'location', 'about', 'homepage']:
+    for p in ['login', 'name', 'birthdate', 'location', 'about', 'homepage']:
         info[p] = env.request.args(p, '').decode('utf-8')
 
     info['gender'] = _gender(env.request.args('gender'))
@@ -240,6 +241,27 @@ def register():
     info['birthdate'] = parse_date(info['birthdate']) \
                             or datetime.now() - timedelta(days=365*16+4)
 
+    email = env.request.args('email', '').decode('utf-8').strip()
+    if email:
+        try:
+            env.user.add_account('email', email, confirmed=True)
+        except ValueError:
+            errors.append('invalid-email')
+        except AccountExists:
+            errors.append('email-in-use')
+
+    jid = env.request.args('jid', '').decode('utf-8').strip()
+    if jid:
+        try:
+            env.user.add_account('xmpp', jid, confirmed=True)
+        except ValueError:
+            errors.append('invalid-jid')
+        except AccountExists:
+            errors.append('jid-in-use')
+
+    if not email and not jid:
+        errors.append('email-empty')
+
     if not network and not errors:
         try:
             text = env.request.args('recaptcha_response_field')
@@ -259,6 +281,9 @@ def register():
                         (env.request.protocol, settings.domain))
 
     if errors:
+        info['email'] = email
+        info['jid'] = jid
+
         if network and uid:
             tmpl = '/auth/register_ulogin.html'
         else:
@@ -266,10 +291,13 @@ def register():
 
         return render(tmpl, fields=ULOGIN_FIELDS, info=info, errors=errors)
 
+    for p in ['name', 'birthdate', 'gender', 'location', 'about', 'homepage']:
+        env.user.set_info(p, info[p])
+
     users.register(login)
 
-    for p in ['name', 'email', 'birthdate', 'gender', 'location', 'about', 'homepage']:
-        env.user.set_info(p, info[p])
+    if email:
+        env.user
 
     if password:
         env.user.set_password(password)
