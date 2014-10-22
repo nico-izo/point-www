@@ -169,6 +169,38 @@ def all_posts(page=1):
 
     return render('/all_posts.html', section='all', posts=plist, page=page)
 
+@catch_errors
+def all_posts_rss():
+    plist = posts.select_posts(private=False, author_private=False,
+                               deny_anonymous=False, blacklist=True,
+                               limit=settings.page_limit*4)
+
+    feed = PyRSS2Gen.RSS2(
+            title="Point.im",
+            link='http://%s/' % (settings.domain),
+            description="Point.im")
+
+    for p in plist:
+        if 'comment_id' in p and p['comment_id']:
+            title='#%s/%s' % (p['post'].id, p['comment_id'])
+            link = 'http://%s/%s#%s' % \
+                    (settings.domain, p['post'].id, p['comment_id'])
+        else:
+            title='#%s' % p['post'].id
+            link = 'http://%s/%s' % (settings.domain, p['post'].id)
+
+        feed.items.append(PyRSS2Gen.RSSItem(
+            author=env.owner.login,
+            title=title,
+            link=link,
+            guid=link,
+            pubDate=p['post'].created,
+            categories=p['post'].tags,
+            description=render_string('/rss-text.html', p=p)
+        ))
+
+    return Response(feed.to_xml(), mimetype='application/rss+xml')
+
 def all_posts_warning():
     try:
         referer = env.request.args('referer')

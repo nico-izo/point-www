@@ -31,6 +31,7 @@ urls = (
 
     (r'^/all(?:/(?P<page>\d+))?/?$', blog.all_posts),
     (r'^/all/warning/?', blog.all_posts_warning),
+    (r'^/all/rss/?$', blog.all_posts_rss),
 
     (r'^/info/(?P<login>[-a-zA-Z0-9]+)?$', users.info),
     (r'^/avatar/(?P<login>[-a-zA-Z0-9]+)(?:/(?P<size>24|40|80))?/?$', users.avatar),
