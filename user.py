@@ -48,7 +48,7 @@ class WebUser(User):
 
     def authenticate(self, login=None, password=None):
         if login is not None:
-            res = db.fetchone("SELECT id FROM users.logins "
+            res = db.fetchone("SELECT id, login FROM users.logins "
                              "WHERE lower(login)=%s AND password=%s;",
                              [login.lower(), self._passhash(password)])
 
@@ -57,8 +57,8 @@ class WebUser(User):
                 self.login = None
                 raise NotAuthorized
 
-            self.id = res[0]
-            self.login = login
+            self.id = res['id']
+            self.login = res['login']
             self._get_avatar()
 
         elif not self.id:
