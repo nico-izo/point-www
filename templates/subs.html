@@ -148,7 +148,7 @@
         {% if tt.login %}<a class="user" href="{{env.request.protocol}}://{{tt.login}}.{{settings.domain}}/">{{tt.login}}</a>:{% endif %}
         {% for t in tt.tags %}
             <div class="tag">
-            <a class="del" href="{{env.request.protocol}}://{% if tt.login %}{{tt.login|lower}}.{% endif %}{{settings.domain}}/tag/ubl?tag={{t|urlencode}}&csrf_token={{csrf_token()}}" title="Отписаться" data-confirm="Вы действительно хотите отписаться от тега {{t}}?"></a>
+            <a class="del" href="{{env.request.protocol}}://{% if tt.login %}{{tt.login|lower}}.{% endif %}{{settings.domain}}/tag/ubl?tag={{t|urlencode}}&csrf_token={{csrf_token()}}" title="Удалить" data-confirm="Вы действительно хотите удалить тег {{t}} из чёрного списка?"></a>
             <a class="tag" href="{{env.request.protocol}}://{% if tt.login %}{{tt.login|lower}}.{% endif %}{{settings.domain}}/?tag={{t|urlencode}}">{{t}}</a>
             </div>
         {% endfor %}
