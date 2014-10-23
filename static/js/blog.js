@@ -6,7 +6,7 @@ $(document).ready(function(){
     });
 
     $(".post .reply-form textarea, #new-post-form textarea").on("keypress", function (evt) {
-        if ((evt.keyCode === 10 || evt.keyCode === 13) && evt.ctrlKey) {
+        if ((evt.keyCode === 10 || evt.keyCode === 13) && (evt.ctrlKey || evt.metaKey)) {
             evt.stopPropagation();
             evt.preventDefault();
             $(this).parents("form").submit();
