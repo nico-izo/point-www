@@ -1,9 +1,12 @@
 .post {
     position: relative;
-    margin: 0;
+    margin: 5px 0;
     box-sizing: border-box;
-    padding: 10px 0;
+    padding: 5px 0;
     border-bottom: solid 1px #f0f0f0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .post.private {
@@ -269,7 +272,7 @@
 
 .post .post-id a .unread {
     padding: 0 .5em;
-    font-weight: bold;
+    font-weight: normal;
     color: #35587c;
     background: #ebeef2;
 }
@@ -457,6 +460,11 @@
 
 .post .edit-buttons .del {
     background-image: url("//point.im/img/btn-del.png");
+}
+
+#comments .post.unread {
+    background: #fff8f0;
+    border: solid 1px #f4ead4;
 }
 
 /* Pager */

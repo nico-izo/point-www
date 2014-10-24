@@ -13,7 +13,8 @@ urls = (
     (r'^/t/(?:[0-9a-f]{2})/(?P<hash>[0-9a-f]{32})(?:\.jpg)?/?$', thumbnail),
     (r'^/usercss/(?P<login>[-a-zA-Z0-9]+)(?:\.css)?', users.usercss),
 
-    (r'^/messages(?:/(?P<page>\d+))?/?$', blog.messages_incoming),
+    (r'^/messages(?:/(?P<page>\d+))?/?$', blog.messages_new),
+    (r'^/messages/incoming(?:/(?P<page>\d+))?/?$', blog.messages_incoming),
     (r'^/messages/outgoing(?:/(?P<page>\d+))?/?$', blog.messages_outgoing),
 
     (r'^/comments(?:/(?P<page>\d+))?/?$', blog.comments),

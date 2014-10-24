@@ -213,6 +213,31 @@ def all_posts_warning():
 
 @catch_errors
 @check_auth
+def messages_new(page=1):
+    try:
+        page = int(page)
+    except (TypeError, ValueError):
+        page = 1
+    if not page:
+        page = 1
+
+    offset = (page - 1) * settings.page_limit
+
+    plist = posts.private_unread(offset=offset, limit=settings.page_limit+1)
+
+    if not plist and page == 1:
+        return Response(redirect='%s://%s/messages/incoming' % \
+                        (env.request.protocol, settings.domain))
+
+    if env.request.is_xhr:
+        for p in plist:
+            p['created'] = timestamp(p['created'])
+        return Response(json.dumps(plist), mimetype='application/json')
+
+    return render('/messages/index.html', section='messages', posts=plist, page=page)
+
+@catch_errors
+@check_auth
 def messages_incoming(page=1):
     try:
         page = int(page)
@@ -377,9 +402,11 @@ def show_post(id):
                 c.to_comment_id = None
         comments = filter(lambda c: not c.to_comment_id, cout.itervalues())
 
+    section = 'messages' if post.private else ''
+
     return render('/post.html', post=post, comments=comments,
                   comments_count=comments_count, tree=tree,
-                  errors=errors)
+                  errors=errors, section=section)
 
 def _files(files):
     if not files:

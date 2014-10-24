@@ -43,7 +43,11 @@
         {% block extra_head %}{% endblock %}
     </head>
     <body>
+        {% set unread_posts = env.user.unread_posts_count('post') %}
         {% set unread_comments = env.user.unread_comments_count('post') %}
+        {% set unread_private_posts = env.user.unread_posts_count('private') %}
+        {% set unread_private_comments = env.user.unread_comments_count('private') %}
+
         <div id="header-wrap">
             <div id="header">
                 <a id="logo"{% if not env.user.id %} class="visible"{% endif %} href="{{env.request.protocol}}://{{settings.domain}}"><img src="/img/logo.png" alt="point.im"/></a>
@@ -59,14 +63,26 @@
                 <div id="user-menu">
                     <label id="user-menu-hide-label" for="user-menu-cb"></label>
                     <div id="sections-menu">
-                        <a id="menu-recent"{% if section in ['recent_all', 'recent_posts', 'feeds'] and env.user==env.owner %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/recent">Лента</a>
+                        <a id="menu-recent"{% if section in ['recent_all', 'recent_posts', 'feeds'] and env.user==env.owner %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/recent">
+                            Лента
+                            {% if unread_posts %}<span class="unread">{{unread_posts}}</span>{% endif %}
+                        </a>
                         <a id="menu-blog"{% if section=='blog' and env.user==env.owner %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/">Блог</a>
                         {#<a id="menu-feeds"{% if section=='feeds' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/feeds">Фиды</>#}
                         <a id="menu-comments"{% if section=='comments' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/comments">
                             Комментарии
                             {% if unread_comments %}<span class="unread">{{ unread_comments }}{% endif %}
                         </a>
-                        <a id="menu-messages"{% if section=='messages' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/messages">Сообщения</a>
+                        <a id="menu-messages"{% if section=='messages' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/messages">
+                            Сообщения
+                            {% if unread_private_posts %}
+                            <span class="unread">{{unread_private_posts}}
+                                {% if unread_private_comments %}<span class="unread-comments">+{{unread_private_comments}}</span>{% endif %}
+                            </span>
+                            {% elif unread_private_comments %}
+                            <span class="unread unread-comments">{{unread_private_comments}}</span>
+                            {% endif %}
+                        </a>
                         <a id="menu-bookmarks"{% if section=='bookmarks' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/bookmarks">Закладки</a>
                     </div>
                     <a id="menu-profile" href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/profile">Профиль</a>
@@ -108,13 +124,25 @@
                 <div id="left-menu">
                     {% if env.user.id %}
                         <h3 id="left-menu-my">Моё</h3>
-                        <a id="menu-recent"{% if section in ['recent_all', 'recent_posts', 'feeds'] and env.user==env.owner %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/recent">Лента</a>
+                        <a id="menu-recent"{% if section in ['recent_all', 'recent_posts', 'feeds'] and env.user==env.owner %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/recent">
+                            Лента
+                            {% if unread_posts %}<span class="unread">{{unread_posts}}</span>{% endif %}
+                        </a>
                         <a id="menu-blog"{% if section=='blog' and env.user==env.owner %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/">Блог</a>
                         <a id="menu-comments"{% if section=='comments' %} class="active"{% endif %}  href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/comments">
                             Комментарии
                             {% if unread_comments %}<span class="unread">{{ unread_comments }}{% endif %}
                         </a>
-                        <a id="menu-messages"{% if section=='messages' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/messages">Сообщения</a>
+                        <a id="menu-messages"{% if section=='messages' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/messages">
+                            Сообщения
+                            {% if unread_private_posts %}
+                            <span class="unread">{{unread_private_posts}}
+                                {% if unread_private_comments %}<span class="unread-comments">+{{unread_private_comments}}</span>{% endif %}
+                            </span>
+                            {% elif unread_private_comments %}
+                            <span class="unread unread-comments">{{unread_private_comments}}</span>
+                            {% endif %}
+                        </a>
                         <a id="menu-bookmarks"{% if section=='bookmarks' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/bookmarks">Закладки</a>
 
                         {% if False and section != 'feeds' and env.user.id==1 %}

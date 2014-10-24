@@ -830,7 +830,6 @@ img.avatar {
 }
 
 #left-menu .unread, #user-menu .unread {
-    display: block;
     float: right;
     margin: 0 4px;
     padding: 0 .5em;
@@ -840,7 +839,8 @@ img.avatar {
 }
 
 #user-menu .unread {
-    padding: .25em 1em;
+    margin-top: -.25em;
+    padding: .25em .5em;
 }
 
 #user-menu .active .unread {
@@ -850,6 +850,10 @@ img.avatar {
 
 #left-menu .active .unread {
     background: #ffffff;
+}
+
+#left-menu .unread-comments, #user-menu .unread-comments {
+    font-weight: normal;
 }
 
 #main .aside {

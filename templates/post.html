@@ -14,7 +14,7 @@
 {% macro comments_list(comments) %}
     {% for c in comments %}
     <a name="{{c.id}}"></a>
-    <div class="post{% if c.is_rec %} recommendation{% endif %}" data-id="{{post.id}}" data-comment-id="{{c.id}}"{% if c.to_comment_id %} data-to-comment-id="{{c.to_comment_id}}"{% endif %}>
+    <div class="post{% if c.is_rec %} recommendation{% endif %}{% if c.unread %} unread{% endif %}" data-id="{{post.id}}" data-comment-id="{{c.id}}"{% if c.to_comment_id %} data-to-comment-id="{{c.to_comment_id}}"{% endif %}>
         <div class="info">
             {% if c.author.id==-1 %}
             <img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}/av24.png" alt="{{post.login}}"/>

@@ -36,6 +36,7 @@
 #tree-switch {
     float: right;
     clear: both;
+    margin-bottom: 1em;
 }
 
 #tree-switch a {
