@@ -344,6 +344,9 @@ def show_post(id):
 
     comments = post.comments(cuser=env.user)
 
+    if comments:
+        posts.clear_unread_comments(id)
+
     errors = []
     if env.request.args('expired'):
         errors.append('expired')

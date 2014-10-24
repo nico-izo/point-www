@@ -161,7 +161,7 @@
                 <div class="post-id">
                     <a href="{{env.request.protocol}}://{{p.post.author.login|lower}}.{{settings.domain}}/{{p.post.id}}{% if p.comment_id %}#{{p.comment_id}}{% endif %}">
                         #{{p.post.id}}{% if p.comment_id %}/{{p.comment_id}}{% endif %}
-                        {% if p.post.comments_count() %}<span class="cn">{{p.post.comments_count()}}</span>{% endif %}
+                        {% if p.post.comments_count() %}<span class="cn">{{p.post.comments_count()}}</span>{% if p.unread %}<span class="unread">{{p.unread}}</span>{% endif %}{% endif %}
                     </a>
                 </div>
 

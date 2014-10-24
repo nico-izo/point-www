@@ -829,6 +829,29 @@ img.avatar {
     bottom: 1em;
 }
 
+#left-menu .unread, #user-menu .unread {
+    display: block;
+    float: right;
+    margin: 0 4px;
+    padding: 0 .5em;
+    background: #ebeef2;
+    color: #35587c;
+    font-weight: bold;
+}
+
+#user-menu .unread {
+    padding: .25em 1em;
+}
+
+#user-menu .active .unread {
+    background: transparent;
+    color: #ebeef2;
+}
+
+#left-menu .active .unread {
+    background: #ffffff;
+}
+
 #main .aside {
     padding: 10px;
 }

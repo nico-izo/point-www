@@ -267,6 +267,13 @@
     font-weight: normal;
 }
 
+.post .post-id a .unread {
+    padding: 0 .5em;
+    font-weight: bold;
+    color: #35587c;
+    background: #ebeef2;
+}
+
 .post:hover .post-id a {
     color: #35587c;
 }

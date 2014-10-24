@@ -43,6 +43,7 @@
         {% block extra_head %}{% endblock %}
     </head>
     <body>
+        {% set unread_comments = env.user.unread_comments_count('post') %}
         <div id="header-wrap">
             <div id="header">
                 <a id="logo"{% if not env.user.id %} class="visible"{% endif %} href="{{env.request.protocol}}://{{settings.domain}}"><img src="/img/logo.png" alt="point.im"/></a>
@@ -61,7 +62,10 @@
                         <a id="menu-recent"{% if section in ['recent_all', 'recent_posts', 'feeds'] and env.user==env.owner %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/recent">Лента</a>
                         <a id="menu-blog"{% if section=='blog' and env.user==env.owner %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/">Блог</a>
                         {#<a id="menu-feeds"{% if section=='feeds' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/feeds">Фиды</>#}
-                        <a id="menu-comments"{% if section=='comments' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/comments">Комментарии</a>
+                        <a id="menu-comments"{% if section=='comments' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/comments">
+                            Комментарии
+                            {% if unread_comments %}<span class="unread">{{ unread_comments }}{% endif %}
+                        </a>
                         <a id="menu-messages"{% if section=='messages' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/messages">Сообщения</a>
                         <a id="menu-bookmarks"{% if section=='bookmarks' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/bookmarks">Закладки</a>
                     </div>
@@ -106,7 +110,10 @@
                         <h3 id="left-menu-my">Моё</h3>
                         <a id="menu-recent"{% if section in ['recent_all', 'recent_posts', 'feeds'] and env.user==env.owner %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/recent">Лента</a>
                         <a id="menu-blog"{% if section=='blog' and env.user==env.owner %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/">Блог</a>
-                        <a id="menu-comments"{% if section=='comments' %} class="active"{% endif %}  href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/comments">Комментарии</a>
+                        <a id="menu-comments"{% if section=='comments' %} class="active"{% endif %}  href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/comments">
+                            Комментарии
+                            {% if unread_comments %}<span class="unread">{{ unread_comments }}{% endif %}
+                        </a>
                         <a id="menu-messages"{% if section=='messages' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/messages">Сообщения</a>
                         <a id="menu-bookmarks"{% if section=='bookmarks' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/bookmarks">Закладки</a>
 
