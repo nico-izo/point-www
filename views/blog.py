@@ -369,6 +369,7 @@ def show_post(id):
 
     comments = post.comments(cuser=env.user)
 
+    posts.clear_unread_posts(id)
     if comments:
         posts.clear_unread_comments(id)
 
@@ -389,7 +390,7 @@ def show_post(id):
         sess['ctree'] = tree
         sess.save()
     else:
-        tree = sess['ctree'] or False
+        tree = sess['ctree'] or env.user.get_profile('tree')
 
     comments_count = len(comments)
     if tree:
