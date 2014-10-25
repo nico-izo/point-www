@@ -292,7 +292,7 @@ def accounts():
     jids = env.request.args('xmpp', [])
     if not isinstance(jids, list):
         jids = [jids]
-    jids = filter(None, [jid.strip() for jid in jids])
+    jids = filter(None, [jid.strip().decode('utf-8') for jid in jids])
 
     jids_err = []
     for jid in jids:
