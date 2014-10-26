@@ -155,14 +155,17 @@
                 <a class="more" href="{{env.request.protocol}}://{{p.login|lower}}.{{settings.domain}}/{{p.id}}">Читать полностью</a>
                 <a class="less" href="{{env.request.protocol}}://{{p.login|lower}}.{{settings.domain}}/{{p.id}}">Скрыть</a>
             </div>#}
-            {% if p.post.tags %}<div class="tags">{% for t in p.post.tags %}<a class="tag" href="{{env.request.protocol}}://{{p.post.author.login|lower}}.{{settings.domain}}/?tag={{t|urlencode}}">{{t}}</a> {% endfor %}</div>{% endif %}
+            {% if not p.comment_id and p.post.tags %}<div class="tags">{% for t in p.post.tags %}<a class="tag" href="{{env.request.protocol}}://{{p.post.author.login|lower}}.{{settings.domain}}/?tag={{t|urlencode}}">{{t}}</a> {% endfor %}</div>{% endif %}
 
             <div class="clearfix">
                 <div class="post-id">
-                    <a href="{{env.request.protocol}}://{{p.post.author.login|lower}}.{{settings.domain}}/{{p.post.id}}{% if p.comment_id %}#{{p.comment_id}}{% endif %}">
-                        #{{p.post.id}}{% if p.comment_id %}/{{p.comment_id}}{% endif %}
+                    {% if p.comment_id %}
+                    <a href="{{env.request.protocol}}://{{p.post.author.login|lower}}.{{settings.domain}}/{{p.post.id}}#{{p.comment_id}}">#{{p.post.id}}/{{p.comment_id}}</a>
+                    {% else %}
+                    <a href="{{env.request.protocol}}://{{p.post.author.login|lower}}.{{settings.domain}}/{{p.post.id}}">#{{p.post.id}}
                         {% if p.post.comments_count() %}<span class="cn">{{p.post.comments_count()}}</span>{% if p.unread %}<span class="unread">{{p.unread}}</span>{% endif %}{% endif %}
                     </a>
+                    {% endif %}
                 </div>
 
                 {% if env.user.id and not p.post.archive %}
