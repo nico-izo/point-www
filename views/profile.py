@@ -133,7 +133,10 @@ def profile():
             if v is None:
                 continue
             if 'type' in field:
-                v = field['type'](v)
+                try:
+                    v = field['type'](v)
+                except:
+                    errors.append(name)
             if 'check' in field and not field['check'](v):
                 errors.append(name)
                 continue
