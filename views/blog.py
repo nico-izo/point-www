@@ -381,6 +381,7 @@ def show_post(id):
 
     sess = Session()
 
+    print '------ tree', sess['ctree']
     tree = env.request.args('tree')
     if tree:
         if tree.lower() in ('0', 'false', 'f'):
@@ -389,8 +390,10 @@ def show_post(id):
             tree = True
         sess['ctree'] = tree
         sess.save()
+    elif sess['ctree'] is not None:
+        tree = sess['ctree']
     else:
-        tree = sess['ctree'] or env.user.get_profile('tree')
+        env.user.get_profile('tree')
 
     comments_count = len(comments)
     if tree:
