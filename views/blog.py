@@ -381,7 +381,6 @@ def show_post(id):
 
     sess = Session()
 
-    print '------ tree', sess['ctree']
     tree = env.request.args('tree')
     if tree:
         if tree.lower() in ('0', 'false', 'f'):
