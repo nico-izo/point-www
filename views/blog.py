@@ -355,7 +355,7 @@ def tag_posts(tag, page=1):
     return render('/tags.html', section=section, posts=plist, page=page,
                   tags=tag)
 
-@catch_errors
+#@catch_errors
 def show_post(id):
     post = posts.show_post(id)
 
@@ -369,9 +369,10 @@ def show_post(id):
 
     comments = post.comments(cuser=env.user)
 
-    posts.clear_unread_posts(id)
-    if comments:
-        posts.clear_unread_comments(id)
+    if env.user.is_authorized():
+        posts.clear_unread_posts(id)
+        if comments:
+            posts.clear_unread_comments(id)
 
     errors = []
     if env.request.args('expired'):
