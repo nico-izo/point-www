@@ -355,7 +355,7 @@ def tag_posts(tag, page=1):
     return render('/tags.html', section=section, posts=plist, page=page,
                   tags=tag)
 
-#@catch_errors
+@catch_errors
 def show_post(id):
     post = posts.show_post(id)
 
