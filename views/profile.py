@@ -49,7 +49,7 @@ _info_form = {
 }
 
 _profile_form = {
-    'lang': {'check': lambda l: l in ('en', 'ru')},
+    'lang': {'check': lambda l: len(l) == 2},
     #'tz': {'type': int, 'check': lambda t: -43200 <= t <= 43200},
     'tz': {'type': str, 'check': check_tz},
     'private': {'type': bool},
