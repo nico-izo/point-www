@@ -39,8 +39,8 @@
         <link rel="icon" type="image/png" href="{{env.request.protocol}}://{{settings.domain}}/img/favicon.png"/>
 
 
-        <link id="usercss-link" rel="stylesheet" type="text/css" href="{{ env.request.protocol }}{{settings.usercss_root}}/{{env.user.login}}.css"/>
         {% block extra_head %}{% endblock %}
+        <link id="usercss-link" rel="stylesheet" type="text/css" href="{{ env.request.protocol }}{{settings.usercss_root}}/{{env.user.login}}.css"/>
     </head>
     <body>
         {% set unread_posts = env.user.unread_posts_count('post') %}
