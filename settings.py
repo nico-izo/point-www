@@ -25,7 +25,7 @@ db = {
     'port': 5432,
     'database': 'point',
     'user': 'point',
-    'password': '',
+    'password': 'point',
     'maxsize': 10
 }
 
