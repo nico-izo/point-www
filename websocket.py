@@ -16,6 +16,7 @@ from geweb import log
 from Cookie import Cookie
 from geweb.session import Session
 from point.core.user import User, UserNotFound
+from views.filters import markdown_filter
 
 import json
 
@@ -44,6 +45,9 @@ class WsPubsub(object):
             del data['to']
         except KeyError:
             return
+
+        if 'text' in data and data['text']:
+            data['html'] = markdown_filter(None, data['text'])
 
         for uid in to:
             gevent.spawn(send_message, uid, json.dumps(data))
@@ -86,14 +90,15 @@ class WsApplication(WebSocketApplication):
         if message.lower().startswith('authorization:'):
             sessid = message[14:].strip()
             try:
-                try:
-                    user = self._auth(sessid, self.ws)
-                    self.ws.send(json.dumps({'login': user.login}))
-                except (KeyError, UserNotFound):
-                    self.ws.send('NotAuthorized')
-                    self.ws.close()
+                user = self._auth(sessid, self.ws)
+                self.ws.send(json.dumps({'login': user.login}))
+            except (KeyError, UserNotFound):
+                self.ws.send('NotAuthorized')
+                self.ws.close()
+
             except WebSocketError:
                 pass
+
 
     def on_close(self, reason):
         print '>> close', reason, self.ws
