@@ -32,8 +32,7 @@ class UserLinkPattern(Pattern):
         except UserNotFound:
             return #'@'+m.group('u')
         a = etree.Element('a')
-        a.set('href', '%s://%s.%s/' % (env.request.protocol,
-                                       m.group('u'), settings.domain))
+        a.set('href', '//%s.%s/' % (m.group('u'), settings.domain))
         a.set('class', 'user')
         a.text = m.group('u')
         return a
@@ -45,12 +44,10 @@ class PostLinkPattern(Pattern):
     def handleMatch(self, m):
         a = etree.Element('a')
         if m.group('c'):
-            a.set('href', '%s://%s/%s#%s' % (env.request.protocol,
-                                             settings.domain, m.group('p'), m.group('c')))
+            a.set('href', '//%s/%s#%s' % (settings.domain, m.group('p'), m.group('c')))
             a.text = '#%s/%s' % (m.group('p'), m.group('c'))
         else:
-            a.set('href', '%s://%s/%s' % (env.request.protocol,
-                                          settings.domain, m.group('p')))
+            a.set('href', '//%s/%s' % (settings.domain, m.group('p')))
             a.text = '#%s' % m.group('p')
         a.set('class', 'post')
         return a
