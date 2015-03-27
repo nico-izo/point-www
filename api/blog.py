@@ -132,7 +132,8 @@ def all_posts(page=1):
 
     plist = posts.select_posts(private=False, author_private=False,
                                deny_anonymous=False, blacklist=True,
-                               limit=settings.page_limit+1, offset=offset)
+                               limit=settings.page_limit+1, offset=offset,
+                               before=before)
     if len(plist) > settings.page_limit:
         plist = plist[:settings.page_limit]
         has_next = True
