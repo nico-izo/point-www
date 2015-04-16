@@ -240,7 +240,7 @@ $(function () {
     $.getJSON("/files/stat/blacklisters.json").success(function (users) {
         $("#stat-blacklisters").highcharts({
             chart: {type: "bar"},
-            title: {text: "Пылающие жопы", x: -20},
+            title: {text: "Топ 20 обидчивых и ранимых", x: -20},
             xAxis: {
             categories: _.map(users, function (obj) { return obj[0]; }),
                 labels: {
