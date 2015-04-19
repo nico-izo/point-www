@@ -57,8 +57,6 @@ class PostLinkPattern(Pattern):
 
 class UrlPattern(Pattern):
     def __init__(self):
-        # !!!
-        print "It's alive!"
         Pattern.__init__(self, ur'(?P<url>(?P<proto>\w+)://(?:[\w\.\-%\:]*\@)?(?P<host>[\w\.\-%]+)(?::(?P<port>\d+))?(?P<path>(?:/[^\s\?\u0002\u0003]*)*)(?P<qs>\?[^#\s\u0002\u0003]*)?(?:#(?P<hash>\S+))?)')
 
     def handleMatch(self, m):
@@ -67,6 +65,8 @@ class UrlPattern(Pattern):
         print 'url',url
 
         imgm = re.search(r'\.(?P<ext>jpe?g|png|gif)((:|%3a)large)?$', m.group('path'), re.I)
+        # !!!
+        print 'imgm: ',imgm
         if (imgm \
         or re.search("^http://ompldr.org/v[A-Z][a-zA-Z0-9]+$", url, re.I) \
         or url.startswith("http://img.leprosorium.com") \
