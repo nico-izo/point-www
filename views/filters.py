@@ -237,8 +237,8 @@ def markdown_filter(environ, text, img=False):
     #        return mdstring
 
     mdstring = md.convert(text)
-    if settings.cache_markdown:
-        cache_store('md:%s' % h, mdstring, 3600)
+    #if settings.cache_markdown:
+    #    cache_store('md:%s' % h, mdstring, 3600)
     #!!!
     print 'mdstring ',mdstring
 
