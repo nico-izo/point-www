@@ -200,9 +200,15 @@ class UrlPattern(Pattern):
         a = etree.Element('a')
         a.set('href', url)
         a.text = text
+<<<<<<< HEAD
         # !!!
         print 'a.text',a.text
         print 'a.href',a.attrib['href']
+=======
+        #!!!
+        print 'a.text',a.text
+        print 'a.href',a.href
+>>>>>>> b2ba021da8bfa44be7205cae9962c8029813b400
 
         return a
 
