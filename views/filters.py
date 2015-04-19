@@ -10,8 +10,6 @@ from point.util.md import CodeBacktick, SharpHeader, QuoteBlock, UrlColons, \
                           StrikePattern, ColonLinkPattern
 from geweb import log
 from markdown import Markdown
-# !!!
-# from markdown.odict import OrderedDict
 from markdown.inlinepatterns import Pattern, LINK_RE
 from markdown.util import etree
 from xml.sax.saxutils import escape
@@ -78,7 +76,6 @@ class UrlPattern(Pattern):
                 a.set('class', 'postimg gif')
             else:
                 a.set('class', 'postimg')
-
             img = etree.SubElement(a, 'img')
             img.set('src', imgproc_url(re.sub(r'%3alarge', ':large', url, re.I)))
 
@@ -221,30 +218,25 @@ md.inlinePatterns.add('url', UrlPattern(), '>automail')
 md.inlinePatterns.add('user', UserLinkPattern(), '>url')
 md.inlinePatterns.add('post', PostLinkPattern(), '>user')
 md.inlinePatterns.add('strike', StrikePattern(), '>post')
-# !!!
-print ">> patterns: ", md.inlinePatterns
+# replace native LinkPattern 
 md.inlinePatterns['link'] = ColonLinkPattern(LINK_RE, md)
-print ">> patterns: ", md.inlinePatterns
+
 
 @environmentfilter
 def markdown_filter(environ, text, img=False):
     if not text:
         return ''
-    #!!!
-    print 'text',text
 
-    #if settings.cache_markdown:
-    #    h = md5(text.encode('utf-8')).hexdigest()
-    #    mdstring = cache_get('md:%s' % h)
+    if settings.cache_markdown:
+        h = md5(text.encode('utf-8')).hexdigest()
+        mdstring = cache_get('md:%s' % h)
 
-    #    if mdstring:
-    #        return mdstring
+        if mdstring:
+            return mdstring
 
     mdstring = md.convert(text)
-    #if settings.cache_markdown:
-    #    cache_store('md:%s' % h, mdstring, 3600)
-    #!!!
-    print 'mdstring ',mdstring
+    if settings.cache_markdown:
+        cache_store('md:%s' % h, mdstring, 3600)
 
     return mdstring
 
@@ -271,4 +263,3 @@ filters = {
     'shuffle': shuffle_filter,
     'basename': basename
 }
-
