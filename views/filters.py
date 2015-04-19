@@ -7,10 +7,10 @@ from point.core.user import User, UserNotFound
 from point.util import cache_get, cache_store
 from point.util.imgproc import imgproc_url
 from point.util.md import CodeBacktick, SharpHeader, QuoteBlock, UrlColons, \
-                          StrikePattern
+                          StrikePattern, ColonLinkPattern
 from geweb import log
 from markdown import Markdown
-from markdown.inlinepatterns import Pattern
+from markdown.inlinepatterns import Pattern, LINK_RE
 from markdown.util import etree
 from xml.sax.saxutils import escape
 from random import shuffle
@@ -73,7 +73,6 @@ class UrlPattern(Pattern):
                 a.set('class', 'postimg gif')
             else:
                 a.set('class', 'postimg')
-
             img = etree.SubElement(a, 'img')
             img.set('src', imgproc_url(re.sub(r'%3alarge', ':large', url, re.I)))
 
@@ -216,6 +215,9 @@ md.inlinePatterns.add('url', UrlPattern(), '>automail')
 md.inlinePatterns.add('user', UserLinkPattern(), '>url')
 md.inlinePatterns.add('post', PostLinkPattern(), '>user')
 md.inlinePatterns.add('strike', StrikePattern(), '>post')
+# replace native LinkPattern 
+md.inlinePatterns['link'] = ColonLinkPattern(LINK_RE, md)
+
 
 @environmentfilter
 def markdown_filter(environ, text, img=False):
@@ -258,4 +260,3 @@ filters = {
     'shuffle': shuffle_filter,
     'basename': basename
 }
-
