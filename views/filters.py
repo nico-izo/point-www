@@ -10,6 +10,8 @@ from point.util.md import CodeBacktick, SharpHeader, QuoteBlock, UrlColons, \
                           StrikePattern
 from geweb import log
 from markdown import Markdown
+# !!!
+from markdown.odict import OrderedDict
 from markdown.inlinepatterns import Pattern
 from markdown.util import etree
 from xml.sax.saxutils import escape
