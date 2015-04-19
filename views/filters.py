@@ -61,12 +61,8 @@ class UrlPattern(Pattern):
 
     def handleMatch(self, m):
         url = m.group('url')
-        # !!!
-        print 'url',url
 
         imgm = re.search(r'\.(?P<ext>jpe?g|png|gif)((:|%3a)large)?$', m.group('path'), re.I)
-        # !!!
-        print 'imgm: ',imgm
         if (imgm \
         or re.search("^http://ompldr.org/v[A-Z][a-zA-Z0-9]+$", url, re.I) \
         or url.startswith("http://img.leprosorium.com") \
@@ -83,8 +79,6 @@ class UrlPattern(Pattern):
 
             img = etree.SubElement(a, 'img')
             img.set('src', imgproc_url(re.sub(r'%3alarge', ':large', url, re.I)))
-            #!!!
-            print 'wrap ',wrap
 
             return wrap
 
@@ -204,10 +198,6 @@ class UrlPattern(Pattern):
         a = etree.Element('a')
         a.set('href', url)
         a.text = text
-        # !!!
-        print 'a.text',a.text
-        print 'a.href',a.attrib['href']
-
         return a
 
 class WordWrap(Pattern):
