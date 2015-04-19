@@ -200,7 +200,7 @@ class UrlPattern(Pattern):
         a = etree.Element('a')
         a.set('href', url)
         a.text = text
-        #!!!
+        # !!!
         print 'a.text',a.text
         print 'a.href',a.attrib['href']
 
