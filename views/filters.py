@@ -7,11 +7,11 @@ from point.core.user import User, UserNotFound
 from point.util import cache_get, cache_store
 from point.util.imgproc import imgproc_url
 from point.util.md import CodeBacktick, SharpHeader, QuoteBlock, UrlColons, \
-                          StrikePattern
+                          StrikePattern, LinkPattern
 from geweb import log
 from markdown import Markdown
 # !!!
-from markdown.odict import OrderedDict
+# from markdown.odict import OrderedDict
 from markdown.inlinepatterns import Pattern
 from markdown.util import etree
 from xml.sax.saxutils import escape
@@ -221,6 +221,9 @@ md.inlinePatterns.add('url', UrlPattern(), '>automail')
 md.inlinePatterns.add('user', UserLinkPattern(), '>url')
 md.inlinePatterns.add('post', PostLinkPattern(), '>user')
 md.inlinePatterns.add('strike', StrikePattern(), '>post')
+# md.inlinePatterns.add('link', LinkPattern(LINK_RE, md)
+print ">> patterns: ", md.inlinePatterns
+
 
 @environmentfilter
 def markdown_filter(environ, text, img=False):
