@@ -79,7 +79,9 @@ class UrlPattern(Pattern):
 
             img = etree.SubElement(a, 'img')
             img.set('src', imgproc_url(re.sub(r'%3alarge', ':large', url, re.I)))
+            #!!!
             print 'wrap ',wrap
+
             return wrap
 
         # dropbox
@@ -224,6 +226,8 @@ md.inlinePatterns.add('strike', StrikePattern(), '>post')
 def markdown_filter(environ, text, img=False):
     if not text:
         return ''
+    #!!!
+    print 'text',text
 
     if settings.cache_markdown:
         h = md5(text.encode('utf-8')).hexdigest()
@@ -235,7 +239,9 @@ def markdown_filter(environ, text, img=False):
     mdstring = md.convert(text)
     if settings.cache_markdown:
         cache_store('md:%s' % h, mdstring, 3600)
+    #!!!
     print 'mdstring ',mdstring
+
     return mdstring
 
 _nl_re = re.compile(r'[\r\n]+')
