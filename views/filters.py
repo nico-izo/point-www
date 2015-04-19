@@ -79,7 +79,7 @@ class UrlPattern(Pattern):
 
             img = etree.SubElement(a, 'img')
             img.set('src', imgproc_url(re.sub(r'%3alarge', ':large', url, re.I)))
-
+            print wrap
             return wrap
 
         # dropbox
