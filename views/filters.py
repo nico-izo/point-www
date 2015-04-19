@@ -201,7 +201,9 @@ class UrlPattern(Pattern):
         a.set('href', url)
         a.text = text
         #!!!
-        print 'a',a
+        print 'a.text',a.text
+        print 'a.href',a.attrib['href']
+
         return a
 
 class WordWrap(Pattern):
