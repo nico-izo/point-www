@@ -61,6 +61,8 @@ class UrlPattern(Pattern):
 
     def handleMatch(self, m):
         url = m.group('url')
+        # !!!
+        print 'url',url
 
         imgm = re.search(r'\.(?P<ext>jpe?g|png|gif)((:|%3a)large)?$', m.group('path'), re.I)
         if (imgm \
