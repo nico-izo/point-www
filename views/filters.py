@@ -57,6 +57,8 @@ class PostLinkPattern(Pattern):
 
 class UrlPattern(Pattern):
     def __init__(self):
+        # !!!
+        print "It's alive!"
         Pattern.__init__(self, ur'(?P<url>(?P<proto>\w+)://(?:[\w\.\-%\:]*\@)?(?P<host>[\w\.\-%]+)(?::(?P<port>\d+))?(?P<path>(?:/[^\s\?\u0002\u0003]*)*)(?P<qs>\?[^#\s\u0002\u0003]*)?(?:#(?P<hash>\S+))?)')
 
     def handleMatch(self, m):
