@@ -200,6 +200,8 @@ class UrlPattern(Pattern):
         a = etree.Element('a')
         a.set('href', url)
         a.text = text
+        #!!!
+        print 'a',a
         return a
 
 class WordWrap(Pattern):
