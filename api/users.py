@@ -12,13 +12,6 @@ import json
 
 from api import api
 
-@api
-#@check_auth
-def my_info():
-    login = env.user.login
-    print '>> User: ', login
-    return info(login)
-
 
 @api
 def info(login):
@@ -49,6 +42,16 @@ def info(login):
             if not data['bl']:
                 data['wl'] = env.user.check_blacklist(user)
     return data
+
+
+@api
+#@check_auth
+def my_info():
+    login = env.user.login
+    print '>> User: ', login
+    data = info(login)
+    return data
+
 
 @csrf
 @check_auth
