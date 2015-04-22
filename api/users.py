@@ -13,7 +13,7 @@ import json
 from api import api
 
 @api
-@check_auth
+#@check_auth
 def my_info():
     env.owner = env.user
     print env.user
