@@ -50,9 +50,9 @@ def info(login):
 #@check_auth
 def my_info():
     login = env.user.login
-    print '>> User: ', login
-    data = users.info(login)
-    return data
+    if not login:
+        raise NotFound
+    return users.info(login)
 
 
 @csrf
