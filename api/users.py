@@ -16,7 +16,7 @@ from api import api
 #@check_auth
 def my_info():
     env.owner = env.user
-    print env.user
+    print env.user.login
     return None
 
 
