@@ -13,6 +13,14 @@ import json
 from api import api
 
 @api
+@check_auth
+def my_info():
+    env.owner = env.user
+    print env.user
+    return None
+
+
+@api
 def info(login):
     try:
         user = User('login', login)
