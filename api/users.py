@@ -45,13 +45,11 @@ def info(login):
                 data['wl'] = env.user.check_blacklist(user)
     return data
 
-
+# get user info via settings.domain/api/me
 @api
-#@check_auth
 def my_info():
     login = env.user.login
     if not login:
-        #raise NotFound
         raise Forbidden
     return users.info(login)
 
