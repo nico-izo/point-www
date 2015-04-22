@@ -6,11 +6,12 @@ from geweb.exceptions import Forbidden, NotFound
 from geweb.template import render
 from point.core.user import User, SubscribeError, check_auth, \
                             AlreadySubscribed, AlreadyRequested, \
-                            UserNotFound
+                            UserNotFound, NotAuthorized
 from geweb.util import csrf
 import json
 
 from api import api
+
 
 @api
 def info(login):
@@ -41,6 +42,15 @@ def info(login):
             if not data['bl']:
                 data['wl'] = env.user.check_blacklist(user)
     return data
+
+# get user info via settings.domain/api/me
+@api
+def my_info():
+    login = env.user.login
+    if not login:
+        raise NotAuthorized
+    return users.info(login)
+
 
 @csrf
 @check_auth
