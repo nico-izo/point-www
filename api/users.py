@@ -15,6 +15,8 @@ from api import api
 
 @api
 def info(login):
+    #!!!
+    print ">>> ", login
     try:
         user = User('login', login)
     except UserNotFound:
