@@ -16,7 +16,7 @@ from api import api
 #@check_auth
 def my_info():
     login = env.user.login
-    #print '>> User: ', user
+    print '>> User: ', login
     return info(login)
 
 
