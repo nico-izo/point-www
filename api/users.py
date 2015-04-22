@@ -51,7 +51,7 @@ def info(login):
 def my_info():
     login = env.user.login
     print '>> User: ', login
-    data = info(login)
+    data = users.info(login)
     return data
 
 
