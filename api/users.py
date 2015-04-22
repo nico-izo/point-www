@@ -6,7 +6,7 @@ from geweb.exceptions import Forbidden, NotFound
 from geweb.template import render
 from point.core.user import User, SubscribeError, check_auth, \
                             AlreadySubscribed, AlreadyRequested, \
-                            UserNotFound
+                            UserNotFound, NotAuthorized
 from geweb.util import csrf
 import json
 
@@ -48,7 +48,7 @@ def info(login):
 def my_info():
     login = env.user.login
     if not login:
-        raise Forbidden
+        raise NotAuthorized
     return users.info(login)
 
 
