@@ -51,7 +51,8 @@ def info(login):
 def my_info():
     login = env.user.login
     if not login:
-        raise NotFound
+        #raise NotFound
+        raise Forbidden
     return users.info(login)
 
 
