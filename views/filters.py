@@ -232,13 +232,10 @@ def markdown_filter(environ, text, img=False):
         if mdstring:
             return mdstring
     """
-    # !!!
-    print ">>> text", text
     mdstring = md.convert(text)
     # !!!
     # if settings.cache_markdown:
     #     cache_store('md:%s' % h, mdstring, 3600)
-    print ">>> mdstring2", mdstring
     return mdstring
 
 _nl_re = re.compile(r'[\r\n]+')
