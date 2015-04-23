@@ -176,7 +176,11 @@ class UrlPattern(Pattern):
         # point post links
         um = re.search(r'https?://(?:[a-z0-9-]+\.)?%s/(?P<p>[a-z]+)(?:#(?P<c>\d+))?$' % settings.domain, url, re.I)
         if um:
+            # !!!
+            print '>>> point post link detected'
             t = '#'+um.group('p')
+            # !!!
+            print '>>> t', t
             if um.group('c'):
                 t += '/' + um.group('c')
                 a = etree.Element('a')
