@@ -223,18 +223,22 @@ md.inlinePatterns['link'] = ColonLinkPattern(LINK_RE, md)
 def markdown_filter(environ, text, img=False):
     if not text:
         return ''
-
+    # !!!
+    """
     if settings.cache_markdown:
         h = md5(text.encode('utf-8')).hexdigest()
         mdstring = cache_get('md:%s' % h)
 
         if mdstring:
             return mdstring
-
+    """
+    # !!!
+    print ">>> text", text
     mdstring = md.convert(text)
-    if settings.cache_markdown:
-        cache_store('md:%s' % h, mdstring, 3600)
-
+    # !!!
+    # if settings.cache_markdown:
+    #     cache_store('md:%s' % h, mdstring, 3600)
+    print ">>> mdstring2", mdstring
     return mdstring
 
 _nl_re = re.compile(r'[\r\n]+')
