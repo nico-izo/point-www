@@ -39,7 +39,7 @@ class UserLinkPattern(Pattern):
 
 class PostLinkPattern(Pattern):
     def __init__(self):
-        Pattern.__init__(self, ur'(?<!\w|\d+\/)\u0005?#(?P<p>[a-zA-Z]+)(?:[/.](?P<c>\d+))?')
+        Pattern.__init__(self, ur'(?<!\w|\/)\u0005?#(?P<p>[a-zA-Z]+)(?:[/.](?P<c>\d+))?')
 
     def handleMatch(self, m):
         a = etree.Element('a')
