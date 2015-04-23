@@ -192,10 +192,13 @@ class UrlPattern(Pattern):
                 return a
 
         text = unquote_plus(url.encode('utf-8', 'ignore')).decode('utf-8', 'ignore')
+        # !!!
+        print '>>> unquote_plus', text
         if len(text) > 50:
             text = '%s...%s' % (text[:27], text[-20:])
 
         a = etree.Element('a')
+        print '>>> url', url
         a.set('href', url)
         a.text = text
         return a
