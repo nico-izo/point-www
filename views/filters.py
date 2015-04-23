@@ -39,7 +39,7 @@ class UserLinkPattern(Pattern):
 
 class PostLinkPattern(Pattern):
     def __init__(self):
-        Pattern.__init__(self, ur'(?<!\w)\u0005?#(?P<p>[a-zA-Z]+)(?:[/.](?P<c>\d+))?')
+        Pattern.__init__(self, ur'(?<!\w|\d+\/)\u0005?#(?P<p>[a-zA-Z]+)(?:[/.](?P<c>\d+))?')
 
     def handleMatch(self, m):
         a = etree.Element('a')
@@ -176,11 +176,7 @@ class UrlPattern(Pattern):
         # point post links
         um = re.search(r'https?://(?:[a-z0-9-]+\.)?%s/(?P<p>[a-z]+)(?:#(?P<c>\d+))?$' % settings.domain, url, re.I)
         if um:
-            # !!!
-            print '>>> point post link detected'
             t = '#'+um.group('p')
-            # !!!
-            print '>>> t', t
             if um.group('c'):
                 t += '/' + um.group('c')
                 a = etree.Element('a')
@@ -192,13 +188,10 @@ class UrlPattern(Pattern):
                 return a
 
         text = unquote_plus(url.encode('utf-8', 'ignore')).decode('utf-8', 'ignore')
-        # !!!
-        print '>>> unquote_plus', text
         if len(text) > 50:
             text = '%s...%s' % (text[:27], text[-20:])
 
         a = etree.Element('a')
-        print '>>> url', url
         a.set('href', url)
         a.text = text
         return a
