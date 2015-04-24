@@ -39,7 +39,7 @@ class UserLinkPattern(Pattern):
 
 class PostLinkPattern(Pattern):
     def __init__(self):
-        Pattern.__init__(self, ur'(?<!\w)\u0005?#(?P<p>[a-zA-Z]+)(?:[/.](?P<c>\d+))?')
+        Pattern.__init__(self, ur'(?<!\w|\/)\u0005?#(?P<p>[a-zA-Z]+)(?:[/.](?P<c>\d+))?')
 
     def handleMatch(self, m):
         a = etree.Element('a')
@@ -232,9 +232,9 @@ def markdown_filter(environ, text, img=False):
             return mdstring
 
     mdstring = md.convert(text)
+
     if settings.cache_markdown:
         cache_store('md:%s' % h, mdstring, 3600)
-
     return mdstring
 
 _nl_re = re.compile(r'[\r\n]+')
