@@ -203,10 +203,8 @@ class WordWrap(Pattern):
     def handleMatch(self, m):
         return re.sub(r'\S{80}', lambda w: '%s '%w.group(0), m.group('word'))
 
-#md = Markdown(extensions=['nl2br', 'smarty', 'codehilite(guess_lang=False)', 
-#              'toc'], safe_mode='escape')
-md = Markdown(extensions=['nl2br', 'codehilite(guess_lang=False)', 'toc'], 
-              safe_mode='escape')
+md = Markdown(extensions=['nl2br', 'smarty(smart_angled_quotes=True)', 
+              'codehilite(guess_lang=False)', 'toc'], safe_mode='escape')
 
 md.preprocessors.add('cbacktick', CodeBacktick(md), '_begin')
 md.preprocessors.add('sharp', SharpHeader(md), '>cbacktick')
