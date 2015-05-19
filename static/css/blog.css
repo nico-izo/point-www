@@ -321,7 +321,7 @@
     float: right;
     margin-bottom: 1em;
     white-space: nowrap;
-    opacity: 0;
+    opacity: 0.25;
     -webkit-transition: opacity ease .2s;
     -moz-transition: opacity ease .2s;
     -o-transition: opacity ease .2s;
