@@ -72,6 +72,40 @@ $(function () {
         });
     });
 
+    /*
+        Количество комментов в постах (топ 20)
+    */
+    $.getJSON("/files/stat/comments_count.json").success(function (users) {
+        $("#stat-comments-count").highcharts({
+            chart: {type: "bar"},
+            title: {text: "Топ 20 постов с наибольшим количеством комментариев", x: -20},
+            xAxis: {
+            categories: _.map(users, function (obj) { return obj[0]; }),
+                labels: {
+                    align: 'right'
+                }
+            },
+            yAxis: {
+                title: {text: ""},
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }],
+                min: 0
+            },
+            legend: {
+                borderWidth: 0
+            },
+            series: [{
+                name: "Комментарии",
+                color: "#3cde8d",
+                data: _.map(users, function (obj) { return obj[1]; })
+            }]
+        });
+    });
+
+
     $.getJSON("/files/stat/most_commented_weekly.json").success(function (users) {
         $("#stat-most-commented-weekly").highcharts({
             chart: {type: "bar"},
