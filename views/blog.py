@@ -338,8 +338,7 @@ def tag_posts(tag, page=1):
     else:
         private = False
 
-    if not env.user.is_authorized():
-        deny_anonymous = False
+    deny_anonymous = False if not env.user.is_authorized() else None
 
     if not isinstance(tag, (list, tuple)):
         tag = [tag]
