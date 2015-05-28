@@ -338,6 +338,8 @@ def tag_posts(tag, page=1):
     else:
         private = False
 
+    # переменная deny_anonymous для соотв. значений поля deny_anonymous
+    # в таблице users.profile
     deny_anonymous = False if not env.user.is_authorized() else None
 
     if not isinstance(tag, (list, tuple)):
