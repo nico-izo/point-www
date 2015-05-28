@@ -343,7 +343,7 @@ def tag_posts(tag, page=1):
 
     if not isinstance(tag, (list, tuple)):
         tag = [tag]
-    tag = [t.decode('utf-8').replace(u"\xa0", " ").lower() for t in tag]
+    tag = [t.decode('utf-8').replace(u"\xa0", " ") for t in tag]
 
     plist = posts.select_posts(author=author, private=private, 
                                deny_anonymous=deny_anonymous, tags=tag,
