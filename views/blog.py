@@ -145,6 +145,7 @@ def recent_posts(page=1):
                   posts=plist, page=page)
 
 @catch_errors
+@check_auth
 def all_posts(page=1):
     sess = Session()
     if not sess['agree']:
