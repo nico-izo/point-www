@@ -272,14 +272,10 @@ def subscribers(login):
 @api
 def subscribers_byid(uid):
     """Return user's subscribers by given user id"""
-    try:
-        uid = int(uid)
-    except ValueError:
+    uid = int(uid)
+    env.owner = User(int(uid))
+    if not env.owner or not env.owner.id:
         raise NotFound
-    else:
-        env.owner = User(uid)
-        if not env.owner or not env.owner.id:
-            raise NotFound
     return env.owner.subscribers()
 
 @api
