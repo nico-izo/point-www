@@ -57,7 +57,7 @@ def user_info_byid():
     _id = env.request.args("id")
     if _id:
         try:
-            user = User('id', _id)
+            user = User(_id)
             # !!!
             print(user)
             return users.info(user.login)
