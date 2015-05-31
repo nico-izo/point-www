@@ -63,10 +63,10 @@ urls = (
     (r'^%s/user/bl/?$' % prefix, 'GET', users.blacklist),
     #(r'^%s/user/bl$' % prefix, 'POST', users.add_to_blacklist),
     #(r'^%s/user/bl$' % prefix, 'DELETE', users.del_from_blacklist),
-
-    (r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/?$' % prefix, users.info),
     # user info via id
-    (r'^%s/userid/(?P<uid>\d+)/?$' % prefix, users.user_info_byid),
+    (r'^%s/user/(?P<uid>\d+)/?$' % prefix, users.user_info_byid),
+    # user info via login
+    (r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/?$' % prefix, users.info),
     # user info via settings.domain/api/me
     (r'^%s/me/?$' % prefix, users.my_info),
 
