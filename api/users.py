@@ -52,11 +52,11 @@ def my_info():
     return users.info(login)
 
 @api
-def user_info_byid(_id):
+def user_info_byid(uid):
     """Return user info by given user id"""
-    if _id and _id.isdigit():
+    if uid and uid.isdigit():
         try:
-            user = User(int(_id))
+            user = User(int(uid))
         except UserNotFound:
             raise NotFound
         else:
