@@ -51,6 +51,19 @@ def my_info():
         raise NotAuthorized
     return users.info(login)
 
+@api
+def user_info_byid():
+    """Return user info by given user id"""
+    _id = env.request.args("id")
+    if _id:
+        try:
+            user = User(int(_id))
+        except UserNotFound:
+            raise NotFound
+        else:
+            return users.info(user)
+    raise NotFound
+
 
 @csrf
 @check_auth
