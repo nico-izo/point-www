@@ -47,6 +47,7 @@ urls = (
     (r'^%s/login/?$' % prefix, 'POST', auth.login),
     (r'^%s/logout/?$' % prefix, 'POST', auth.logout),
 
+    (r'^%s/user/id/(?P<uid>\d+)/subscriptions/?$' % prefix, users.subscriptions_byid),
     (r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/subscriptions/?$' % prefix, users.subscriptions),
 
     (r'^%s/user/id/(?P<uid>\d+)/subscribers/?$' % prefix, users.subscribers_byid),

@@ -263,6 +263,15 @@ def subscriptions(login):
     return env.owner.subscriptions()
 
 @api
+def subscriptions_byid(uid):
+    """Return user's subscriptions by given user id"""
+    uid = int(uid)
+    env.owner = User(int(uid))
+    if not env.owner or not env.owner.id:
+        raise NotFound
+    return env.owner.subscriptions()
+
+@api
 def subscribers(login):
     env.owner = User("login", login)
     if not env.owner or not env.owner.id:
