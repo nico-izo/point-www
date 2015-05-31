@@ -165,7 +165,7 @@ def all_posts(page=1):
     offset = (page - 1) * settings.page_limit
 
     plist = posts.select_posts(private=False, author_private=False,
-                               deny_anonymous=False, blacklist=True,
+                               blacklist=True,
                                limit=settings.page_limit+1, offset=offset)
 
     return render('/all_posts.html', section='all', posts=plist, page=page)
