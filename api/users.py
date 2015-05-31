@@ -55,7 +55,7 @@ def my_info():
 @api
 def user_info_byid():
     _id = env.request.args("id")
-    if _uid:
+    if _id:
         try:
             user = User('id', _id)
             return users.info(user.login)
