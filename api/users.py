@@ -57,7 +57,7 @@ def user_info_byid(uid):
     if uid and uid.isdigit():
         try:
             user = User(int(uid))
-        except UserNotFound:
+        except (UserNotFound, ValueError):
             raise NotFound
         else:
             return users.info(user)
@@ -267,6 +267,19 @@ def subscribers(login):
     env.owner = User("login", login)
     if not env.owner or not env.owner.id:
         raise NotFound
+    return env.owner.subscribers()
+
+@api
+def subscribers_byid(uid):
+    """Return user's subscribers by given user id"""
+    try:
+        uid = int(uid)
+    except ValueError:
+        raise NotFound
+    else:
+        env.owner = User(uid)
+        if not env.owner or not env.owner.id:
+            raise NotFound
     return env.owner.subscribers()
 
 @api
