@@ -56,10 +56,12 @@ def my_info():
 def user_info_byid():
     _id = env.request.args("id")
     if _id:
+        # !!!
+        print('id',id)
         try:
             user = User(_id)
             # !!!
-            print(user)
+            print('user: ',user)
             return users.info(user.login)
         except UserNotFound:
             raise NotFound
