@@ -65,6 +65,10 @@ urls = (
     #(r'^%s/user/bl$' % prefix, 'DELETE', users.del_from_blacklist),
 
     (r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/?$' % prefix, users.info),
+    # user info via id
+    (r'^%s/user/(?P<id>[0-9]+)/?$' % prefix, users.user_info_byid),
+
+    (r'^%s/tags(?:/(?P<login>[-a-zA-Z0-9]+))?/?$' % prefix, blog.tags),
     # user info via settings.domain/api/me
     (r'^%s/me/?$' % prefix, users.my_info),
 
