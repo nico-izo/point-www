@@ -66,7 +66,7 @@ urls = (
 
     (r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/?$' % prefix, users.info),
     # user info via id
-    (r'^%s/user/id/(?P<id>[0-9]+)/?$' % prefix, users.user_info_byid),
+    (r'^%s/user/?$' % prefix, users.user_info_byid),
     # user info via settings.domain/api/me
     (r'^%s/me/?$' % prefix, users.my_info),
 
