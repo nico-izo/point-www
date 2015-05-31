@@ -59,7 +59,7 @@ def user_info_byid():
         # !!!
         print('id',_id)
         try:
-            user = User(_id)
+            user = User(int(_id))
             # !!!
             print('user: ',user)
             return users.info(user.login)
