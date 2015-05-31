@@ -58,6 +58,8 @@ def user_info_byid():
     if _id:
         try:
             user = User('id', _id)
+            # !!!
+            print(user)
             return users.info(user.login)
         except UserNotFound:
             raise NotFound
