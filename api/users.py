@@ -61,7 +61,7 @@ def user_info_byid():
         except UserNotFound:
             raise NotFound
         else:
-            return users.info(user.login)
+            return users.info(user)
     raise NotFound
 
 
