@@ -36,6 +36,7 @@ urls = (
 
     (r'^/info/(?P<login>[-a-zA-Z0-9]+)?$', users.info),
     (r'^/avatar/(?P<login>[-a-zA-Z0-9]+)(?:/(?P<size>24|40|80))?/?$', users.avatar),
+    (r'^/avatar/id/(?P<login>[-a-zA-Z0-9]+)(?:/(?P<size>24|40|80))?/?$', users.avatar),
     (r'^/user/s$', users.subscribe),
     (r'^/user/u$', users.unsubscribe),
     (r'^/user/sr$', users.subscribe_rec),
