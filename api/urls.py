@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 from api import auth, blog, users
 
 prefix = r'/api'
@@ -80,6 +82,12 @@ urls = (
     # user info via settings.domain/api/me
     (r'^%s/me/?$' % prefix, users.my_info),
 
+    """Получение спика тегов пользователя по его user id или логину. 
+    Во избежание дублирования кода оба шаблона URL используют именованное 
+    регулярное выражение login"""
+    # by id
+    (r'^%s/tags(?:/id/(?P<login>\d+))?/?$' % prefix, blog.tags),
+    # by login
     (r'^%s/tags(?:/(?P<login>[-a-zA-Z0-9]+))?/?$' % prefix, blog.tags),
     #(r'^%s/tag/s$' % prefix, users.tag_subscribe),
     #(r'^%s/tag/u$' % prefix, users.tag_unsubscribe),
