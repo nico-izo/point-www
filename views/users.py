@@ -42,9 +42,14 @@ def info(login):
     return Response(json.dumps(data), mimetype='application/json')
 
 def avatar(login, size):
+    """To avoid code duplication, parameter ``login`` can be interpreted 
+    as a number if it is user id, and as a string if it is user login"""
     size = int(size) if size else 40
     try:
-        user = User('login', login)
+        if login and login.isdigit():
+            user = User(int(login))
+        else:
+            user = User('login', login)
         avatar = user.get_info('avatar')
     except UserNotFound:
         avatar = None
