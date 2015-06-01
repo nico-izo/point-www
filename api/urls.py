@@ -3,7 +3,11 @@ from api import auth, blog, users
 prefix = r'/api'
 
 urls = (
+    # user blog by id
+    (r'^%s/blog(?:/id/(?P<uid>\d+))?/?$' % prefix, blog.blog_by_id),
+    # user blog by login
     (r'^%s/blog(?:/(?P<login>[-a-zA-Z0-9]+))?/?$' % prefix, blog.blog),
+
     (r'^%s/recent/?' % prefix, blog.recent_all),
     (r'^%s/recent/posts/?$' % prefix, blog.recent_posts),
     (r'%s/all/?$' % prefix, blog.all_posts),

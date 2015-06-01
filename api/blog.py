@@ -64,6 +64,43 @@ def blog(login=None):
     }
 
 @api
+def blog_by_id(uid=None):
+    """Obtain user blog contents by given user id
+    parameters:
+    uid - user id
+    """
+    if uid:
+        env.owner = User(int(uid))
+    elif env.user.is_authorized():
+        env.owner = env.user
+
+    if not env.owner:
+        raise UserNotFound
+
+    before = env.request.args("before")
+    if before:
+        try:
+            before = long(before)
+        except ValueError:
+            before = None
+
+    try:
+        plist = posts.recent_blog_posts(env.owner, settings.page_limit+1,
+                                        before=before)
+        if len(plist) > settings.page_limit:
+            plist = plist[:settings.page_limit]
+            has_next = True
+        else:
+            has_next = False
+    except PostAuthorError:
+        raise Forbidden
+
+    return {
+        "posts": plist,
+        "has_next": has_next
+    }
+
+@api
 @check_auth
 def recent_all():
     env.owner = env.user
