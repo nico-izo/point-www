@@ -267,7 +267,7 @@ def taglist(login):
     как id пользователя, так и строкой -- в этом случае он интерпретируется 
     как login пользователя
     """
-    if login.isdigit():
+    if login and login.isdigit():
         env.owner = User(int(login))
     else:
         env.owner = User("login", login)
@@ -293,7 +293,7 @@ def tag_posts(login=None):
             before = None
 
     if login:
-        if login.isdigit():
+        if login and login.isdigit():
             author = User(int(login))
         else:            
             author = User("login", login)
