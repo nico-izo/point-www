@@ -86,7 +86,7 @@ urls = (
     Во избежание дублирования кода оба шаблона URL используют именованное 
     регулярное выражение login"""
     # by id
-    (r'^%s/tags(?:/id/(?P<login>\d+))?/?$' % prefix, blog.tags),
+    # (r'^%s/tags(?:/id/(?P<login>\d+))?/?$' % prefix, blog.tags),
     # by login
     (r'^%s/tags(?:/(?P<login>[-a-zA-Z0-9]+))?/?$' % prefix, blog.tags),
     #(r'^%s/tag/s$' % prefix, users.tag_subscribe),
