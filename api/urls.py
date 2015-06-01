@@ -7,8 +7,10 @@ prefix = r'/api'
 urls = (
     # user blog by id
     (r'^%s/blog(?:/id/(?P<uid>\d+))?/?$' % prefix, blog.blog_by_id),
-    # user blog by login
+    # user blog by login (DEPRECATED)
     (r'^%s/blog(?:/(?P<login>[-a-zA-Z0-9]+))?/?$' % prefix, blog.blog),
+    # user blog by login
+    (r'^%s/blog(?:/login/(?P<login>[-a-zA-Z0-9]+))?/?$' % prefix, blog.blog),
 
     (r'^%s/recent/?' % prefix, blog.recent_all),
     (r'^%s/recent/posts/?$' % prefix, blog.recent_posts),
@@ -88,6 +90,8 @@ urls = (
     # by id
     (r'^%s/tags(?:/id/(?P<login>\d+))?/?$' % prefix, blog.tags),
     # by login
+    (r'^%s/tags(?:/login/(?P<login>[-a-zA-Z0-9]+))?/?$' % prefix, blog.tags),
+    # by login (DEPRECATED)
     (r'^%s/tags(?:/(?P<login>[-a-zA-Z0-9]+))?/?$' % prefix, blog.tags),
     #(r'^%s/tag/s$' % prefix, users.tag_subscribe),
     #(r'^%s/tag/u$' % prefix, users.tag_unsubscribe),
