@@ -47,7 +47,10 @@ urls = (
     (r'^%s/login/?$' % prefix, 'POST', auth.login),
     (r'^%s/logout/?$' % prefix, 'POST', auth.logout),
 
+    (r'^%s/user/id/(?P<uid>\d+)/subscriptions/?$' % prefix, users.subscriptions_byid),
     (r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/subscriptions/?$' % prefix, users.subscriptions),
+
+    (r'^%s/user/id/(?P<uid>\d+)/subscribers/?$' % prefix, users.subscribers_byid),
     (r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/subscribers/?$' % prefix, users.subscribers),
 
     #(r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/s$' % prefix, 'POST', users.subscribe),
@@ -63,10 +66,13 @@ urls = (
     (r'^%s/user/bl/?$' % prefix, 'GET', users.blacklist),
     #(r'^%s/user/bl$' % prefix, 'POST', users.add_to_blacklist),
     #(r'^%s/user/bl$' % prefix, 'DELETE', users.del_from_blacklist),
-
-    (r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/?$' % prefix, users.info),
     # user info via id
-    (r'^%s/user/?$' % prefix, users.user_info_byid),
+    (r'^%s/user/id/(?P<uid>\d+)/?$' % prefix, users.user_info_byid),
+    # WILL BE DEPRECATED soon
+    # user info via login (for old clients)
+    (r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/?$' % prefix, users.info),
+    # user info via login
+    (r'^%s/user/login/(?P<login>[-a-zA-Z0-9]+)/?$' % prefix, users.info),
     # user info via settings.domain/api/me
     (r'^%s/me/?$' % prefix, users.my_info),
 

@@ -52,13 +52,12 @@ def my_info():
     return users.info(login)
 
 @api
-def user_info_byid():
+def user_info_byid(uid):
     """Return user info by given user id"""
-    _id = env.request.args("id")
-    if _id:
+    if uid and uid.isdigit():
         try:
-            user = User(int(_id))
-        except UserNotFound:
+            user = User(int(uid))
+        except (UserNotFound, ValueError):
             raise NotFound
         else:
             return users.info(user)
@@ -264,8 +263,26 @@ def subscriptions(login):
     return env.owner.subscriptions()
 
 @api
+def subscriptions_byid(uid):
+    """Return user's subscriptions by given user id"""
+    uid = int(uid)
+    env.owner = User(int(uid))
+    if not env.owner or not env.owner.id:
+        raise NotFound
+    return env.owner.subscriptions()
+
+@api
 def subscribers(login):
     env.owner = User("login", login)
+    if not env.owner or not env.owner.id:
+        raise NotFound
+    return env.owner.subscribers()
+
+@api
+def subscribers_byid(uid):
+    """Return user's subscribers by given user id"""
+    uid = int(uid)
+    env.owner = User(int(uid))
     if not env.owner or not env.owner.id:
         raise NotFound
     return env.owner.subscribers()
