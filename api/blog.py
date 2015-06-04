@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 from point.app import posts
 from point.util import timestamp, parse_logins
 from point.util.env import env
@@ -34,6 +36,43 @@ def sanitize_plist(plist):
 def blog(login=None):
     if login:
         env.owner = User("login", login)
+    elif env.user.is_authorized():
+        env.owner = env.user
+
+    if not env.owner:
+        raise UserNotFound
+
+    before = env.request.args("before")
+    if before:
+        try:
+            before = long(before)
+        except ValueError:
+            before = None
+
+    try:
+        plist = posts.recent_blog_posts(env.owner, settings.page_limit+1,
+                                        before=before)
+        if len(plist) > settings.page_limit:
+            plist = plist[:settings.page_limit]
+            has_next = True
+        else:
+            has_next = False
+    except PostAuthorError:
+        raise Forbidden
+
+    return {
+        "posts": plist,
+        "has_next": has_next
+    }
+
+@api
+def blog_by_id(uid=None):
+    """Obtain user blog contents by given user id
+    parameters:
+    uid - user id
+    """
+    if uid:
+        env.owner = User(int(uid))
     elif env.user.is_authorized():
         env.owner = env.user
 
@@ -223,7 +262,15 @@ def tags(login=None):
 
 @api
 def taglist(login):
-    env.owner = User("login", login)
+    """Получение спика тегов пользователя по его user id или логину. Параметр 
+    login, переданный в URL может быть как числом, и тогда интерпретируется 
+    как id пользователя, так и строкой -- в этом случае он интерпретируется 
+    как login пользователя
+    """
+    if login and login.isdigit():
+        env.owner = User(int(login))
+    else:
+        env.owner = User("login", login)
     if not env.owner or not env.owner.id:
         raise UserNotFound
 
@@ -232,6 +279,12 @@ def taglist(login):
 
 @api
 def tag_posts(login=None):
+    """Выборка постов по тегам пользователя. Пользователь может быть 
+    идентифицирован по его user id или логину. 
+    Параметр login, переданный в URL может быть числом, и тогда 
+    интерпретируется как id пользователя, или строкой -- в этом случае он 
+    интерпретируется как login пользователя
+    """
     before = env.request.args("before")
     if before:
         try:
@@ -240,7 +293,10 @@ def tag_posts(login=None):
             before = None
 
     if login:
-        author = User("login", login)
+        if login and login.isdigit():
+            author = User(int(login))
+        else:            
+            author = User("login", login)
     else:
         author = None
 
