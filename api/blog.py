@@ -113,6 +113,7 @@ def recent_posts(page=1):
     }
 
 @api
+@check_auth
 def all_posts(page=1):
     before = env.request.args("before")
     if before:
