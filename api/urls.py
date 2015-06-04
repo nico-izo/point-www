@@ -1,9 +1,17 @@
+# -*- coding: UTF-8 -*-
+
 from api import auth, blog, users
 
 prefix = r'/api'
 
 urls = (
+    # user blog by id
+    (r'^%s/blog(?:/id/(?P<uid>\d+))?/?$' % prefix, blog.blog_by_id),
+    # user blog by login (DEPRECATED)
     (r'^%s/blog(?:/(?P<login>[-a-zA-Z0-9]+))?/?$' % prefix, blog.blog),
+    # user blog by login
+    (r'^%s/blog(?:/login/(?P<login>[-a-zA-Z0-9]+))?/?$' % prefix, blog.blog),
+
     (r'^%s/recent/?' % prefix, blog.recent_all),
     (r'^%s/recent/posts/?$' % prefix, blog.recent_posts),
     (r'%s/all/?$' % prefix, blog.all_posts),
@@ -48,9 +56,13 @@ urls = (
     (r'^%s/logout/?$' % prefix, 'POST', auth.logout),
 
     (r'^%s/user/id/(?P<uid>\d+)/subscriptions/?$' % prefix, users.subscriptions_byid),
-    (r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/subscriptions/?$' % prefix, users.subscriptions),
+    (r'^%s/user/login/(?P<login>[-a-zA-Z0-9]+)/subscriptions/?$' % prefix, users.subscriptions),
 
+    (r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/subscriptions/?$' % prefix, users.subscriptions),
+    # WILL BE DEPRECATED soon
     (r'^%s/user/id/(?P<uid>\d+)/subscribers/?$' % prefix, users.subscribers_byid),
+    (r'^%s/user/login/(?P<login>[-a-zA-Z0-9]+)/subscribers/?$' % prefix, users.subscribers),
+    # WILL BE DEPRECATED soon
     (r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/subscribers/?$' % prefix, users.subscribers),
 
     #(r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/s$' % prefix, 'POST', users.subscribe),
@@ -76,6 +88,14 @@ urls = (
     # user info via settings.domain/api/me
     (r'^%s/me/?$' % prefix, users.my_info),
 
+    # Получение спика тегов пользователя по его user id или логину. 
+    # Во избежание дублирования кода оба шаблона URL используют именованное 
+    # регулярное выражение login
+    # by id
+    (r'^%s/tags(?:/id/(?P<login>\d+))?/?$' % prefix, blog.tags),
+    # by login
+    (r'^%s/tags(?:/login/(?P<login>[-a-zA-Z0-9]+))?/?$' % prefix, blog.tags),
+    # by login (DEPRECATED)
     (r'^%s/tags(?:/(?P<login>[-a-zA-Z0-9]+))?/?$' % prefix, blog.tags),
     #(r'^%s/tag/s$' % prefix, users.tag_subscribe),
     #(r'^%s/tag/u$' % prefix, users.tag_unsubscribe),
