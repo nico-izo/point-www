@@ -174,7 +174,6 @@ def all_posts(page=1):
                                blacklist=True,
                                limit=settings.page_limit+1, offset=offset,
                                before=before)
->>>>>>> 2af622eae00a70ceb2bda62f1714d2080ac0be4b
     if len(plist) > settings.page_limit:
         plist = plist[:settings.page_limit]
         has_next = True
