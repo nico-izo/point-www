@@ -2,7 +2,7 @@ from views import index, blog, feeds, doc, mdoc, auth, users, profile, search, t
 
 urls = (
     (r'^/(?:(?P<page>\d+)/?)?$', index),
-    (r'^/recent(?:/(?P<page>\d+))?/?$', blog.recent_all),
+    (r'^/recent(?P<unread>/unread)?(?:/(?P<page>\d+))?/?$', blog.recent_all),
     (r'^/_(?P<path>.+)$', doc),
     (r'^/doc/(?P<path>.+)/?$', mdoc),
     (r'^(?P<path>/(?:help.*|about|tos))$', mdoc),
