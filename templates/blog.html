@@ -314,6 +314,7 @@
 
     {{ post_list(posts) }}
 
+    {% if not unread %}
     <div class="pager clearfix">
         {% if section in ['recent', 'recent_all'] or not section %}
             {% if page > 1 %}<a id="newer" href="/recent/{{page-1}}">Следующие</a>{% endif %}
@@ -344,6 +345,7 @@
             {% endif %}
         {% endif %}
     </div>
+    {% endif %}
 
 {% endblock %}
 

@@ -1,7 +1,13 @@
 {% extends "/blog.html" %}
 
-{% block title %}Комментарии {{env.user.login}}{% endblock %}
+{% block title %}{% if unread %}Непрочитанные комментарии{% else %}Комментарии{% endif %} {{env.user.login}}{% endblock %}
 
 {% block subheader %}
+{% if unread %}
+<a href="/comments">Комментарии</a>
+<span class="active">Непрочитанные</span>
+{% else %}
 <span class="active">Комментарии</span>
+<a href="/comments/unread">Непрочитанные</a>
+{% endif %}
 {% endblock %}

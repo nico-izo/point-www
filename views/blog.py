@@ -286,7 +286,7 @@ def messages_outgoing(page=1):
 
 @catch_errors
 @check_auth
-def comments(page=1):
+def comments(page=1, unread=False):
     if not env.owner or env.owner.id != env.user.id:
         return Response(redirect='%s://%s.%s%s' % \
                         (env.request.protocol,
@@ -302,7 +302,8 @@ def comments(page=1):
 
     offset = (page - 1) * settings.page_limit
 
-    plist = posts.recent_commented_posts(offset=offset,
+    plist = posts.recent_commented_posts(unread=unread,
+                                         offset=offset,
                                          limit=settings.page_limit+1)
 
     if env.request.is_xhr:
@@ -310,7 +311,8 @@ def comments(page=1):
             p['created'] = timestamp(p['created'])
         return Response(json.dumps(plist), mimetype='application/json')
 
-    return render('/comments.html', section='comments', posts=plist, page=page)
+    return render('/comments.html', section='comments',
+                  unread=unread, posts=plist, page=page)
 
 @catch_errors
 def taglist():

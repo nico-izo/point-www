@@ -17,7 +17,7 @@ urls = (
     (r'^/messages/incoming(?:/(?P<page>\d+))?/?$', blog.messages_incoming),
     (r'^/messages/outgoing(?:/(?P<page>\d+))?/?$', blog.messages_outgoing),
 
-    (r'^/comments(?:/(?P<page>\d+))?/?$', blog.comments),
+    (r'^/comments(?P<unread>/unread)?(?:/(?P<page>\d+))?/?$', blog.comments),
 
     (r'^/subscriptions/?$', users.subscriptions),
     (r'^/subscribers/?$', users.subscribers),
