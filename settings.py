@@ -115,7 +115,7 @@ recaptcha_private_key = ''
 
 cache_markdown = True
 
-cache_expire_max = 86400
+cache_expire_max = 86400 * 3
 
 try:
     from settings_local import *

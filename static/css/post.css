@@ -27,6 +27,10 @@
     margin-left: 10px;
 }
 
+.comments .comments .comments .comments .comments .comments .comments .comments .comments .comments {
+    margin-left: 0;
+}
+
 #comments .post .post-id .comment-id {
     background: transparent;
     color: #35587c;

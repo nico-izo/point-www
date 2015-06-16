@@ -6,11 +6,12 @@ from geweb.exceptions import Forbidden, NotFound
 from geweb.template import render
 from point.core.user import User, SubscribeError, check_auth, \
                             AlreadySubscribed, AlreadyRequested, \
-                            UserNotFound
+                            UserNotFound, NotAuthorized
 from geweb.util import csrf
 import json
 
 from api import api
+
 
 @api
 def info(login):
@@ -41,6 +42,27 @@ def info(login):
             if not data['bl']:
                 data['wl'] = env.user.check_blacklist(user)
     return data
+
+# get user info via settings.domain/api/me
+@api
+def my_info():
+    login = env.user.login
+    if not login:
+        raise NotAuthorized
+    return users.info(login)
+
+@api
+def user_info_byid(uid):
+    """Return user info by given user id"""
+    if uid and uid.isdigit():
+        try:
+            user = User(int(uid))
+        except (UserNotFound, ValueError):
+            raise NotFound
+        else:
+            return users.info(user)
+    raise NotFound
+
 
 @csrf
 @check_auth
@@ -241,8 +263,26 @@ def subscriptions(login):
     return env.owner.subscriptions()
 
 @api
+def subscriptions_byid(uid):
+    """Return user's subscriptions by given user id"""
+    uid = int(uid)
+    env.owner = User(int(uid))
+    if not env.owner or not env.owner.id:
+        raise NotFound
+    return env.owner.subscriptions()
+
+@api
 def subscribers(login):
     env.owner = User("login", login)
+    if not env.owner or not env.owner.id:
+        raise NotFound
+    return env.owner.subscribers()
+
+@api
+def subscribers_byid(uid):
+    """Return user's subscribers by given user id"""
+    uid = int(uid)
+    env.owner = User(int(uid))
     if not env.owner or not env.owner.id:
         raise NotFound
     return env.owner.subscribers()

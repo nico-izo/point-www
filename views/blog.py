@@ -145,6 +145,7 @@ def recent_posts(page=1):
                   posts=plist, page=page)
 
 @catch_errors
+@check_auth
 def all_posts(page=1):
     sess = Session()
     if not sess['agree']:
@@ -164,7 +165,7 @@ def all_posts(page=1):
     offset = (page - 1) * settings.page_limit
 
     plist = posts.select_posts(private=False, author_private=False,
-                               deny_anonymous=False, blacklist=True,
+                               blacklist=True,
                                limit=settings.page_limit+1, offset=offset)
 
     return render('/all_posts.html', section='all', posts=plist, page=page)
@@ -338,11 +339,16 @@ def tag_posts(tag, page=1):
     else:
         private = False
 
+    # variable deny_anonymous is for corresponding value of 'deny_anonymous'
+    # field in 'users.profile' table
+    deny_anonymous = False if not env.user.is_authorized() else None
+
     if not isinstance(tag, (list, tuple)):
         tag = [tag]
     tag = [t.decode('utf-8').replace(u"\xa0", " ") for t in tag]
 
-    plist = posts.select_posts(author=author, private=private, tags=tag,
+    plist = posts.select_posts(author=author, private=private, 
+                               deny_anonymous=deny_anonymous, tags=tag,
                                offset=offset, limit=settings.page_limit+1)
 
     if env.request.is_xhr:

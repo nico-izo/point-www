@@ -211,7 +211,36 @@ $(function () {
     $.getJSON("/files/stat/blacklisted.json").success(function (users) {
         $("#stat-blacklisted").highcharts({
             chart: {type: "bar"},
-            title: {text: "Топ 20 ненавидимых пользователей", x: -20},
+            title: {text: "Топ 20 ненавидимых", x: -20},
+            xAxis: {
+            categories: _.map(users, function (obj) { return obj[0]; }),
+                labels: {
+                    align: 'right'
+                }
+            },
+            yAxis: {
+                title: {text: ""},
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }],
+                min: 0
+            },
+            legend: {
+                borderWidth: 0
+            },
+            series: [{
+                name: "Пользователи",
+                data: _.map(users, function (obj) { return obj[1]; })
+            }]
+        });
+    });
+
+    $.getJSON("/files/stat/blacklisters.json").success(function (users) {
+        $("#stat-blacklisters").highcharts({
+            chart: {type: "bar"},
+            title: {text: "Топ 20 обидчивых и ранимых", x: -20},
             xAxis: {
             categories: _.map(users, function (obj) { return obj[0]; }),
                 labels: {
