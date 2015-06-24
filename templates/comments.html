@@ -5,9 +5,9 @@
 {% block subheader %}
 {% if unread %}
 <a href="/comments">Комментарии</a>
-<span class="active">Непрочитанные</span>
+<span class="active">Непрочитанные{% if unread_comments %} ({{unread_comments}}){% endif %}</span>
 {% else %}
 <span class="active">Комментарии</span>
-<a href="/comments/unread">Непрочитанные</a>
+<a href="/comments/unread">Непрочитанные{% if unread_comments %} ({{unread_comments}}){% endif %}</a>
 {% endif %}
 {% endblock %}
