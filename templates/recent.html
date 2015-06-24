@@ -5,7 +5,7 @@
 {% block subheader %}
     {% if unread %}
     <a href="/">Все</a>
-    <span class="active">Непрочитанные{% if unread_posts %} ({{ unread_posts }}){% endif %}</span>
+    <a href="/recent/unread" class="active">Непрочитанные{% if unread_posts %} ({{ unread_posts }}){% endif %}</a>
     {% else %}
     <span class="active">Все</span>
     {% if unread_posts %}<a href="/recent/unread">Непрочитанные ({{ unread_posts }})</a>{% endif %}
