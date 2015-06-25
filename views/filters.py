@@ -239,7 +239,7 @@ def markdown_filter(environ, text, img=False):
             return mdstring
 
     mdstring = md.convert(text)
-    print mdstring
+    #print mdstring
     md.reset()
 
     if settings.cache_markdown:
