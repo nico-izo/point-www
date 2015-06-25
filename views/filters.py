@@ -205,13 +205,13 @@ class WordWrap(Pattern):
     def handleMatch(self, m):
         return re.sub(r'\S{80}', lambda w: '%s '%w.group(0), m.group('word'))
 
-footnote_wo_hr = footnotes.FootnoteExtension()
-footnote_wo_hr.makeFootnotesDiv = RemoveHRFromFootnotesDiv
+#footnote_wo_hr = footnotes.FootnoteExtension()
+#footnote_wo_hr.makeFootnotesDiv = RemoveHRFromFootnotesDiv
 
-md = Markdown(extensions=['nl2br',footnote_wo_hr,'codehilite(guess_lang=False)', 'toc'],
-              safe_mode='escape')
-#md = Markdown(extensions=['nl2br','footnotes','codehilite(guess_lang=False)', 'toc'],
+#md = Markdown(extensions=['nl2br',footnote_wo_hr,'codehilite(guess_lang=False)', 'toc'],
 #              safe_mode='escape')
+md = Markdown(extensions=['nl2br','footnotes','codehilite(guess_lang=False)', 'toc'],
+              safe_mode='escape')
 
 md.preprocessors.add('cbacktick', CodeBacktick(md), '_begin')
 md.preprocessors.add('sharp', SharpHeader(md), '>cbacktick')
@@ -231,12 +231,12 @@ def markdown_filter(environ, text, img=False):
     if not text:
         return ''
 
-    '''if settings.cache_markdown:
+    if settings.cache_markdown:
         h = md5(text.encode('utf-8')).hexdigest()
         mdstring = cache_get('md:%s' % h)
 
         if mdstring:
-            return mdstring'''
+            return mdstring
 
     mdstring = md.convert(text)
     print mdstring
