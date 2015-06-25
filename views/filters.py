@@ -7,11 +7,13 @@ from point.core.user import User, UserNotFound
 from point.util import cache_get, cache_store
 from point.util.imgproc import imgproc_url
 from point.util.md import CodeBacktick, SharpHeader, QuoteBlock, UrlColons, \
-                          StrikePattern, ColonLinkPattern
+                          StrikePattern, ColonLinkPattern, \
+                          RemoveHRFromFootnotesDiv
 from geweb import log
 from markdown import Markdown
 from markdown.inlinepatterns import Pattern, LINK_RE
 from markdown.util import etree
+from markdown.extensions import footnotes
 from xml.sax.saxutils import escape
 from random import shuffle
 
@@ -203,6 +205,8 @@ class WordWrap(Pattern):
     def handleMatch(self, m):
         return re.sub(r'\S{80}', lambda w: '%s '%w.group(0), m.group('word'))
 
+footnotes.makeFootnotesDiv = RemoveHRFromFootnotesDiv
+
 md = Markdown(extensions=['nl2br','footnotes','codehilite(guess_lang=False)', 'toc'],
               safe_mode='escape')
 
@@ -232,6 +236,7 @@ def markdown_filter(environ, text, img=False):
             return mdstring
 
     mdstring = md.convert(text)
+    md.reset()
 
     if settings.cache_markdown:
         cache_store('md:%s' % h, mdstring, 3600)
