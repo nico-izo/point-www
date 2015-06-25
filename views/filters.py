@@ -205,10 +205,13 @@ class WordWrap(Pattern):
     def handleMatch(self, m):
         return re.sub(r'\S{80}', lambda w: '%s '%w.group(0), m.group('word'))
 
-footnotes.makeFootnotesDiv = RemoveHRFromFootnotesDiv
+footnote_wo_hr = footnotes.FootnoteExtension()
+footnote_wo_hr.makeFootnotesDiv = RemoveHRFromFootnotesDiv
 
-md = Markdown(extensions=['nl2br','footnotes','codehilite(guess_lang=False)', 'toc'],
+md = Markdown(extensions=['nl2br',footnote_wo_hr,'codehilite(guess_lang=False)', 'toc'],
               safe_mode='escape')
+#md = Markdown(extensions=['nl2br','footnotes','codehilite(guess_lang=False)', 'toc'],
+#              safe_mode='escape')
 
 md.preprocessors.add('cbacktick', CodeBacktick(md), '_begin')
 md.preprocessors.add('sharp', SharpHeader(md), '>cbacktick')
