@@ -231,14 +231,15 @@ def markdown_filter(environ, text, img=False):
     if not text:
         return ''
 
-    if settings.cache_markdown:
+    '''if settings.cache_markdown:
         h = md5(text.encode('utf-8')).hexdigest()
         mdstring = cache_get('md:%s' % h)
 
         if mdstring:
-            return mdstring
+            return mdstring'''
 
     mdstring = md.convert(text)
+    print mdstring
     md.reset()
 
     if settings.cache_markdown:
