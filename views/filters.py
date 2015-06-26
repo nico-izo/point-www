@@ -13,7 +13,7 @@ from geweb import log
 from markdown import Markdown
 from markdown.inlinepatterns import Pattern, LINK_RE
 from markdown.util import etree
-from markdown.extensions import footnotes
+from markdown.extensions.footnotes import FootnoteExtension as footnote
 from xml.sax.saxutils import escape
 from random import shuffle
 
@@ -205,13 +205,35 @@ class WordWrap(Pattern):
     def handleMatch(self, m):
         return re.sub(r'\S{80}', lambda w: '%s '%w.group(0), m.group('word'))
 
-#footnote_wo_hr = footnotes.FootnoteExtension()
-#footnote_wo_hr.makeFootnotesDiv = RemoveHRFromFootnotesDiv
+'''
+class Dog:
+    def bark(self):
+        print "Woof"
 
-#md = Markdown(extensions=['nl2br',footnote_wo_hr,'codehilite(guess_lang=False)', 'toc'],
-#              safe_mode='escape')
-md = Markdown(extensions=['nl2br','footnotes','codehilite(guess_lang=False)', 'toc'],
+def new_bark(self):
+    print "Woof Woof"
+
+foo = Dog()
+
+funcType = type(Dog.bark)
+
+# "Woof"
+foo.bark()
+
+# replace bark with new_bark for this object only
+foo.bark = funcType(new_bark, foo, Dog)
+
+# "Woof Woof"
+foo.bark()'''
+
+footnote_wo_hr = footnote()
+footnote_type = type(footnote.makeFootnotesDiv)
+footnote.makeFootnotesDiv = footnote_type(RemoveHRFromFootnotesDiv, footnote_wo_hr, footnote)
+
+md = Markdown(extensions=['nl2br',footnote_wo_hr,'codehilite(guess_lang=False)', 'toc'],
               safe_mode='escape')
+#md = Markdown(extensions=['nl2br','footnotes','codehilite(guess_lang=False)', 'toc'],
+#              safe_mode='escape')
 
 md.preprocessors.add('cbacktick', CodeBacktick(md), '_begin')
 md.preprocessors.add('sharp', SharpHeader(md), '>cbacktick')
