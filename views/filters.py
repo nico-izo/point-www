@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 import os
 from jinja2 import environmentfilter
 from urllib import unquote_plus
