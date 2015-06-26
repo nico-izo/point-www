@@ -13,9 +13,7 @@ from geweb import log
 from markdown import Markdown
 from markdown.inlinepatterns import Pattern, LINK_RE
 from markdown.util import etree
-from markdown.extensions.footnotes import FootnoteExtension as footnote, \
-                                          FN_BACKLINK_TEXT, NBSP_PLACEHOLDER, \
-                                          DEF_RE, TABBED_RE
+from markdown.extensions.footnotes import FootnoteExtension as footnote
 from xml.sax.saxutils import escape
 from random import shuffle
 
