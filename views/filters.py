@@ -205,35 +205,17 @@ class WordWrap(Pattern):
     def handleMatch(self, m):
         return re.sub(r'\S{80}', lambda w: '%s '%w.group(0), m.group('word'))
 
-'''
-class Dog:
-    def bark(self):
-        print "Woof"
 
-def new_bark(self):
-    print "Woof Woof"
-
-foo = Dog()
-
-funcType = type(Dog.bark)
-
-# "Woof"
-foo.bark()
-
-# replace bark with new_bark for this object only
-foo.bark = funcType(new_bark, foo, Dog)
-
-# "Woof Woof"
-foo.bark()'''
-
+# Замена метода `makeFootnotesDiv` класса `FootnoteExtension` (определен в 
+# `markdown.extensions.footnotes.py` на метод `RemoveHRFromFootnotesDiv` 
+# из `point.util.md` который возвращает блок `<div>` со сносками без 
+# горизонтальной линии `<HR>`
 footnote_wo_hr = footnote()
 footnote_type = type(footnote.makeFootnotesDiv)
 footnote.makeFootnotesDiv = footnote_type(RemoveHRFromFootnotesDiv, footnote_wo_hr, footnote)
 
 md = Markdown(extensions=['nl2br',footnote_wo_hr,'codehilite(guess_lang=False)', 'toc'],
               safe_mode='escape')
-#md = Markdown(extensions=['nl2br','footnotes','codehilite(guess_lang=False)', 'toc'],
-#              safe_mode='escape')
 
 md.preprocessors.add('cbacktick', CodeBacktick(md), '_begin')
 md.preprocessors.add('sharp', SharpHeader(md), '>cbacktick')
@@ -261,7 +243,10 @@ def markdown_filter(environ, text, img=False):
             return mdstring
 
     mdstring = md.convert(text)
-    #print mdstring
+    # метод reset() вызывается, чтобы сбросить определение сносок из  
+    # экземпляра класса, иначе они попадут в следующие сконвертированные 
+    # фрагменты HTML как сказано в 
+    # https://pythonhosted.org/Markdown/extensions/api.html#registerextension
     md.reset()
 
     if settings.cache_markdown:
