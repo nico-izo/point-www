@@ -215,7 +215,7 @@ footnote_wo_hr = footnote()
 footnote_hr = type(footnote.makeFootnotesDiv)
 footnote.makeFootnotesDiv = footnote_hr(RemoveHRFromFootnotesDiv, footnote_wo_hr, footnote)
 
-md = Markdown(extensions=['nl2br',footnote_wo_hr,'codehilite(guess_lang=False)', 'toc'],
+md = Markdown(extensions=['nl2br','footnote_wo_hr(UNIQUE_IDS=True)','codehilite(guess_lang=False)', 'toc'],
               safe_mode='escape')
 
 md.preprocessors.add('cbacktick', CodeBacktick(md), '_begin')
@@ -248,7 +248,7 @@ def markdown_filter(environ, text, img=False):
     # экземпляра класса, иначе они попадут в следующие сконвертированные 
     # фрагменты HTML как сказано в 
     # https://pythonhosted.org/Markdown/extensions/api.html#registerextension
-    md.reset()
+    # md.reset()
 
     if settings.cache_markdown:
         cache_store('md:%s' % h, mdstring, 3600)
