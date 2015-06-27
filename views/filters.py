@@ -9,13 +9,14 @@ from point.core.user import User, UserNotFound
 from point.util import cache_get, cache_store
 from point.util.imgproc import imgproc_url
 from point.util.md import CodeBacktick, SharpHeader, QuoteBlock, UrlColons, \
-                          StrikePattern, ColonLinkPattern, \
-                          RemoveHRFromFootnotesDiv
+                          StrikePattern, ColonLinkPattern #, \
+                          #RemoveHRFromFootnotesDiv
 from geweb import log
 from markdown import Markdown
 from markdown.inlinepatterns import Pattern, LINK_RE
 from markdown.util import etree
-from markdown.extensions.footnotes import FootnoteExtension as footnote
+#from markdown.extensions.footnotes import FootnoteExtension as footnote
+from point.util import unique_footnotes
 from xml.sax.saxutils import escape
 from random import shuffle
 
@@ -211,11 +212,13 @@ class WordWrap(Pattern):
 # `markdown.extensions.footnotes.py` на метод `RemoveHRFromFootnotesDiv` 
 # из `point.util.md` который возвращает блок `<div>` со сносками без 
 # горизонтальной линии `<HR>`
-footnote_wo_hr = footnote(UNIQUE_IDS=True)
-footnote_hr = type(footnote.makeFootnotesDiv)
-footnote.makeFootnotesDiv = footnote_hr(RemoveHRFromFootnotesDiv, footnote_wo_hr, footnote)
+#footnote_wo_hr = footnote(UNIQUE_IDS=True)
+#footnote_hr = type(footnote.makeFootnotesDiv)
+#footnote.makeFootnotesDiv = footnote_hr(RemoveHRFromFootnotesDiv, footnote_wo_hr, footnote)
 
-md = Markdown(extensions=['nl2br',footnote_wo_hr,'codehilite(guess_lang=False)', 'toc'],
+#md = Markdown(extensions=['nl2br',footnote_wo_hr,'codehilite(guess_lang=False)', 'toc'],
+#              safe_mode='escape')
+md = Markdown(extensions=['nl2br','unique_footnotes','codehilite(guess_lang=False)', 'toc'],
               safe_mode='escape')
 
 md.preprocessors.add('cbacktick', CodeBacktick(md), '_begin')
@@ -245,8 +248,8 @@ def markdown_filter(environ, text, img=False):
 
     mdstring = md.convert(text)
     # метод reset() вызывается, чтобы сбросить определение сносок из  
-    # экземпляра класса, иначе они попадут в следующие сконвертированные 
-    # фрагменты HTML как сказано в 
+    # экземпляра класса, иначе уже имеющиеся сноски попадут во все следующие 
+    # сконвертированные фрагменты HTML как сказано в 
     # https://pythonhosted.org/Markdown/extensions/api.html#registerextension
     md.reset()
 
