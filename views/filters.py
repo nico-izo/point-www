@@ -10,7 +10,7 @@ from point.util import cache_get, cache_store
 from point.util.imgproc import imgproc_url
 from point.util.md import CodeBacktick, SharpHeader, QuoteBlock, UrlColons, \
                           StrikePattern, ColonLinkPattern, \
-                          RemoveHRFromFootnotesDiv
+                          RemoveHRFromFootnotesDiv, makeUniqueFootnoteId
 from geweb import log
 from markdown import Markdown
 from markdown.inlinepatterns import Pattern, LINK_RE
@@ -207,14 +207,16 @@ class WordWrap(Pattern):
     def handleMatch(self, m):
         return re.sub(r'\S{80}', lambda w: '%s '%w.group(0), m.group('word'))
 
-
+makeUniqueFootnoteId
 # Замена метода `makeFootnotesDiv` класса `FootnoteExtension` (определен в 
 # `markdown.extensions.footnotes.py` на метод `RemoveHRFromFootnotesDiv` 
 # из `point.util.md` который возвращает блок `<div>` со сносками без 
 # горизонтальной линии `<HR>`
-footnote_wo_hr = footnote(UNIQUE_IDS=1)
-footnote_type = type(footnote.makeFootnotesDiv)
-footnote.makeFootnotesDiv = footnote_type(RemoveHRFromFootnotesDiv, footnote_wo_hr, footnote)
+footnote_wo_hr = footnote()
+footnote_hr = type(footnote.makeFootnotesDiv)
+footnote_unique_id = type(footnote.makeFootnoteId)
+footnote.makeFootnotesDiv = footnote_hr(RemoveHRFromFootnotesDiv, footnote_wo_hr, footnote)
+footnote.makeFootnoteId = footnote_unique_id(makeUniqueFootnoteId, footnote_wo_hr, footnote)
 
 md = Markdown(extensions=['nl2br',footnote_wo_hr,'codehilite(guess_lang=False)', 'toc'],
               safe_mode='escape')
