@@ -240,8 +240,8 @@ def markdown_filter(environ, text, img=False):
         h = md5(text.encode('utf-8')).hexdigest()
         #mdstring = cache_get('md:%s' % h)
 
-        if mdstring:
-            return mdstring
+        #if mdstring:
+        #    return mdstring
 
     mdstring = md.convert(text)
     # метод reset() вызывается, чтобы сбросить определение сносок из  
