@@ -16,7 +16,7 @@ from markdown import Markdown
 from markdown.inlinepatterns import Pattern, LINK_RE
 from markdown.util import etree
 #from markdown.extensions.footnotes import FootnoteExtension as footnote
-from point.util import unique_footnotes
+from point.util.unique_footnotes import UniqueFootnoteExtension
 from xml.sax.saxutils import escape
 from random import shuffle
 
@@ -215,10 +215,11 @@ class WordWrap(Pattern):
 #footnote_wo_hr = footnote(UNIQUE_IDS=True)
 #footnote_hr = type(footnote.makeFootnotesDiv)
 #footnote.makeFootnotesDiv = footnote_hr(RemoveHRFromFootnotesDiv, footnote_wo_hr, footnote)
+unique_footnotes = UniqueFootnoteExtension()
 
 #md = Markdown(extensions=['nl2br',footnote_wo_hr,'codehilite(guess_lang=False)', 'toc'],
 #              safe_mode='escape')
-md = Markdown(extensions=['nl2br','unique_footnotes','codehilite(guess_lang=False)', 'toc'],
+md = Markdown(extensions=['nl2br',unique_footnotes,'codehilite(guess_lang=False)', 'toc'],
               safe_mode='escape')
 
 md.preprocessors.add('cbacktick', CodeBacktick(md), '_begin')
