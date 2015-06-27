@@ -60,3 +60,7 @@
     font-size:small;
     line-height: normal;
 }
+
+.footnote-ref {
+    font-size: 120%;
+}
