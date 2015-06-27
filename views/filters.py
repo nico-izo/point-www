@@ -211,11 +211,11 @@ class WordWrap(Pattern):
 # `markdown.extensions.footnotes.py` на метод `RemoveHRFromFootnotesDiv` 
 # из `point.util.md` который возвращает блок `<div>` со сносками без 
 # горизонтальной линии `<HR>`
-footnote_wo_hr = footnote()
+footnote_wo_hr = footnote(UNIQUE_IDS=True)
 footnote_hr = type(footnote.makeFootnotesDiv)
 footnote.makeFootnotesDiv = footnote_hr(RemoveHRFromFootnotesDiv, footnote_wo_hr, footnote)
 
-md = Markdown(extensions=['nl2br','footnote_wo_hr(UNIQUE_IDS=True)','codehilite(guess_lang=False)', 'toc'],
+md = Markdown(extensions=['nl2br',footnote_wo_hr,'codehilite(guess_lang=False)', 'toc'],
               safe_mode='escape')
 
 md.preprocessors.add('cbacktick', CodeBacktick(md), '_begin')
