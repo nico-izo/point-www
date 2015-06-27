@@ -248,7 +248,7 @@ def markdown_filter(environ, text, img=False):
     # экземпляра класса, иначе они попадут в следующие сконвертированные 
     # фрагменты HTML как сказано в 
     # https://pythonhosted.org/Markdown/extensions/api.html#registerextension
-    # md.reset()
+    md.reset()
 
     if settings.cache_markdown:
         cache_store('md:%s' % h, mdstring, 3600)
