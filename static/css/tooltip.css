@@ -1,3 +1,20 @@
+/*------------------------------------------------
+    Tooltip on the page 
+------------------------------------------------*/
+
+.post-footnote {
+    font-size:small;
+    line-height: normal;
+}
+
+.footnote-ref {
+    font-size: 120%;
+}
+
+/*------------------------------------------------
+    Tooltip popup
+------------------------------------------------*/
+
 #tooltip {
     text-align: center;
     color: #fff;
