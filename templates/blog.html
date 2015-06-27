@@ -3,10 +3,12 @@
 {% block extra_head %}
 <link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/blog.css"/>
 <link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/code.css"/>
+<link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/tooltip.css"/>
 {#<script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/aside.js"></script>
 <script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/jquery.autosize.js"></script>
 <script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/jquery.tmpl.min.js"></script>
 <script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/blog.js"></script>#}
+<script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/tooltip.js"></script>
 {% if env.owner and env.owner.id and env.owner.type != 'feed' %}
 <link rel="alternate" type="application/rss+xml" title="POINT | RSS 2.0" href="{{env.request.protocol}}://{{env.owner.login}}.{{settings.domain}}/rss"/>
 {% endif %}
