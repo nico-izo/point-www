@@ -15,7 +15,6 @@ from geweb import log
 from markdown import Markdown
 from markdown.inlinepatterns import Pattern, LINK_RE
 from markdown.util import etree
-#from markdown.extensions.footnotes import FootnoteExtension as footnote
 from point.util.unique_footnotes import UniqueFootnoteExtension
 from xml.sax.saxutils import escape
 from random import shuffle
@@ -208,17 +207,8 @@ class WordWrap(Pattern):
     def handleMatch(self, m):
         return re.sub(r'\S{80}', lambda w: '%s '%w.group(0), m.group('word'))
 
-# Замена метода `makeFootnotesDiv` класса `FootnoteExtension` (определен в 
-# `markdown.extensions.footnotes.py` на метод `RemoveHRFromFootnotesDiv` 
-# из `point.util.md` который возвращает блок `<div>` со сносками без 
-# горизонтальной линии `<HR>`
-#footnote_wo_hr = footnote(UNIQUE_IDS=True)
-#footnote_hr = type(footnote.makeFootnotesDiv)
-#footnote.makeFootnotesDiv = footnote_hr(RemoveHRFromFootnotesDiv, footnote_wo_hr, footnote)
+# создаем собственный класс уникальных сносок
 unique_footnotes = UniqueFootnoteExtension()
-
-#md = Markdown(extensions=['nl2br',footnote_wo_hr,'codehilite(guess_lang=False)', 'toc'],
-#              safe_mode='escape')
 md = Markdown(extensions=['nl2br',unique_footnotes,'codehilite(guess_lang=False)', 'toc'],
               safe_mode='escape')
 
@@ -242,10 +232,10 @@ def markdown_filter(environ, text, img=False):
 
     if settings.cache_markdown:
         h = md5(text.encode('utf-8')).hexdigest()
-        #mdstring = cache_get('md:%s' % h)
+        mdstring = cache_get('md:%s' % h)
 
-        #if mdstring:
-        #    return mdstring
+        if mdstring:
+            return mdstring
 
     mdstring = md.convert(text)
     # метод reset() вызывается, чтобы сбросить определение сносок из  
