@@ -7,6 +7,10 @@
     line-height: normal;
 }
 
+div.post-footnote > ol {
+    list-style-type: decimal;
+}
+
 .footnote-ref {
     font-size: 120%;
 }
