@@ -95,7 +95,7 @@ def blog_rss():
 
 @catch_errors
 @check_auth
-def recent_all(page=1):
+def recent_all(page=1, unread=False):
     if not env.owner or env.owner.id != env.user.id:
         return Response(redirect="%s://%s.%s/recent" % \
                         (env.request.protocol, env.user.login, settings.domain))
@@ -108,32 +108,9 @@ def recent_all(page=1):
 
     offset = (page - 1) * settings.page_limit
 
-    plist = posts.recent_posts(offset=offset, limit=settings.page_limit+1)
+    unread = bool(unread)
 
-    if env.request.is_xhr:
-        for p in plist:
-            p['created'] = timestamp(p['created'])
-        return Response(json.dumps(plist), mimetype='application/json')
-
-    return render('/recent.html', section='recent_all',
-                  posts=plist, page=page)
-
-@catch_errors
-@check_auth
-def recent_posts(page=1):
-    if not env.owner or env.owner.id != env.user.id:
-        return Response(redirect="%s://%s.%s/recent" % \
-                        (env.request.protocol, env.user.login, settings.domain))
-    try:
-        page = int(page)
-    except (TypeError, ValueError):
-        page = 1
-    if not page:
-        page = 1
-
-    offset = (page - 1) * settings.page_limit
-
-    plist = posts.recent_posts(type='post',
+    plist = posts.recent_posts(unread=unread,
                                offset=offset, limit=settings.page_limit+1)
 
     if env.request.is_xhr:
@@ -141,7 +118,35 @@ def recent_posts(page=1):
             p['created'] = timestamp(p['created'])
         return Response(json.dumps(plist), mimetype='application/json')
 
-    return render('/recent.html', section='recent_posts',
+    return render('/recent.html', section='recent_all', unread=unread,
+                  posts=plist, page=page)
+
+@catch_errors
+@check_auth
+def recent_posts(page=1, unread=False):
+    if not env.owner or env.owner.id != env.user.id:
+        return Response(redirect="%s://%s.%s/recent" % \
+                        (env.request.protocol, env.user.login, settings.domain))
+    try:
+        page = int(page)
+    except (TypeError, ValueError):
+        page = 1
+    if not page:
+        page = 1
+
+    offset = (page - 1) * settings.page_limit
+
+    unread = bool(unread)
+
+    plist = posts.recent_posts(type='post', unread=bool(unread),
+                               offset=offset, limit=settings.page_limit+1)
+
+    if env.request.is_xhr:
+        for p in plist:
+            p['created'] = timestamp(p['created'])
+        return Response(json.dumps(plist), mimetype='application/json')
+
+    return render('/recent.html', section='recent_posts', unread=unread,
                   posts=plist, page=page)
 
 @catch_errors
@@ -281,7 +286,7 @@ def messages_outgoing(page=1):
 
 @catch_errors
 @check_auth
-def comments(page=1):
+def comments(page=1, unread=False):
     if not env.owner or env.owner.id != env.user.id:
         return Response(redirect='%s://%s.%s%s' % \
                         (env.request.protocol,
@@ -297,7 +302,8 @@ def comments(page=1):
 
     offset = (page - 1) * settings.page_limit
 
-    plist = posts.recent_commented_posts(offset=offset,
+    plist = posts.recent_commented_posts(unread=unread,
+                                         offset=offset,
                                          limit=settings.page_limit+1)
 
     if env.request.is_xhr:
@@ -305,7 +311,8 @@ def comments(page=1):
             p['created'] = timestamp(p['created'])
         return Response(json.dumps(plist), mimetype='application/json')
 
-    return render('/comments.html', section='comments', posts=plist, page=page)
+    return render('/comments.html', section='comments',
+                  unread=unread, posts=plist, page=page)
 
 @catch_errors
 def taglist():

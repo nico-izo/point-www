@@ -36,11 +36,12 @@
         <!--<script src="{{env.request.protocol}}://{{settings.domain}}/js/modernizr-2.6.2.min.js"></script>-->
         <script src="{{env.request.protocol}}://{{settings.domain}}/js/jquery-1.9.1.min.js"></script>
         <script src="{{env.request.protocol}}://{{settings.domain}}/js/blog.js"></script>
+        <script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/tooltip.js"></script>
         <link rel="icon" type="image/png" href="{{env.request.protocol}}://{{settings.domain}}/img/favicon.png"/>
-
 
         {% block extra_head %}{% endblock %}
         <link id="usercss-link" rel="stylesheet" type="text/css" href="{{ env.request.protocol }}{{settings.usercss_root}}/{{env.user.login}}.css"/>
+        <link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/tooltip.css"/>
     </head>
     <body>
         {% set unread_posts = env.user.unread_posts_count('post') %}

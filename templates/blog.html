@@ -7,6 +7,7 @@
 <script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/jquery.autosize.js"></script>
 <script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/jquery.tmpl.min.js"></script>
 <script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/blog.js"></script>#}
+
 {% if env.owner and env.owner.id and env.owner.type != 'feed' %}
 <link rel="alternate" type="application/rss+xml" title="POINT | RSS 2.0" href="{{env.request.protocol}}://{{env.owner.login}}.{{settings.domain}}/rss"/>
 {% endif %}
