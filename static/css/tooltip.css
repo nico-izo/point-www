@@ -12,7 +12,7 @@ div.post-footnote > ol {
 }
 
 .footnote-ref {
-    font-size: 120%;
+    text-decoration: none;
 }
 
 /*------------------------------------------------
