@@ -67,7 +67,7 @@ session_cookie = 'user'
 session_expire = 90 # 90 days
 session_backend = 'geweb.session.redis.RedisBackend'
 session_prefix = 'geweb-session-'
-session_socket = storage_socket
+session_socket = 'unix:///var/run/redis/sessions.sock'
 
 middleware = [
     'geweb.session.SessionMiddleware',
