@@ -7,6 +7,10 @@
     vertical-align: top;
 }
 
+.linenos, .linenos * {
+    overflow: hidden !important;
+}
+
 .linenos {
     width: 4em;
     max-width: 4em;
