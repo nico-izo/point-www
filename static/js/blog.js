@@ -20,5 +20,16 @@ $(document).ready(function() {
             evt.preventDefault();
         }
     });
+    
+    // Scroll line numbers
+    $('.codehilitetable').each(function() {
+      var lines = $('.linenos pre', this);
+      if (lines.length === 0) {
+        //return;
+      }
+      $('.codehilite pre', this).on('scroll', function(evt) {
+        lines.scrollTop($(this).scrollTop());
+      });
+    });
 });
 
