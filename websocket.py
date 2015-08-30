@@ -68,8 +68,8 @@ class WsApplication(WebSocketApplication):
         #for k, v in self.ws.environ.iteritems():
         #    print '>', k, v
 
-        cookies = Cookie(self.ws.environ['HTTP_COOKIE'])
         try:
+            cookies = Cookie(self.ws.environ['HTTP_COOKIE'])
             sessid = cookies[settings.session_cookie].value
             user = self._auth(sessid, self.ws)
             if user and user.id:
