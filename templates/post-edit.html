@@ -54,7 +54,7 @@
                 </div>
                 <div class="footnote">
                     Для форматирования текста используется <a href="{{env.request.protocol}}://{{settings.domain}}/help/markdown">Markdown</a>.<br/>
-                    Пост можно изменить только в течение {{(settings.edit_expire/60)|int}} минут после создания.
+                    Пост можно изменить один раз и только в течение {{(settings.edit_expire/60)|int}} минут после создания.
                 </div>
                 <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
             </div>
