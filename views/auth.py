@@ -20,6 +20,8 @@ import urllib2
 from datetime import datetime, timedelta
 from recaptcha.client import captcha
 
+from geweb import log
+
 try:
     import re2 as re
 except ImportError:
@@ -252,8 +254,9 @@ def register():
             if not resp.is_valid:
                 errors.append('captcha')
 
-        except urllib2.URLError:
-            errors.append('recaptcha-fail')
+        except urllib2.URLError, e:
+            log.error('recaptcha fail: %s' % e)
+            #errors.append('recaptcha-fail')
         except AddressNotFound:
             return Response(redirect='%s://%s/remember?fail=1' % \
                         (env.request.protocol, settings.domain))
