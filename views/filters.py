@@ -9,8 +9,7 @@ from point.core.user import User, UserNotFound
 from point.util import cache_get, cache_store
 from point.util.imgproc import imgproc_url
 from point.util.md import CodeBacktick, SharpHeader, QuoteBlock, UrlColons, \
-                          StrikePattern, ColonLinkPattern #, \
-                          #RemoveHRFromFootnotesDiv
+                          StrikePattern, ColonLinkPattern
 from geweb import log
 from markdown import Markdown
 from markdown.inlinepatterns import Pattern, LINK_RE
@@ -55,6 +54,20 @@ class PostLinkPattern(Pattern):
             a.text = '#%s' % m.group('p')
         a.set('class', 'post')
         return a
+
+
+class CommentLinkPattern(Pattern):
+    def __init__(self):
+        #Pattern.__init__(self, ur'\s(?<!\d)\/(?P<c>\d+)\s')
+        Pattern.__init__(self, ur'(^|\s)\/(?P<c>\d+)(\s|$)')
+
+    def handleMatch(self, m):
+        a = etree.Element('a')
+        a.set('href', '#%s' % m.group('c'))
+        a.text = '/%s' % m.group('c')
+        a.set('class', 'comment-id')
+        return a
+
 
 class UrlPattern(Pattern):
     def __init__(self):
