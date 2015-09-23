@@ -233,7 +233,8 @@ md.preprocessors.add('urlcolons', UrlColons(md), '>quoteblock')
 md.inlinePatterns.add('url', UrlPattern(), '>automail')
 md.inlinePatterns.add('user', UserLinkPattern(), '>url')
 md.inlinePatterns.add('post', PostLinkPattern(), '>user')
-md.inlinePatterns.add('strike', StrikePattern(), '>post')
+md.inlinePatterns.add('comment', CommentLinkPattern(), '>post')
+md.inlinePatterns.add('strike', StrikePattern(), '>comment')
 # replace native LinkPattern 
 md.inlinePatterns['link'] = ColonLinkPattern(LINK_RE, md)
 
