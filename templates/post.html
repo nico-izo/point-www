@@ -53,7 +53,7 @@
 
             <div class="clearfix">
                 <div class="post-id">
-                    <a href="{{env.request.protocol}}://{{settings.domain}}/{{post.id}}#{{c.id}}">#{{post.id}}/{{c.id}}</a>
+                    <a href="#{{c.id}}">#{{post.id}}/{{c.id}}</a>
                     {% if c.to_comment_id %}
                     в ответ на <a class="comment-id" href="#{{c.to_comment_id}}">/{{c.to_comment_id}}</a>
                     {% endif %}
