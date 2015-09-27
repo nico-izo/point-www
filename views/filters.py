@@ -77,10 +77,10 @@ class UrlPattern(Pattern):
 
         imgm = re.search(r'\.(?P<ext>jpe?g|png|gif)((:|%3a)large)?$', m.group('path'), re.I)
         if (imgm \
-        or re.search("^http://ompldr.org/v[A-Z][a-zA-Z0-9]+$", url, re.I) \
+        or re.search("^https?://ompldr.org/v[A-Z][a-zA-Z0-9]+$", url, re.I) \
         or url.startswith("http://img.leprosorium.com") \
         or url.startswith("http://pics.livejournal.com/")) \
-        and not re.search(r'https?://(www\.)?dropbox.com', url, re.I):
+        and not re.search(r'^https?://(www\.)?dropbox.com', url, re.I):
             wrap = etree.Element('div')
             wrap.set('class', 'clearfix')
             a = etree.SubElement(wrap, 'a')
@@ -111,7 +111,7 @@ class UrlPattern(Pattern):
             return wrap
 
         # vimeo
-        um = re.search("(?:http://)?(?:(?:www\.)?vimeo\.com\/(?P<id>[\d-]+))", url, re.I)
+        um = re.search("(?:https?://)?(?:(?:www\.)?vimeo\.com\/(?P<id>[\d-]+))", url, re.I)
         if um:
             wrap = etree.Element('div')
             wrap.set('class', 'clearfix')
