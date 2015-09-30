@@ -197,9 +197,11 @@
                     <a href="{{env.request.protocol}}://{{settings.domain}}/statistics">Статистика</a>
                     <a href="{{env.request.protocol}}://bitbucket.org/arts/point-issues">Сообщить об ошибке</a>
                 </div>
+                {% if env.user.id %}
                 <div class="secret">
                     <a href="{{env.request.protocol}}://{{settings.domain}}/all">Всё подряд</a>
                 </div>
+                {% endif %}
             </div>
             <div id="copyright">
                 &copy; 2010&ndash;2015 A. Sazhin
