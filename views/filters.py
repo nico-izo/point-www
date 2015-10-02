@@ -58,7 +58,8 @@ class PostLinkPattern(Pattern):
 
 class CommentLinkPattern(Pattern):
     def __init__(self):
-        Pattern.__init__(self, ur'(?<!\w|\/)\u0005?\/(?P<c>\d+)(?=\s|$)')
+        # Pattern.__init__(self, ur'(?<!\w|\/)\u0005?\/(?P<c>\d+)(?=\s|$)')
+        Pattern.__init__(self, ur'(?<!\w|/)\u0005?\(?/(?P<c>\d+)(?=[.,;:?!)]|(?:\s|$))')
 
     def handleMatch(self, m):
         a = etree.Element('a')
