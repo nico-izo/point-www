@@ -65,7 +65,7 @@ class CommentLinkPattern(Pattern):
         a = etree.Element('a')
         a.set('href', '#%s' % m.group('c'))
         a.text = '/%s' % m.group('c')
-        a.set('class', 'comment-id')
+        a.set('class', 'post-id')
         return a
 
 
