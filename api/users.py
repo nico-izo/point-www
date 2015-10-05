@@ -17,6 +17,9 @@ from api import api
 def info(login):
     try:
         user = User('login', login)
+        # !!!
+        print '**** user form API ****'
+        print user
     except UserNotFound:
         raise NotFound
 
