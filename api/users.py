@@ -66,7 +66,8 @@ def user_info_byid(uid):
         else:
             print '**** user LOGIN from by-id ****'
             print(user.login)
-            data = users.info(user)
+            #data = users.info(user)
+            data = info(user.login)
             print '**** DATA: ****'
             print data
             return data
