@@ -71,7 +71,7 @@ def user_info_byid(uid):
             data = info(user.login)
             print '**** DATA: ****'
             print data.body
-            return data.body
+            return json.dumps(data.body)
     raise NotFound
 
 
