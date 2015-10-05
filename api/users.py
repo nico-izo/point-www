@@ -22,6 +22,9 @@ def info(login):
 
     try:
         data = users.info(user)
+        print '*'*20
+        print data
+        print '*'*20
     except SubscribeError:
         raise Forbidden
     data['id'] = user.id
