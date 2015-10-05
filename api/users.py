@@ -70,7 +70,7 @@ def user_info_byid(uid):
             data = info(user.login)
             print '**** DATA: ****'
             print data.body
-            return data
+            return Response(json.dumps(data.body), mimetype='application/json')
     raise NotFound
 
 
