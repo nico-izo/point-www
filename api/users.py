@@ -61,7 +61,7 @@ def user_info_byid(uid):
         try:
             user = User(int(uid))
             # !!!
-            print user
+            print user.login
         except (UserNotFound, ValueError):
             raise NotFound
         else:
