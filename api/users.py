@@ -15,6 +15,8 @@ from api import api
 
 @api
 def info(login):
+    print '**** LOGIN: ****'
+    print login
     try:
         user = User('login', login)
         # !!!
