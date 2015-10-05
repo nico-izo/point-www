@@ -69,7 +69,7 @@ def user_info_byid(uid):
             #data = users.info(user)
             data = info(user.login)
             print '**** DATA: ****'
-            print data
+            print data.read()
             return data
     raise NotFound
 
