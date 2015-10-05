@@ -18,7 +18,7 @@ def info(login):
     try:
         user = User('login', login)
         # !!!
-        print '**** user form API ****'
+        print '**** user form API by login ****'
         print user
     except UserNotFound:
         raise NotFound
@@ -64,7 +64,8 @@ def user_info_byid(uid):
         try:
             user = User(int(uid))
             # !!!
-            print user.login
+            print '**** user from API by id ****'
+            print user
         except (UserNotFound, ValueError):
             raise NotFound
         else:
