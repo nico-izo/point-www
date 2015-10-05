@@ -49,6 +49,7 @@ def info(login):
             data['bl'] = env.user.check_blacklist(user)
             if not data['bl']:
                 data['wl'] = env.user.check_blacklist(user)
+    print type(data)
     return data
 
 
@@ -70,7 +71,7 @@ def user_info_byid(uid):
             data = info(user.login)
             print '**** DATA: ****'
             print data.body
-            return Response(json.dumps(data.body), mimetype='application/json')
+            return data.body
     raise NotFound
 
 
