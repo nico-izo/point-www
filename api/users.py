@@ -64,10 +64,9 @@ def user_info_byid(uid):
         except (UserNotFound, ValueError):
             raise NotFound
         else:
-            # return users.info(user)
             print '**** user LOGIN from by-id ****'
             print(user.login)
-            data = info(user.login)
+            data = users.info(user)
             print '**** DATA: ****'
             print data
             return data
