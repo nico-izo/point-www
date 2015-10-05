@@ -15,21 +15,13 @@ from api import api
 
 @api
 def info(login):
-    print '**** LOGIN: ****'
-    print login
     try:
         user = User('login', login)
-        # !!!
-        print '**** user form API by login ****'
-        print user
     except UserNotFound:
         raise NotFound
 
     try:
         data = users.info(user)
-        print '*'*20
-        print data
-        print '*'*20
     except SubscribeError:
         raise Forbidden
     data['id'] = user.id
@@ -49,7 +41,6 @@ def info(login):
             data['bl'] = env.user.check_blacklist(user)
             if not data['bl']:
                 data['wl'] = env.user.check_blacklist(user)
-    print type(data)
     return data
 
 
@@ -59,18 +50,10 @@ def user_info_byid(uid):
     if uid and uid.isdigit():
         try:
             user = User(int(uid))
-            # !!!
-            print '**** user from API by id ****'
-            print user
         except (UserNotFound, ValueError):
             raise NotFound
         else:
-            print '**** user LOGIN from by-id ****'
-            print(user.login)
-            #data = users.info(user)
             data = info(user.login)
-            print '**** DATA: ****'
-            print type(json.loads(data.body))
             return json.loads(data.body)
     raise NotFound
 
