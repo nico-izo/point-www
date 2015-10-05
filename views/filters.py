@@ -9,8 +9,7 @@ from point.core.user import User, UserNotFound
 from point.util import cache_get, cache_store
 from point.util.imgproc import imgproc_url
 from point.util.md import CodeBacktick, SharpHeader, QuoteBlock, UrlColons, \
-                          StrikePattern, ColonLinkPattern #, \
-                          #RemoveHRFromFootnotesDiv
+                          StrikePattern, ColonLinkPattern
 from geweb import log
 from markdown import Markdown
 from markdown.inlinepatterns import Pattern, LINK_RE
@@ -56,6 +55,20 @@ class PostLinkPattern(Pattern):
         a.set('class', 'post')
         return a
 
+
+class CommentLinkPattern(Pattern):
+    def __init__(self):
+        # Pattern.__init__(self, ur'(?<!\w|\/)\u0005?\/(?P<c>\d+)(?=\s|$)')
+        Pattern.__init__(self, ur'(?<!\w|/)\u0005?\(?/(?P<c>\d+)(?=[.,;:?!)]|(?:\s|$))')
+
+    def handleMatch(self, m):
+        a = etree.Element('a')
+        a.set('href', '#%s' % m.group('c'))
+        a.text = '/%s' % m.group('c')
+        a.set('class', 'post')
+        return a
+
+
 class UrlPattern(Pattern):
     def __init__(self):
         Pattern.__init__(self, ur'(?P<url>(?P<proto>\w+)://(?:[\w\.\-%\:]*\@)?(?P<host>[\w\.\-%]+)(?::(?P<port>\d+))?(?P<path>(?:/[^\s\?\u0002\u0003]*)*)(?P<qs>\?[^#\s\u0002\u0003]*)?(?:#(?P<hash>\S+))?)')
@@ -65,10 +78,10 @@ class UrlPattern(Pattern):
 
         imgm = re.search(r'\.(?P<ext>jpe?g|png|gif)((:|%3a)large)?$', m.group('path'), re.I)
         if (imgm \
-        or re.search("^http://ompldr.org/v[A-Z][a-zA-Z0-9]+$", url, re.I) \
+        or re.search("^https?://ompldr.org/v[A-Z][a-zA-Z0-9]+$", url, re.I) \
         or url.startswith("http://img.leprosorium.com") \
         or url.startswith("http://pics.livejournal.com/")) \
-        and not re.search(r'https?://(www\.)?dropbox.com', url, re.I):
+        and not re.search(r'^https?://(www\.)?dropbox.com', url, re.I):
             wrap = etree.Element('div')
             wrap.set('class', 'clearfix')
             a = etree.SubElement(wrap, 'a')
@@ -99,7 +112,7 @@ class UrlPattern(Pattern):
             return wrap
 
         # vimeo
-        um = re.search("(?:http://)?(?:(?:www\.)?vimeo\.com\/(?P<id>[\d-]+))", url, re.I)
+        um = re.search("(?:https?://)?(?:(?:www\.)?vimeo\.com\/(?P<id>[\d-]+))", url, re.I)
         if um:
             wrap = etree.Element('div')
             wrap.set('class', 'clearfix')
@@ -220,7 +233,8 @@ md.preprocessors.add('urlcolons', UrlColons(md), '>quoteblock')
 md.inlinePatterns.add('url', UrlPattern(), '>automail')
 md.inlinePatterns.add('user', UserLinkPattern(), '>url')
 md.inlinePatterns.add('post', PostLinkPattern(), '>user')
-md.inlinePatterns.add('strike', StrikePattern(), '>post')
+md.inlinePatterns.add('comment', CommentLinkPattern(), '>post')
+md.inlinePatterns.add('strike', StrikePattern(), '>comment')
 # replace native LinkPattern 
 md.inlinePatterns['link'] = ColonLinkPattern(LINK_RE, md)
 
