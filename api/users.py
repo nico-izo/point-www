@@ -49,13 +49,6 @@ def info(login):
                 data['wl'] = env.user.check_blacklist(user)
     return data
 
-# get user info via settings.domain/api/me
-@api
-def my_info():
-    login = env.user.login
-    if not login:
-        raise NotAuthorized
-    return users.info(login)
 
 @api
 def user_info_byid(uid):
@@ -69,8 +62,18 @@ def user_info_byid(uid):
         except (UserNotFound, ValueError):
             raise NotFound
         else:
-            return users.info(user)
+            # return users.info(user)
+            return info(user)
     raise NotFound
+
+
+# get user info via settings.domain/api/me
+@api
+def my_info():
+    login = env.user.login
+    if not login:
+        raise NotAuthorized
+    return users.info(login)
 
 
 @csrf
