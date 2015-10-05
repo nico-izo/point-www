@@ -60,6 +60,8 @@ def user_info_byid(uid):
     if uid and uid.isdigit():
         try:
             user = User(int(uid))
+            # !!!
+            print user
         except (UserNotFound, ValueError):
             raise NotFound
         else:
