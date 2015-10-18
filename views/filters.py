@@ -209,6 +209,7 @@ class UrlPattern(Pattern):
 
         a = etree.Element('a')
         a.set('href', url)
+        a.set('rel', 'nofollow')
         a.text = text
         return a
 
