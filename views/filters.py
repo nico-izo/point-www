@@ -62,7 +62,10 @@ class CommentLinkPattern(Pattern):
 
     def handleMatch(self, m):
         a = etree.Element('a')
-        a.set('href', '#%s' % m.group('c'))
+        if m.group('c') == '0':
+            a.set('href', '#')
+        else:
+            a.set('href', '#%s' % m.group('c'))
         a.text = '/%s' % m.group('c')
         a.set('class', 'post')
         return a
