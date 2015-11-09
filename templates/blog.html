@@ -110,7 +110,7 @@
 {% macro post_list(posts) %}
     {% for p in posts %}
     {% if loop.index > settings.page_limit %}{% break %}{% endif %}
-    <div class="post{% if p.post.private %} private{% endif %}" data-id="{{p.post.id}}">
+    <div class="post{% if p.post.private %} private{% endif %}{% if p.post.pinned %} pinned{% endif %}" data-id="{{p.post.id}}">
         <div class="info">
             {% if p.rec %}
             <a href="{{env.request.protocol}}://{{p.rec.author.login|lower}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if p.rec.author.get_info('avatar') %}/40/{{p.rec.author.get_info('avatar')}}{% else %}/av40.png{% endif %}" alt="{{p.rec.author.login}}"/></a>

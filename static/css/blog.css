@@ -309,6 +309,10 @@
     background-size: 32px 32px;
 }
 
+.post.pinned .post-id::before{
+    content: "Прикрепленный пост, еба.";
+}
+
 @media (-webkit-max-device-pixel-ratio: 1.5),
        (-moz-max-device-pixel-ratio: 1.5),
        (-o-max-device-pixel-ratio: 1.5),
