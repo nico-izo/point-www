@@ -695,3 +695,26 @@ def unbookmark(id):
 
     return Response(redirect=env.request.referer)
 
+@catch_errors
+@csrf
+@check_auth
+@check_referer
+def pin(id):
+    post = Post(id)
+    if env.user.id == post.author.id:
+        post.set_pinned(True)
+        return Response(redirect=env.request.referer)
+    else:
+        raise Forbidden
+
+@catch_errors
+@csrf
+@check_auth
+@check_referer
+def unpin(id):
+    post = Post(id)
+    if env.user.id == post.author.id:
+        post.set_pinned(False)
+        return Response(redirect=env.request.referer)
+    else:
+        raise Forbidden

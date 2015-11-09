@@ -206,6 +206,13 @@
                 {% else %}
                 <a class="bookmark" href="{{env.request.protocol}}://{{p.post.author.login|lower}}.{{settings.domain}}/{{p.post.id}}/b?{% if p.comment_id %}comment_id={{p.comment_id}}&{% endif %}csrf_token={{csrf_token()}}">в закладки</a>
                 {% endif %}
+                {% if env.user.id == p.post.author.id %}
+                    {% if p.post.pinned %}
+                    <a class="pin" href="{{env.request.protocol}}://{{p.post.author.login|lower}}.{{settings.domain}}/{{p.post.id}}/upin?csrf_token={{csrf_token()}}">открепить</a>
+                    {% else %}
+                    <a class="pin" href="{{env.request.protocol}}://{{p.post.author.login|lower}}.{{settings.domain}}/{{p.post.id}}/pin?csrf_token={{csrf_token()}}">прикрепить</a>
+                    {% endif %}
+                {% endif %}
             </div>
 
             {% if not p.post.archive %}
