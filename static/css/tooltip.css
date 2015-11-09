@@ -7,26 +7,23 @@
 .post-footnote {
     /* font-size:small; */
     line-height: normal;
-}
-
 div.post-footnote > ol {
-  list-style: decimal;
+  list-style: decimal outside;
   font-size: .85em;
-  counter-reset: item;
   padding: 0 0 0 1.5em;
 }
 
 div.post-footnote > ol li {
-  position: relative;
+  margin: 5px 0;
 }
 
-div.post-footnote > ol li:before {
+
+div.post-footnote > ol li p {
+  display: inline;
+}
+
+div.post-footnote > ol li p:first-child ~ p {
   display: block;
-  position: absolute;
-  top: 0;
-  left: -1.5em;
-  counter-increment: item;
-  content: counter(item);
 }
 
 .footnote-ref {
