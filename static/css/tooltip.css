@@ -11,6 +11,7 @@ div.post-footnote > ol {
     list-style-type: decimal;
     list-style-position: inside;
     font-size: x-small;
+    padding-left: 0px;
 }
 
 .footnote-ref {
@@ -35,17 +36,7 @@ div.post-footnote > ol {
     -webkit-box-shadow: 2px 4px 2px rgba(0,0,0,0.3);
 }
 
-/*#tooltip {
-    text-align: center;
-    color: #fff;
-    background: #111;
-    position: absolute;
-    font-size: 0.8em;
-    line-height: 1.3em;
-    z-index: 100;
-    padding: 15px;
-}*/
- 
+
 #tooltip:after { /* triangle decoration */
     width: 0;
     height: 0;
