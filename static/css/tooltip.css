@@ -1,17 +1,32 @@
 /*------------------------------------------------
     Tooltip on the page 
+    @Alinaki version, see https://point.im/iakll#75
+    for explanation
 ------------------------------------------------*/
 
 .post-footnote {
-    font-size:small;
+    /* font-size:small; */
     line-height: normal;
 }
 
 div.post-footnote > ol {
-    list-style-type: decimal;
-    list-style-position: inside;
-    font-size: x-small;
-    padding-left: 0px;
+  list-style: decimal;
+  font-size: .85em;
+  counter-reset: item;
+  padding: 0 0 0 1.5em;
+}
+
+div.post-footnote > ol li {
+  position: relative;
+}
+
+div.post-footnote > ol li:before {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -1.5em;
+  counter-increment: item;
+  content: counter(item);
 }
 
 .footnote-ref {
