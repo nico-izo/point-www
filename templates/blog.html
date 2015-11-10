@@ -110,7 +110,7 @@
 {% macro post_list(posts) %}
     {% for p in posts %}
     {% if loop.index > settings.page_limit %}{% break %}{% endif %}
-    <div class="post{% if p.post.private %} private{% endif %}" data-id="{{p.post.id}}">
+    <div class="post{% if p.post.private %} private{% endif %}{% if p.post.pinned %} pinned{% endif %}" data-id="{{p.post.id}}">
         <div class="info">
             {% if p.rec %}
             <a href="{{env.request.protocol}}://{{p.rec.author.login|lower}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if p.rec.author.get_info('avatar') %}/40/{{p.rec.author.get_info('avatar')}}{% else %}/av40.png{% endif %}" alt="{{p.rec.author.login}}"/></a>
@@ -205,6 +205,13 @@
                 <a class="bookmark" href="{{env.request.protocol}}://{{p.post.author.login|lower}}.{{settings.domain}}/{{p.post.id}}/ub?{% if p.comment_id %}comment_id={{p.comment_id}}&{% endif %}csrf_token={{csrf_token()}}">из закладок</a>
                 {% else %}
                 <a class="bookmark" href="{{env.request.protocol}}://{{p.post.author.login|lower}}.{{settings.domain}}/{{p.post.id}}/b?{% if p.comment_id %}comment_id={{p.comment_id}}&{% endif %}csrf_token={{csrf_token()}}">в закладки</a>
+                {% endif %}
+                {% if env.user.id == p.post.author.id %}
+                    {% if p.post.pinned %}
+                    <a class="pin" href="{{env.request.protocol}}://{{p.post.author.login|lower}}.{{settings.domain}}/{{p.post.id}}/upin?csrf_token={{csrf_token()}}">открепить</a>
+                    {% else %}
+                    <a class="pin" href="{{env.request.protocol}}://{{p.post.author.login|lower}}.{{settings.domain}}/{{p.post.id}}/pin?csrf_token={{csrf_token()}}">прикрепить</a>
+                    {% endif %}
                 {% endif %}
             </div>
 
