@@ -1,36 +1,4 @@
 /*------------------------------------------------
-    Tooltip on the page 
-    @Alinaki version, see https://point.im/iakll
-    for explanation
-------------------------------------------------*/
-
-.post-footnote {
-    /* font-size:small; */
-    line-height: normal;
-div.post-footnote > ol {
-  list-style: decimal outside;
-  font-size: .85em;
-  padding: 0 0 0 1.5em;
-}
-
-div.post-footnote > ol li {
-  margin: 5px 0;
-}
-
-
-div.post-footnote > ol li p {
-  display: inline;
-}
-
-div.post-footnote > ol li p:first-child ~ p {
-  display: block;
-}
-
-.footnote-ref {
-    text-decoration: none;
-}
-
-/*------------------------------------------------
     Tooltip popup
 ------------------------------------------------*/
 
