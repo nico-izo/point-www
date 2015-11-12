@@ -306,3 +306,11 @@ def whitelist():
         raise NotFound
     return env.owner.whitelist()
 
+@api
+@check_auth
+def blacklisters():
+    env.owner = env.user
+    if not env.owner or not env.owner.id:
+        raise NotFound
+    return env.owner.blacklisters()
+
