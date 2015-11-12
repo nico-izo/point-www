@@ -156,5 +156,23 @@
     {% endfor %}
 </div>
 </div>
+
+<h1><label for="blers-cb">Пользователи, у которых вы в черном списке</label></h1>
+<input type="checkbox" id="blers-cb"/>
+
+<div class="users">
+{% for u in env.user.blacklisters() %}
+<div class="user">
+    <a class="user" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if u.info.avatar %}/40/{{u.info.avatar}}{% else %}/av40.png{% endif %}" alt="{{u.login}}"/></a>
+    <div class="info">
+        <a class="user" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/">{{u.login}}</a>
+        {% if u.info.name %}<span class="name">{{u.info.name}}</span>{% endif %}
+    </div>
+</div>
+{% else %}
+<p>Вы никого не оскорбили своим существованием</p>
+{% endfor %}
+</div>
+
 {% endif %}
 {% endblock %}
