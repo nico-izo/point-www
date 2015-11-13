@@ -78,6 +78,7 @@ urls = (
     (r'^%s/user/bl/?$' % prefix, 'GET', users.blacklist),
     #(r'^%s/user/bl$' % prefix, 'POST', users.add_to_blacklist),
     #(r'^%s/user/bl$' % prefix, 'DELETE', users.del_from_blacklist),
+    (r'^%s/user/blers/?$' % prefix, 'GET', users.blacklisters),
     # user info via id
     (r'^%s/user/id/(?P<uid>\d+)/?$' % prefix, users.user_info_byid),
     # WILL BE DEPRECATED soon
