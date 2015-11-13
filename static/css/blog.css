@@ -322,8 +322,10 @@
     background-size: 32px 32px;
 }
 
-.post.pinned .post-id::before{
-    content: "Прикрепленный пост, еба.";
+.post.pinned .post-id > a {
+    padding-left: 24px;
+    background: url("//point.im/img/icon-pinned.png") left center no-repeat;
+    background-size: 16px 16px;
 }
 
 @media (-webkit-max-device-pixel-ratio: 1.5),
