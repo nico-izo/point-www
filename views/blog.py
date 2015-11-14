@@ -556,6 +556,30 @@ def add_comment(id):
 @csrf
 @check_auth
 @check_referer
+def edit_comment(post_id, comment_id):
+    if comment_id == '0':
+        raise NotFound
+    else:
+        try:
+            posts.edit_comment(post_id, comment_id,
+                env.request.args('text', ''), editor=env.user)
+        except PostTextError:
+            return render('/comment-error.html')
+
+        if env.owner and env.owner.login:
+            login = env.owner.login.lower()
+        else:
+            post = Post(post_id)
+            login = post.author.login.lower()
+
+        return Response(redirect='%s://%s.%s/%s#%s' % \
+            (env.request.protocol, login, settings.domain, post_id, comment_id))
+
+
+@catch_errors
+@csrf
+@check_auth
+@check_referer
 def recommend(id):
     comment_id = env.request.args('comment_id')
     text = env.request.args('text')

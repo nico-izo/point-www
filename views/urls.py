@@ -89,6 +89,8 @@ urls = (
     (r'^/(?P<id>[a-z]+)/ub$', blog.unbookmark),
 
     (r'^/(?P<id>[a-z]+)/pin$', blog.pin),
-    (r'^/(?P<id>[a-z]+)/upin$', blog.unpin)
+    (r'^/(?P<id>[a-z]+)/upin$', blog.unpin),
+
+    (r'^/(?P<post_id>[a-z]+)/edit-comment/(?P<comment_id>[0-9]+)$', blog.edit_comment)
 )
 
