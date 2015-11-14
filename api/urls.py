@@ -24,6 +24,7 @@ urls = (
 
     (r'^%s/post/(?P<id>[a-z]+)$' % prefix, 'POST', blog.add_comment),
     (r'^%s/post/(?P<id>[a-z]+)/(?P<comment_id>\d+)$' % prefix, 'DELETE', blog.delete_comment),
+    (r'^%s/post/(?P<id>[a-z]+)/(?P<comment_id>\d+)$' % prefix, 'PATCH', blog.edit_comment),
 
     (r'^%s/post/(?P<id>[a-z]+)/r$' % prefix, 'POST', blog.recommend_post),
     (r'^%s/post/(?P<id>[a-z]+)/r$' % prefix, 'DELETE', blog.unrecommend_post),
