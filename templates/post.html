@@ -52,6 +52,11 @@
             {% endif %}
 
             <div class="clearfix">
+                {% if c.updated %}
+                <div class="comment-updated">
+                    Комментарий был отредактирован в {{c.updated.strftime('%H:%M:%S %d.%m.%Y')}}
+                </div>
+                {% endif %}
                 <div class="post-id">
                     <a href="#{{c.id}}">#{{post.id}}/{{c.id}}</a>
                     {% if c.to_comment_id %}
@@ -61,6 +66,9 @@
 
                 {% if env.user.id and not post.archive %}
                 <div class="action-labels">
+                    {% if c.author == env.user %}
+                    <label class="reply-label" for="edit-{{post.id}}_{{c.id}}">редактировать</label>
+                    {% endif %}
                     <label class="reply-label" for="reply-{{post.id}}_{{c.id}}"}>ответить</label>
                     {% if not post.private and c.author.login!=env.user.login %}
                         {% if c.recommended %}
@@ -91,6 +99,19 @@
                 <a class="bookmark" href="{{env.request.protocol}}://{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/b?comment_id={{c.id}}&csrf_token={{csrf_token()}}">в закладки</a>
                 {% endif %}
             </div>
+
+            {% if c.author == env.user %}
+            <input type="radio" class="reply-radio" name="reply-radio" id="edit-{{post.id}}_{{c.id}}"/>
+            <form class="reply-form" action="/{{post.id}}/edit-comment/{{c.id}}" method="post" enctype="multipart/form-data" autocomplete="off">
+                <textarea name="text">{{c.text}}</textarea>
+                <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+                <div class="clearfix">
+                    <div class="buttons">
+                        <input type="submit" value="Сохранить"/>
+                    </div>
+                </div>
+            </form>
+            {% endif %}
 
             {% if not post.archive %}
             <input type="radio" class="reply-radio" name="reply-radio" id="reply-{{post.id}}_{{c.id}}"/>
