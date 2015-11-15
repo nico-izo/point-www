@@ -10,7 +10,7 @@ from point.core.post import Post, PostAuthorError, PostTextError, \
                             RecommendationNotFound, RecommendationError, \
                             RecommendationExists, BookmarkExists, \
                             PostUpdateError, PostDiffError, PostCommentedError,\
-                            AlreadySubscribed, PostAlreadyPinnedError, 
+                            AlreadySubscribed, PostAlreadyPinnedError, \
                             PostNotPinnedError 
 from point.core.user import User, SubscribeError, UserNotFound, check_auth
 
