@@ -82,6 +82,7 @@ actions_interval = 2
 edit_expire = 120
 edit_ratio = .95
 edit_distance = 10
+edit_comment_expire = edit_expire / 2
 
 user_rename_timeout = 60 * 60 * 24
 

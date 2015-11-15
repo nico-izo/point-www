@@ -66,7 +66,7 @@
 
                 {% if env.user.id and not post.archive %}
                 <div class="action-labels">
-                    {% if c.author == env.user %}
+                    {% if c.author == env.user and c.is_editable() %}
                     <label class="reply-label" for="edit-{{post.id}}_{{c.id}}">редактировать</label>
                     {% endif %}
                     <label class="reply-label" for="reply-{{post.id}}_{{c.id}}"}>ответить</label>
@@ -100,7 +100,7 @@
                 {% endif %}
             </div>
 
-            {% if c.author == env.user %}
+            {% if c.author == env.user and c.is_editable() %}
             <input type="radio" class="reply-radio" name="reply-radio" id="edit-{{post.id}}_{{c.id}}"/>
             <form class="reply-form" action="/{{post.id}}/edit-comment/{{c.id}}" method="post" enctype="multipart/form-data" autocomplete="off">
                 <textarea name="text">{{c.text}}</textarea>
