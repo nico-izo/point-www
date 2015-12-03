@@ -10,7 +10,8 @@ from point.core.post import Post, PostAuthorError, PostTextError, \
                             RecommendationNotFound, RecommendationError, \
                             RecommendationExists, BookmarkExists, \
                             PostUpdateError, PostDiffError, PostCommentedError,\
-                            AlreadySubscribed
+                            AlreadySubscribed, PostAlreadyPinnedError, \
+                            PostNotPinnedError 
 from point.core.user import User, SubscribeError, UserNotFound, check_auth
 
 from api import api, write_api
@@ -125,6 +126,37 @@ def recent_all():
         "posts": plist,
         "has_next": has_next
     }
+
+
+@write_api
+def post_pin(id):
+    post = posts.show_post(id)
+    try:
+        if post.pinned:
+            raise PostAlreadyPinnedError
+    except PostAlreadyPinnedError:
+        return {
+            "code": "405",
+            "message": "Post already pinned."
+        }
+    else:
+        post.set_pinned()
+
+
+@write_api
+def post_unpin(id):
+    post = posts.show_post(id)
+    try:
+        if not post.pinned:
+            raise PostNotPinnedError
+    except PostNotPinnedError:
+        return {
+            "code": "405",
+            "message": "Post not pinned."
+        }
+    else:
+        post.set_pinned(False)
+
 
 @api
 @check_auth
