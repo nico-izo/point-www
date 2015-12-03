@@ -130,7 +130,7 @@
             {% if p.btext %}<div class="btext">{{p.btext}}</div>{% endif %}
             {% if p.rec %}
             <a href="{{env.request.protocol}}://{{p.rec.author.login|lower}}.{{settings.domain}}/" class="user author">{{p.rec.author.login}}</a>
-            {% if p.rec.text %}<div class="rtext">{{p.rec.text}}</div>{% endif %}
+            {% if p.rec.text %}<div class="rtext">{{p.rec.text|markdown|safe}}</div>{% endif %}
             <div class="rec">
                 <a href="{{env.request.protocol}}://{{p.post.author.login|lower}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if p.post.author.get_info('avatar') %}/24/{{p.post.author.get_info('avatar')}}{% else %}/av24.png{% endif %}" alt="{{p.post.author.login}}"/></a>
                 <a href="{{env.request.protocol}}://{{p.post.author.login|lower}}.{{settings.domain}}/" class="user rcmd">{{p.post.author.login}}</a>
