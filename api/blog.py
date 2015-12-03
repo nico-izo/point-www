@@ -398,6 +398,15 @@ def add_comment(id):
     return {"id": id, "comment_id": comment_id}
 
 @write_api
+def edit_comment(id, comment_id):
+    text = env.request.args('text', '').strip()
+
+    posts.edit_comment(id, comment_id, text, env.user)
+
+    return {"id": id, "comment_id": comment_id}
+
+
+@write_api
 def delete_comment(id, comment_id):
     try:
         posts.delete_comment(id, comment_id)

@@ -27,6 +27,11 @@
     margin-left: 10px;
 }
 
+.comment-updated {
+    font-size: 0.9em;
+    font-style: italic;
+}
+
 .comments .comments .comments .comments .comments .comments .comments .comments .comments .comments {
     margin-left: 0;
 }
