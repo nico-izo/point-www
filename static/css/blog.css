@@ -94,6 +94,10 @@
     font-style: normal;
 }
 
+.post .rtext p, .post .btext p {
+    margin: 0 .5em 0;
+}
+
 .post .text {
     /*clear: both;*/
     margin-bottom: 1em;
