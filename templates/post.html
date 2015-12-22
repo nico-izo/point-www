@@ -66,10 +66,10 @@
 
                 {% if env.user.id and not post.archive %}
                 <div class="action-labels">
+                    <label class="reply-label" for="reply-{{post.id}}_{{c.id}}">ответить</label>
                     {% if c.author == env.user and c.is_editable() %}
-                    <label class="reply-label" for="edit-{{post.id}}_{{c.id}}">редактировать</label>
+                    <label class="reply-label" for="edit-{{post.id}}_{{c.id}}"></label>
                     {% endif %}
-                    <label class="reply-label" for="reply-{{post.id}}_{{c.id}}"}>ответить</label>
                     {% if not post.private and c.author.login!=env.user.login %}
                         {% if c.recommended %}
                         <a class="recommend" href="{{env.request.protocol}}://{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/ur?comment_id={{c.id}}&csrf_token={{csrf_token()}}">не рекомендовать<!--span class="count">8</span--></a>
