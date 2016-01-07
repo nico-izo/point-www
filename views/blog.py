@@ -316,8 +316,8 @@ def comments(page=1, unread=False):
 
 @catch_errors
 def taglist():
-    if not env.owner:
-        raise NotFound
+    if not env.user.login and env.owner.get_profile('deny_anonymous'):
+        raise Forbidden
 
     sort_by_name = env.request.args('order', '') != 'cnt'
 
