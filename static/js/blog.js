@@ -10,9 +10,9 @@ $(document).ready(function() {
 
     // Listeners
     // New post form
-    $("#new-post-form textarea").on("keypress", send_form_by_ctrl_enter);
+    $("#new-post-form textarea").on("keydown", send_form_by_ctrl_enter);
     // Comments reply form
-    $("#content").on("keypress", ".reply-form textarea", send_form_by_ctrl_enter);
+    $("#content").on("keydown", ".reply-form textarea", send_form_by_ctrl_enter);
 
     // Delete post or comment
     $(document).on("click", ".post .edit-buttons .del", function (evt) {
