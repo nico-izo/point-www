@@ -873,6 +873,40 @@ img.avatar {
     }
 }
 
+/* 
+    Show/hide 'scroll to top' button
+*/
+#scrollToTop {
+    bottom: 20px;
+    right: 20px;
+    background-color: #35587C;
+    color: #FFF;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1.3px;
+    text-decoration: none;
+    padding: 11px 0px 9px;
+    width: 140px;
+    text-align: center;
+    border-radius: 18px;
+    transition: background 200ms ease 0s;
+}
+
+.totophide {
+    opacity:0;
+}
+.totopshow {
+    opacity:1;
+}
+
+@media (max-width: 780px) {
+    #scrollToTop {
+        right: 50%;
+        margin-right: -70px;
+    }
+}
+
 #aside-toggle-cb {
     position: absolute;
     left: -9999px;

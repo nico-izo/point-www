@@ -36,6 +36,7 @@
         <!--<script src="{{env.request.protocol}}://{{settings.domain}}/js/modernizr-2.6.2.min.js"></script>-->
         <script src="{{env.request.protocol}}://{{settings.domain}}/js/jquery-1.9.1.min.js"></script>
         <script src="{{env.request.protocol}}://{{settings.domain}}/js/blog.js"></script>
+        <script src="{{env.request.protocol}}://{{settings.domain}}/js/scrolltotop.js"></script>
         <script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/tooltip.js"></script>
         <link rel="icon" type="image/png" href="{{env.request.protocol}}://{{settings.domain}}/img/favicon.png"/>
 
@@ -174,6 +175,7 @@
                         {% block content %}{% endblock %}
                     </div>
                 </div>
+                <a style="position: fixed; z-index: 4816152342; display: block;" href="#" id="scrollToTop">Наверх</a>
             </div>
         </div>
 
@@ -204,7 +206,7 @@
                 {% endif %}
             </div>
             <div id="copyright">
-                &copy; 2010&ndash;2015 A. Sazhin
+                &copy; 2010&ndash;2016 A.&nbsp;Sazhin
             </div>
         </div>
         {% block templates %}{% endblock %}
