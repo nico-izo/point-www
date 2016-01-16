@@ -595,22 +595,6 @@ img.avatar {
     display: block;
 }
 
-#header #top-link {
-    display: block;
-    float: right;
-    border: solid;
-    border-color: rgba(255,255,255,.25) transparent;
-    border-width: 0 8px 8px 8px;
-    padding: 0;
-    margin: 14px;
-}
-
-@media (min-width: 800px) {
-    #header #top-link {
-        display: none;
-    }
-}
-
 #subheader-wrap {
     margin-top: 44px;
     width: 100%;
@@ -814,16 +798,6 @@ img.avatar {
     white-space: nowrap;
 }
 
-#main #left-menu #top-link {
-    border: solid;
-    border-color: #ebeef2 transparent;
-    border-width: 0 75px 25px 75px;
-    padding: 0;
-    margin: 0;
-    position: fixed;
-    bottom: 1em;
-}
-
 #left-menu .unread, #user-menu .unread {
     float: right;
     margin: 0 4px;
@@ -865,6 +839,40 @@ img.avatar {
     #main .aside {
         float: right;
         width: 280px;
+    }
+}
+
+/* 
+ *  Show/hide 'scroll to top' button
+ */
+#scrollToTop {
+    bottom: 20px;
+    right: 20px;
+    background-color: #35587C;
+    color: #FFF;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1.3px;
+    text-decoration: none;
+    padding: 11px 0px 9px;
+    width: 140px;
+    text-align: center;
+    border-radius: 18px;
+    transition: opacity .2s;
+}
+
+.totophide {
+    opacity:0;
+}
+.totopshow {
+    opacity:1;
+}
+
+@media (max-width: 780px) {
+    #scrollToTop {
+        right: 50%;
+        margin-right: -70px;
     }
 }
 
