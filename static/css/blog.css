@@ -369,7 +369,7 @@
     /*font-size: .9em;*/
     /*font-weight: bold;*/
     cursor: pointer;
-    margin: .5em;
+    margin: 0 .5em;
 }
 
 .post .reply-label .cn {
@@ -492,6 +492,15 @@
 
 .post .edit-buttons .del {
     background-image: url("//point.im/img/btn-del.png");
+}
+
+label[for^="edit-"] {
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    background-size: contain;
+    background-image: url("//point.im/img/btn-edit-35587C.png");
+    vertical-align: bottom;
 }
 
 #comments .post.unread {
