@@ -221,6 +221,44 @@
     font-weight: bold;
 }
 
+.spoiler-container {
+    background-color: black;
+}
+
+.spoiler-container:hover {
+    animation: backfade 0.3s ease-out;
+    background-color: transparent;
+}
+
+.spoiler {
+    opacity: 0;
+}
+
+.spoiler:hover {
+    animation: reveal 0.3s ease-out;
+    opacity: 1;
+}
+
+@keyframes reveal {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes backfade {
+    from {
+        background-color: black;
+    }
+
+    to {
+        background-color: transparent;
+    }
+}
+
 .post .tags {
     margin: 1em 0;
     /*padding-left: 48px;

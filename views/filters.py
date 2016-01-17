@@ -223,6 +223,19 @@ class WordWrap(Pattern):
     def handleMatch(self, m):
         return re.sub(r'\S{80}', lambda w: '%s '%w.group(0), m.group('word'))
 
+class WebSpoiler(Pattern):
+    def __init__(self):
+        Pattern.__init__(self, r'(%{2})(?P<contents>.+?)\2')
+
+    def handleMatch(self, m):
+        el_cont = etree.Element('span')
+        el_cont.set('class', 'spoiler-container')
+        el = etree.Element('span')
+        el.set('class', 'spoiler')
+        el.text = m.group('contents')
+        el_cont.append(el)
+        return el_cont
+
 # создаем собственный класс уникальных сносок
 unique_footnotes = UniqueFootnoteExtension()
 md = Markdown(extensions=['nl2br',unique_footnotes,'codehilite(guess_lang=False)', 'toc'],
@@ -238,6 +251,7 @@ md.inlinePatterns.add('user', UserLinkPattern(), '>url')
 md.inlinePatterns.add('post', PostLinkPattern(), '>user')
 md.inlinePatterns.add('comment', CommentLinkPattern(), '>post')
 md.inlinePatterns.add('strike', StrikePattern(), '>comment')
+md.inlinePatterns.add('spoiler', WebSpoiler(), '>strike')
 # replace native LinkPattern 
 md.inlinePatterns['link'] = ColonLinkPattern(LINK_RE, md)
 
