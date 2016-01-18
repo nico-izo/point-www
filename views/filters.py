@@ -252,6 +252,7 @@ md.inlinePatterns.add('post', PostLinkPattern(), '>user')
 md.inlinePatterns.add('comment', CommentLinkPattern(), '>post')
 md.inlinePatterns.add('strike', StrikePattern(), '>comment')
 md.inlinePatterns.add('spoiler', WebSpoiler(), '>strike')
+md.ESCAPED_CHARS.append('%')
 # replace native LinkPattern 
 md.inlinePatterns['link'] = ColonLinkPattern(LINK_RE, md)
 
