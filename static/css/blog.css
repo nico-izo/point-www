@@ -37,7 +37,7 @@
     width: 16px;
     height: 16px;
     margin-right: 8px;
-    /*background: transparent url("//point.im/img/btn-recommend.png") left center no-repeat;*/
+    /*background: transparent url("/img/btn-recommend.png") left center no-repeat;*/
     background-size: 16px 16px;
 }
 
@@ -170,7 +170,7 @@
     width: 100%;
     height: 100%;
     margin: -4px;
-    background: url("//point.im/img/embed/youtube.png") right bottom no-repeat;
+    background: url("/img/embed/youtube.png") right bottom no-repeat;
 }
 
 .post .postimg.gif:after {
@@ -181,7 +181,7 @@
     width: 100%;
     height: 100%;
     margin: -4px;
-    background: url("//point.im/img/embed/gif.png") right bottom no-repeat;
+    background: url("/img/embed/gif.png") right bottom no-repeat;
 }*/
 
 .post .postimg img {
@@ -262,7 +262,7 @@
 .post .tags {
     margin: 1em 0;
     /*padding-left: 48px;
-    background: transparent url("//point.im/img/icon-tags.png") left .8em no-repeat;
+    background: transparent url("/img/icon-tags.png") left .8em no-repeat;
     background-size: 32px 32px;*/
 }
 
@@ -280,7 +280,7 @@
 .aside #all-tags {
     margin: 0 .5em;
     padding: .25em 24px .25em 0;
-    background: url("//point.im/img/all-tags.png") right center no-repeat;
+    background: url("/img/all-tags.png") right center no-repeat;
     text-decoration: none;
 }
 
@@ -334,7 +334,7 @@
 
 .post.recommendation .post-id {
     padding-left: 48px;
-    background: url("//point.im/img/icon-rec.png") left center no-repeat;
+    background: url("/img/icon-rec.png") left center no-repeat;
     background-size: 32px 32px;
 }
 
@@ -364,13 +364,13 @@
 
 .post.private .post-id {
     padding-left: 48px;
-    background: url("//point.im/img/icon-private.png") left center no-repeat;
+    background: url("/img/icon-private.png") left center no-repeat;
     background-size: 32px 32px;
 }
 
 .post.pinned .post-id > a {
     padding-left: 24px;
-    background: url("//point.im/img/icon-pinned.png") left center no-repeat;
+    background: url("/img/icon-pinned.png") left center no-repeat;
     background-size: 16px 16px;
 }
 
@@ -525,11 +525,11 @@
 }
 
 .post .edit-buttons .edit {
-    background-image: url("//point.im/img/btn-edit.png");
+    background-image: url("/img/btn-edit.png");
 }
 
 .post .edit-buttons .del {
-    background-image: url("//point.im/img/btn-del.png");
+    background-image: url("/img/btn-del.png");
 }
 
 label[for^="edit-"] {
@@ -537,7 +537,7 @@ label[for^="edit-"] {
     height: 16px;
     width: 16px;
     background-size: contain;
-    background-image: url("//point.im/img/btn-edit-35587C.png");
+    background-image: url("/img/btn-edit-35587C.png");
     vertical-align: bottom;
 }
 
@@ -568,13 +568,13 @@ label[for^="edit-"] {
 .pager #newer {
     float: left;
     padding-left: 28px;
-    background: url("//point.im/img/garl.png") left center no-repeat;
+    background: url("/img/garl.png") left center no-repeat;
 }
 
 .pager #older {
     float: right;
     padding-right: 28px;
-    background: url("//point.im/img/garr.png") right center no-repeat;
+    background: url("/img/garr.png") right center no-repeat;
 }
 
 @media (-webkit-max-device-pixel-ratio: 1.5),
@@ -757,7 +757,7 @@ label[for^="edit-"] {
 
 .aside #tags {
     padding-left: 24px;
-    background: transparent url("//point.im/img/icon-tags.png") left .25em no-repeat;
+    background: transparent url("/img/icon-tags.png") left .25em no-repeat;
     background-size: 16px 16px;
 }
 
@@ -790,7 +790,7 @@ label[for^="edit-"] {
 .aside #all-tags {
     margin: 1em .5em;
     padding: .25em 24px .25em 0;
-    background: url("//point.im/img/all-tags.png") right center no-repeat;
+    background: url("/img/all-tags.png") right center no-repeat;
     text-decoration: none;
     white-space: nowrap;
 }

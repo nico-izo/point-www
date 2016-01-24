@@ -211,18 +211,18 @@ a.preview-link {
 }
 
 .value .addr-row .buttons label.del {
-    background-image: url("//point.im/img/account-del.png");
+    background-image: url("/img/account-del.png");
 }
 
 .value .addr-row .buttons label.set-active {
-    background-image: url("//point.im/img/account-set-active.png");
+    background-image: url("/img/account-set-active.png");
 }
 
 .value .addr-row .del:checked + .buttons .del {
-    background-image: url("//point.im/img/account-del-checked.png");
+    background-image: url("/img/account-del-checked.png");
 }
 .value .addr-row .set-active:checked + .set-active {
-    background-image: url("//point.im/img/account-set-active-checked.png");
+    background-image: url("/img/account-set-active-checked.png");
 }
 
 .value .addr-row .del:checked + .buttons .set-active {

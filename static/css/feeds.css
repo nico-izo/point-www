@@ -7,11 +7,11 @@
     margin: 0 4px;
     background: left .5em no-repeat;
     background-size: 16px 16px;
-    background-image: url("//point.im/img/left-menu-feeds.png");
+    background-image: url("/img/left-menu-feeds.png");
 }
 
 .aside .feed#new-feed {
-    background-image: url("//point.im/img/left-menu-new-feed.png");
+    background-image: url("/img/left-menu-new-feed.png");
     margin-bottom: 1em;
 }
 
