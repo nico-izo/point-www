@@ -1,10 +1,10 @@
 {% extends "/blog.html" %}
 
 {% block extra_head %}
-<link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/blog.css"/>
-<link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/subs.css"/>
-<script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/aside.js"></script>
-<script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/subs.js"></script>
+<link rel="stylesheet" type="text/css" href="//{{settings.domain}}/css/blog.css"/>
+<link rel="stylesheet" type="text/css" href="//{{settings.domain}}/css/subs.css"/>
+<script type="text/javascript" src="//{{settings.domain}}/js/aside.js"></script>
+<script type="text/javascript" src="//{{settings.domain}}/js/subs.js"></script>
 {% endblock %}
 
 {% block title %}{% if section=='subscriptions' %}Подписки{% else %}Читатели{% endif %} {{env.owner.login}}{% endblock %}
@@ -12,9 +12,9 @@
 {% block subheader %}
 {% if section=='subscriptions' %}
 <span class="active">Подписки</span>
-<a href="{{env.request.protocol}}://{{env.owner.login|lower}}.{{settings.domain}}/subscribers">Читатели</a>
+<a href="//{{env.owner.login|lower}}.{{settings.domain}}/subscribers">Читатели</a>
 {% elif section=='subscribers' %}
-<a href="{{env.request.protocol}}://{{env.owner.login|lower}}.{{settings.domain}}/subscriptions">Подписки</a>
+<a href="//{{env.owner.login|lower}}.{{settings.domain}}/subscriptions">Подписки</a>
 <span class="active">Читатели</span>
 {% endif %}
 {% endblock %}
@@ -31,11 +31,11 @@
 {% if section=='subscriptions' and env.user.id==env.owner.id %}
 {% for u in users %}
 <div class="user">
-    <a class="user" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if u.info.avatar %}/40/{{u.info.avatar}}{% else %}/av40.png{% endif %}" alt="{{u.login}}"/></a>
+    <a class="user" href="//{{u.login|lower}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if u.info.avatar %}/40/{{u.info.avatar}}{% else %}/av40.png{% endif %}" alt="{{u.login}}"/></a>
     <div class="info">
-        <a class="user" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/">{{u.login}}</a>
+        <a class="user" href="//{{u.login|lower}}.{{settings.domain}}/">{{u.login}}</a>
         {% if u.info.name %}<span class="name">{{u.info.name}}</span>{% endif %}
-        <a class="del" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/user/u?csrf_token={{csrf_token()}}" title="Отписаться" data-confirm="Отписаться от {{u.login}}?"></a>
+        <a class="del" href="//{{u.login|lower}}.{{settings.domain}}/user/u?csrf_token={{csrf_token()}}" title="Отписаться" data-confirm="Отписаться от {{u.login}}?"></a>
     </div>
 </div>
 {% endfor %}
@@ -44,11 +44,11 @@
     <h2>Теги</h2>
     {% for tt in env.user.tag_subscriptions() %}
         <div class="tags-section">
-        {% if tt.login %}<a class="user" href="{{env.request.protocol}}://{{tt.login}}.{{settings.domain}}/">{{tt.login}}</a>:{% endif %}
+        {% if tt.login %}<a class="user" href="//{{tt.login}}.{{settings.domain}}/">{{tt.login}}</a>:{% endif %}
         {% for t in tt.tags %}
             <div class="tag">
-            <a class="del" href="{{env.request.protocol}}://{% if tt.login %}{{tt.login|lower}}.{% endif %}{{settings.domain}}/tag/u?tag={{t|urlencode}}&csrf_token={{csrf_token()}}" title="Отписаться" data-confirm="Отписаться от тега {{t}}?"></a>
-            <a href="{{env.request.protocol}}://{% if tt.login %}{{tt.login|lower}}.{% endif %}{{settings.domain}}/?tag={{t|urlencode}}">{{t}}</a>
+            <a class="del" href="//{% if tt.login %}{{tt.login|lower}}.{% endif %}{{settings.domain}}/tag/u?tag={{t|urlencode}}&csrf_token={{csrf_token()}}" title="Отписаться" data-confirm="Отписаться от тега {{t}}?"></a>
+            <a href="//{% if tt.login %}{{tt.login|lower}}.{% endif %}{{settings.domain}}/?tag={{t|urlencode}}">{{t}}</a>
             </div>
         {% endfor %}
         </div>
@@ -57,7 +57,7 @@
 
 {% else %}
 {% for u in users %}
-<a class="user" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/">
+<a class="user" href="//{{u.login|lower}}.{{settings.domain}}/">
     <img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if u.info.avatar %}/40/{{u.info.avatar}}{% else %}/av40.png{% endif %}" alt="{{u.login}}"/>
     <div class="info">
         <span class="user">{{u.login}}</span>
@@ -76,11 +76,11 @@
 <div class="users">
 {% for u in env.user.incoming_subscription_requests() %}
 <div class="user">
-    <a class="user" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if u.info.avatar %}/40/{{u.info.avatar}}{% else %}/av40.png{% endif %}" alt="{{u.login}}"/></a>
+    <a class="user" href="//{{u.login|lower}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if u.info.avatar %}/40/{{u.info.avatar}}{% else %}/av40.png{% endif %}" alt="{{u.login}}"/></a>
     <div class="info">
-        <a class="user" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/">{{u.login}}</a>
+        <a class="user" href="//{{u.login|lower}}.{{settings.domain}}/">{{u.login}}</a>
         {% if u.info.name %}<span class="name">{{u.info.name}}</span>{% endif %}
-        <a class="del" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/user/uwl?csrf_token={{csrf_token()}}" title="Отклонить" data-confirm="Отклонить запрос {{u.login}}?"></a>
+        <a class="del" href="//{{u.login|lower}}.{{settings.domain}}/user/uwl?csrf_token={{csrf_token()}}" title="Отклонить" data-confirm="Отклонить запрос {{u.login}}?"></a>
     </div>
 </div>
 {% else %}
@@ -94,11 +94,11 @@
 <div class="users">
 {% for u in env.user.outgoing_subscription_requests() %}
 <div class="user">
-    <a class="user" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if u.info.avatar %}/40/{{u.info.avatar}}{% else %}/av40.png{% endif %}" alt="{{u.login}}"/></a>
+    <a class="user" href="//{{u.login|lower}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if u.info.avatar %}/40/{{u.info.avatar}}{% else %}/av40.png{% endif %}" alt="{{u.login}}"/></a>
     <div class="info">
-        <a class="user" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/">{{u.login}}</a>
+        <a class="user" href="//{{u.login|lower}}.{{settings.domain}}/">{{u.login}}</a>
         {% if u.info.name %}<span class="name">{{u.info.name}}</span>{% endif %}
-        <a class="del" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/user/u?csrf_token={{csrf_token()}}" title="Отменить" data-confirm="Отменить запрос {{u.login}}?"></a>
+        <a class="del" href="//{{u.login|lower}}.{{settings.domain}}/user/u?csrf_token={{csrf_token()}}" title="Отменить" data-confirm="Отменить запрос {{u.login}}?"></a>
     </div>
 </div>
 {% else %}
@@ -112,11 +112,11 @@
 <div class="users">
 {% for u in env.user.whitelist() %}
 <div class="user">
-    <a class="user" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if u.info.avatar %}/40/{{u.info.avatar}}{% else %}/av40.png{% endif %}" alt="{{u.login}}"/></a>
+    <a class="user" href="//{{u.login|lower}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if u.info.avatar %}/40/{{u.info.avatar}}{% else %}/av40.png{% endif %}" alt="{{u.login}}"/></a>
     <div class="info">
-        <a class="user" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/">{{u.login}}</a>
+        <a class="user" href="//{{u.login|lower}}.{{settings.domain}}/">{{u.login}}</a>
         {% if u.info.name %}<span class="name">{{u.info.name}}</span>{% endif %}
-        <a class="del" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/user/uwl?csrf_token={{csrf_token()}}" title="Удалить из белого списка" data-confirm="Вы действительно хотите удалить {{u.login}} из белого списка?"></a>
+        <a class="del" href="//{{u.login|lower}}.{{settings.domain}}/user/uwl?csrf_token={{csrf_token()}}" title="Удалить из белого списка" data-confirm="Вы действительно хотите удалить {{u.login}} из белого списка?"></a>
     </div>
 </div>
 {% else %}
@@ -130,11 +130,11 @@
 <div class="users">
 {% for u in env.user.blacklist() %}
 <div class="user">
-    <a class="user" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if u.info.avatar %}/40/{{u.info.avatar}}{% else %}/av40.png{% endif %}" alt="{{u.login}}"/></a>
+    <a class="user" href="//{{u.login|lower}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if u.info.avatar %}/40/{{u.info.avatar}}{% else %}/av40.png{% endif %}" alt="{{u.login}}"/></a>
     <div class="info">
-        <a class="user" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/">{{u.login}}</a>
+        <a class="user" href="//{{u.login|lower}}.{{settings.domain}}/">{{u.login}}</a>
         {% if u.info.name %}<span class="name">{{u.info.name}}</span>{% endif %}
-        <a class="del" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/user/ubl?csrf_token={{csrf_token()}}" title="Удалить из чёрного списка" data-confirm="Вы действительно хотите удалить {{u.login}} из чёрного списка?"></a>
+        <a class="del" href="//{{u.login|lower}}.{{settings.domain}}/user/ubl?csrf_token={{csrf_token()}}" title="Удалить из чёрного списка" data-confirm="Вы действительно хотите удалить {{u.login}} из чёрного списка?"></a>
     </div>
 </div>
 {% else %}
@@ -145,11 +145,11 @@
     <h2>Теги</h2>
     {% for tt in env.user.tag_blacklist() %}
         <div class="tags-section">
-        {% if tt.login %}<a class="user" href="{{env.request.protocol}}://{{tt.login}}.{{settings.domain}}/">{{tt.login}}</a>:{% endif %}
+        {% if tt.login %}<a class="user" href="//{{tt.login}}.{{settings.domain}}/">{{tt.login}}</a>:{% endif %}
         {% for t in tt.tags %}
             <div class="tag">
-            <a class="del" href="{{env.request.protocol}}://{% if tt.login %}{{tt.login|lower}}.{% endif %}{{settings.domain}}/tag/ubl?tag={{t|urlencode}}&csrf_token={{csrf_token()}}" title="Удалить" data-confirm="Вы действительно хотите удалить тег {{t}} из чёрного списка?"></a>
-            <a class="tag" href="{{env.request.protocol}}://{% if tt.login %}{{tt.login|lower}}.{% endif %}{{settings.domain}}/?tag={{t|urlencode}}">{{t}}</a>
+            <a class="del" href="//{% if tt.login %}{{tt.login|lower}}.{% endif %}{{settings.domain}}/tag/ubl?tag={{t|urlencode}}&csrf_token={{csrf_token()}}" title="Удалить" data-confirm="Вы действительно хотите удалить тег {{t}} из чёрного списка?"></a>
+            <a class="tag" href="//{% if tt.login %}{{tt.login|lower}}.{% endif %}{{settings.domain}}/?tag={{t|urlencode}}">{{t}}</a>
             </div>
         {% endfor %}
         </div>
@@ -163,9 +163,9 @@
 <div class="users">
 {% for u in env.user.blacklisters() %}
 <div class="user">
-    <a class="user" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if u.info.avatar %}/40/{{u.info.avatar}}{% else %}/av40.png{% endif %}" alt="{{u.login}}"/></a>
+    <a class="user" href="//{{u.login|lower}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if u.info.avatar %}/40/{{u.info.avatar}}{% else %}/av40.png{% endif %}" alt="{{u.login}}"/></a>
     <div class="info">
-        <a class="user" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/">{{u.login}}</a>
+        <a class="user" href="//{{u.login|lower}}.{{settings.domain}}/">{{u.login}}</a>
         {% if u.info.name %}<span class="name">{{u.info.name}}</span>{% endif %}
     </div>
 </div>

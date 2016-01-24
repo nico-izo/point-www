@@ -1,8 +1,8 @@
 {% extends "/base.html" %}
 
 {% block extra_head %}
-<link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/blog.css"/>
-<link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/code.css"/>
+<link rel="stylesheet" type="text/css" href="//{{settings.domain}}/css/blog.css"/>
+<link rel="stylesheet" type="text/css" href="//{{settings.domain}}/css/code.css"/>
 {% endblock %}
 
 {% block title %}Результаты поиска {{ search_text }}{% endblock %}
@@ -21,7 +21,7 @@
             {% else %}
             <a class="post-id" href="/{{p.post_id}}">#{{p.post_id}}</a>
             {% endif %}
-            <a class="user" href="{{env.request.protocol}}://{{p.login|lower}}.{{settings.domain}}/">@{{p.login}}</a>
+            <a class="user" href="//{{p.login|lower}}.{{settings.domain}}/">@{{p.login}}</a>
             {% if p.title %}{{p.title}}{% endif %}
         </div>
 
@@ -29,7 +29,7 @@
         {{p.text|markdown|safe}}
         </div>
 
-        {% if p.tags %}<div class="tags">{% for t in p.tags %}<a class="tag" href="{{env.request.protocol}}://{{p.login|lower}}.{{settings.domain}}/?tag={{t|urlencode}}">{{t}}</a> {% endfor %}</div>{% endif %}
+        {% if p.tags %}<div class="tags">{% for t in p.tags %}<a class="tag" href="//{{p.login|lower}}.{{settings.domain}}/?tag={{t|urlencode}}">{{t}}</a> {% endfor %}</div>{% endif %}
     </div>
     {% endfor %}
     </div>
@@ -42,7 +42,7 @@
     </div>
     {% else %}
         <h1>Поиск</h1>
-        <form class="search-form" action="{{env.request.protocol}}://{{settings.domain}}/search">
+        <form class="search-form" action="//{{settings.domain}}/search">
             <input type="submit" value=""/>
             <div>
                 <input type="text" name="text" value="{{ search_text }}" placeholder="Поиск"/>

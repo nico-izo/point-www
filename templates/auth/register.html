@@ -1,7 +1,7 @@
 {% extends "/base.html" %}
 
 {% block extra_head %}
-<link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/profile.css"/>
+<link rel="stylesheet" type="text/css" href="//{{settings.domain}}/css/profile.css"/>
 {% endblock %}
 
 {% block left_menu %}{% endblock%}
@@ -30,9 +30,9 @@
         <div class="row">
             <div class="label">Введите текст с&nbsp;картинки</div>
             <div class="value">
-                <script type="text/javascript" src="{{env.request.protocol}}://www.google.com/recaptcha/api/challenge?k={{settings.recaptcha_public_key}}"></script>
+                <script type="text/javascript" src="//www.google.com/recaptcha/api/challenge?k={{settings.recaptcha_public_key}}"></script>
                 <noscript>
-                    <iframe src="{{env.request.protocol}}://www.google.com/recaptcha/api/noscript?k={{settings.recaptcha_public_key}}" height="300" width="500" frameborder="0"></iframe><br>
+                    <iframe src="//www.google.com/recaptcha/api/noscript?k={{settings.recaptcha_public_key}}" height="300" width="500" frameborder="0"></iframe><br>
                     <textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
                     <input type="hidden" name="recaptcha_response_field" value="manual_challenge">
                 </noscript>

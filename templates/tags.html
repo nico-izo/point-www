@@ -1,12 +1,12 @@
 {% extends "/blog.html" %}
 
 {% block extra_head %}
-<link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/tags.css"/>
-<link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/blog.css"/>
-<!--script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/aside.js"></script>
-<script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/jquery.autosize.js"></script>
-<script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/jquery.tmpl.min.js"></script>
-<script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/blog.js"></script-->
+<link rel="stylesheet" type="text/css" href="//{{settings.domain}}/css/tags.css"/>
+<link rel="stylesheet" type="text/css" href="//{{settings.domain}}/css/blog.css"/>
+<!--script type="text/javascript" src="//{{settings.domain}}/js/aside.js"></script>
+<script type="text/javascript" src="//{{settings.domain}}/js/jquery.autosize.js"></script>
+<script type="text/javascript" src="//{{settings.domain}}/js/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="//{{settings.domain}}/js/blog.js"></script-->
 {% endblock %}
 
 {% block title %}
@@ -29,36 +29,36 @@
 {% if env.user.id %}
 <div class="aside" id="tag-info">
     {% if env.owner.id %}
-    <a id="search-all" href="{{env.request.protocol}}://{{settings.domain}}/?{% for t in tags %}tag={{t|urlencode}}&{% endfor %}">Искать во всех блогах?</a>
+    <a id="search-all" href="//{{settings.domain}}/?{% for t in tags %}tag={{t|urlencode}}&{% endfor %}">Искать во всех блогах?</a>
     {% endif %}
     {% for tag in tags %}
     
     <div class="tag-info">
-        <h1><a href="{{env.request.protocol}}://{{settings.domain}}/?tag={{tag|urlencode}}">{{tag}}</a></h1>
+        <h1><a href="//{{settings.domain}}/?tag={{tag|urlencode}}">{{tag}}</a></h1>
 
         <div id="sub">
         {% if env.user.check_tag_subscribed(tag) %}
-        <a class="sub" href="{{env.request.protocol}}://{{settings.domain}}/tag/u?tag={{tag|urlencode}}&csrf_token={{csrf_token()}}">Отписаться от <span class="tag">{{tag}}</span></a>
+        <a class="sub" href="//{{settings.domain}}/tag/u?tag={{tag|urlencode}}&csrf_token={{csrf_token()}}">Отписаться от <span class="tag">{{tag}}</span></a>
         {% else %}
-        <a class="sub" href="{{env.request.protocol}}://{{settings.domain}}/tag/s?tag={{tag|urlencode}}&csrf_token={{csrf_token()}}">Подписаться на <span class="tag">{{tag}}</span></a>
+        <a class="sub" href="//{{settings.domain}}/tag/s?tag={{tag|urlencode}}&csrf_token={{csrf_token()}}">Подписаться на <span class="tag">{{tag}}</span></a>
         {% if env.owner.id and env.owner.id!=env.user.id %}
         {% if env.user.check_tag_subscribed(tag, env.owner) %}
-        <a class="sub" href="{{env.request.protocol}}://{{env.owner.login}}.{{settings.domain}}/tag/u?tag={{tag|urlencode}}&csrf_token={{csrf_token()}}">Отписаться от <span class="tag">{{tag}}</span> @{{env.owner.login}}</a>
+        <a class="sub" href="//{{env.owner.login}}.{{settings.domain}}/tag/u?tag={{tag|urlencode}}&csrf_token={{csrf_token()}}">Отписаться от <span class="tag">{{tag}}</span> @{{env.owner.login}}</a>
         {% else %}
-        <a class="sub" href="{{env.request.protocol}}://{{env.owner.login}}.{{settings.domain}}/tag/s?tag={{tag|urlencode}}&csrf_token={{csrf_token()}}">Подписаться на <span class="tag">{{tag}}</span> @{{env.owner.login}}</a>
+        <a class="sub" href="//{{env.owner.login}}.{{settings.domain}}/tag/s?tag={{tag|urlencode}}&csrf_token={{csrf_token()}}">Подписаться на <span class="tag">{{tag}}</span> @{{env.owner.login}}</a>
         {% endif %}
         {% endif %}
         {% endif %}
 
         {% if env.user.check_tag_blacklisted(tag) %}
-        <a class="sub" href="{{env.request.protocol}}://{{settings.domain}}/tag/ubl?tag={{tag|urlencode}}&csrf_token={{csrf_token()}}">Убрать <span class="tag">{{tag}}</span> из чёрного списка</a>
+        <a class="sub" href="//{{settings.domain}}/tag/ubl?tag={{tag|urlencode}}&csrf_token={{csrf_token()}}">Убрать <span class="tag">{{tag}}</span> из чёрного списка</a>
         {% else %}
-        <a class="sub" href="{{env.request.protocol}}://{{settings.domain}}/tag/bl?tag={{tag|urlencode}}&csrf_token={{csrf_token()}}">Добавить <span class="tag">{{tag}}</span> в чёрный список</a>
+        <a class="sub" href="//{{settings.domain}}/tag/bl?tag={{tag|urlencode}}&csrf_token={{csrf_token()}}">Добавить <span class="tag">{{tag}}</span> в чёрный список</a>
         {% if env.owner.id and env.owner.id!=env.user.id %}
         {% if env.user.check_tag_blacklisted(tag, env.owner) %}
-        <a class="sub" href="{{env.request.protocol}}://{{env.owner.login}}.{{settings.domain}}/tag/ubl?tag={{tag|urlencode}}&csrf_token={{csrf_token()}}">Убрать <span class="tag">{{tag}}</span> @{{env.owner.login}} из чёрного списка</a>
+        <a class="sub" href="//{{env.owner.login}}.{{settings.domain}}/tag/ubl?tag={{tag|urlencode}}&csrf_token={{csrf_token()}}">Убрать <span class="tag">{{tag}}</span> @{{env.owner.login}} из чёрного списка</a>
         {% else %}
-        <a class="sub" href="{{env.request.protocol}}://{{env.owner.login}}.{{settings.domain}}/tag/bl?tag={{tag|urlencode}}&csrf_token={{csrf_token()}}">Добавить <span class="tag">{{tag}}</span> @{{env.owner.login}} в чёрный список</a>
+        <a class="sub" href="//{{env.owner.login}}.{{settings.domain}}/tag/bl?tag={{tag|urlencode}}&csrf_token={{csrf_token()}}">Добавить <span class="tag">{{tag}}</span> @{{env.owner.login}} в чёрный список</a>
         {% endif %}
         {% endif %}
         {% endif %}

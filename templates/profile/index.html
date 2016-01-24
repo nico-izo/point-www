@@ -1,9 +1,9 @@
 {% extends "/base.html" %}
 
 {% block extra_head %}
-<link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/profile.css"/>
-<script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/jquery.autosize.js"></script>
-<script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/profile.js"></script>
+<link rel="stylesheet" type="text/css" href="//{{settings.domain}}/css/profile.css"/>
+<script type="text/javascript" src="//{{settings.domain}}/js/jquery.autosize.js"></script>
+<script type="text/javascript" src="//{{settings.domain}}/js/profile.js"></script>
 {% endblock %}
 
 {% block subheader %}
@@ -292,7 +292,7 @@
                 <div class="descr">
                 При изменении доменного имени доступ по домену <i>{{env.user.login}}.{{settings.domain}}</i> сохранится.
                 <br/>
-                <a href="{{env.request.protocol}}://{{settings.domain}}/help/domain">Подробнее о доменных именах</a>
+                <a href="//{{settings.domain}}/help/domain">Подробнее о доменных именах</a>
                 </div>
             </div>
         </div>#}
