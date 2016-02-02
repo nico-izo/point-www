@@ -1,15 +1,27 @@
 window.addEventListener("load", function(){
-    scrollToTop = document.getElementById("scrollToTop");
+    var fuckingButton = document.getElementById("scrollToTop"),
+        hideFuckingButtonTimeout = 3000,
+        scrollStarted;
 
-    var scrollToTopFunction = function () {
-        var y = window.scrollY;
-        if (y >= 50) {
-            scrollToTop.className = "totopshow"
-        } else {
-            scrollToTop.className = "totophide"
-        }
+    var scrollStartedFunction = function () {
+        if (undefined != scrollStarted) clearTimeout(scrollStarted);
+
+        $(fuckingButton).removeClass("totophidden")
+                        .addClass("totopshowed");
+        setTimeout(function(){
+            $(fuckingButton).removeClass("totophide")
+                            .addClass("totopshow");
+        }, 5);
+        scrollStarted = setTimeout(function(){
+            $(fuckingButton).removeClass("totopshow")
+                            .addClass("totophide");
+            clearTimeout(scrollStarted);
+            setTimeout(function(){
+                $(fuckingButton).removeClass("totopshowed")
+                                .addClass("totophidden");
+            }, 5);
+        }, hideFuckingButtonTimeout);
     };
 
-    window.addEventListener("scroll", scrollToTopFunction);
-    scrollToTopFunction();
+    window.addEventListener("scroll", scrollStartedFunction);
 });

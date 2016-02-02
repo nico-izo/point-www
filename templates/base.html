@@ -36,12 +36,13 @@
         <!--<script src="{{env.request.protocol}}://{{settings.domain}}/js/modernizr-2.6.2.min.js"></script>-->
         <script src="{{env.request.protocol}}://{{settings.domain}}/js/jquery-1.9.1.min.js"></script>
         <script src="{{env.request.protocol}}://{{settings.domain}}/js/blog.js"></script>
-        <script src="{{env.request.protocol}}://{{settings.domain}}/js/scrolltotop.js"></script>
         <script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/tooltip.js"></script>
         <link rel="icon" type="image/png" href="{{env.request.protocol}}://{{settings.domain}}/img/favicon.png"/>
 
         {% block extra_head %}{% endblock %}
         <link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/tooltip.css"/>
+        <script src="{{env.request.protocol}}://{{settings.domain}}/js/scrolltotop.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/topbutton.css"/>
         <link id="usercss-link" rel="stylesheet" type="text/css" href="{{ env.request.protocol }}{{settings.usercss_root}}/{{env.user.login}}.css"/>
     </head>
     <body>
@@ -110,8 +111,6 @@
                     <a id="menu-register" href="{{env.request.protocol}}://{{settings.domain}}/register" title="Зарегистрироваться"></a>
                 </div>
                 {% endif %}
-
-                <a id="top-link" href="#" title="Наверх"></a>
             </div>
         </div>
         <div id="subheader-wrap">
@@ -133,7 +132,7 @@
                         <a id="menu-blog"{% if section=='blog' and env.user==env.owner %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/">Блог</a>
                         <a id="menu-comments"{% if section=='comments' %} class="active"{% endif %}  href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/comments">
                             Комментарии
-                            {% if unread_comments %}<span class="unread">{{ unread_comments }}{% endif %}
+                            {% if unread_comments %}<span class="unread">{{ unread_comments }}</span>{% endif %}
                         </a>
                         <a id="menu-messages"{% if section=='messages' %} class="active"{% endif %} href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/messages">
                             Сообщения
@@ -163,7 +162,6 @@
                         <a id="menu-login" href="{{env.request.protocol}}://{{settings.domain}}/login">Войти</a>
                         <a id="menu-register" href="{{env.request.protocol}}://{{settings.domain}}/register">Зарегистрироваться</a>
                     {% endif %}
-                    <a id="top-link" href="#" title="Наверх"></a>
                 </div>
                 {% endblock %}
 
@@ -175,7 +173,7 @@
                         {% block content %}{% endblock %}
                     </div>
                 </div>
-                <a style="position: fixed; z-index: 1; display: block;" href="#" id="scrollToTop">Наверх</a>
+                <a class="totophidden totophide" href="#" title="Ёбаная кнопка" id="scrollToTop">&#11014;</a>
             </div>
         </div>
 
