@@ -47,7 +47,7 @@ def blog(login=None):
     if before:
         try:
             before = long(before)
-        except ValueError:
+        except (TypeError, ValueError):
             before = None
 
     try:

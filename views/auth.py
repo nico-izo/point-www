@@ -261,6 +261,12 @@ def register():
             return Response(redirect='%s://%s/remember?fail=1' % \
                         (env.request.protocol, settings.domain))
 
+    if not errors:
+        try:
+            users.register(login)
+        except UserExists:
+            errors.append('login-in-use')
+
     if errors:
         if network and uid:
             tmpl = '/auth/register_ulogin.html'
@@ -268,8 +274,6 @@ def register():
             tmpl = '/auth/register.html'
 
         return render(tmpl, fields=ULOGIN_FIELDS, info=info, errors=errors)
-
-    users.register(login)
 
     for p in ['name', 'email', 'birthdate', 'gender', 'location', 'about', 'homepage']:
         env.user.set_info(p, info[p])

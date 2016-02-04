@@ -12,13 +12,7 @@ from point.util.sessions import add_session
 from geweb.session import Session
 from random import randint
 import urllib2
-import os
 import json
-
-try:
-    import re2 as re
-except ImportError:
-    import re
 
 import settings
 
@@ -217,7 +211,7 @@ def profile():
                 add_session(env.user, sess.sessid)
                 try:
                     users.rename(new_login)
-                except UserLoginError:
+                except (UserLoginError, UserExists):
                     errors.append('invalid-login')
                 except RenameError:
                     #errors.append('rename-timeout')

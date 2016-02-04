@@ -316,6 +316,9 @@ def comments(page=1, unread=False):
 
 @catch_errors
 def taglist():
+    if not env.owner or not env.owner.id:
+        raise UserNotFound
+
     if not env.user.login and env.owner.get_profile('deny_anonymous'):
         raise Forbidden
 
@@ -327,6 +330,9 @@ def taglist():
 
 @catch_errors
 def tag_posts(tag, page=1):
+    if not env.owner or not env.owner.id:
+        raise UserNotFound
+
     try:
         page = int(page)
     except (TypeError, ValueError):
@@ -352,7 +358,7 @@ def tag_posts(tag, page=1):
 
     if not isinstance(tag, (list, tuple)):
         tag = [tag]
-    tag = [t.decode('utf-8').replace(u"\xa0", " ") for t in tag]
+    tag = [t.decode('utf-8', 'ignore').replace(u"\xa0", " ") for t in tag]
 
     plist = posts.select_posts(author=author, private=private, 
                                deny_anonymous=deny_anonymous, tags=tag,
