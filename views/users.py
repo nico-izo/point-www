@@ -263,12 +263,16 @@ def tag_del_from_blacklist():
     return Response(redirect=env.request.referer)
 
 def subscriptions():
+    if not env.owner:
+        raise NotFound
     if not env.user.login and env.owner.get_profile('deny_anonymous'):
         raise Forbidden
     users = env.owner.subscriptions()
     return render('/subs.html', section='subscriptions', users=users)
 
 def subscribers():
+    if not env.owner:
+        raise NotFound
     if not env.user.login and env.owner.get_profile('deny_anonymous'):
         raise Forbidden
     users = env.owner.subscribers()
