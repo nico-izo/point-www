@@ -117,7 +117,7 @@
             <input type="radio" class="reply-radio" name="reply-radio" id="reply-{{post.id}}_{{c.id}}"/>
             <form class="reply-form" action="/{{post.id}}" method="post" enctype="multipart/form-data" autocomplete="off">
                 <textarea name="text">@{{c.author.login}}, </textarea>
-                <input type="hidden" name="comment_id" value="{{c.id}}"/>
+                <input type="hidden" name="comment_id" value="{{c.id or ''}}"/>
                 <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
                 <div class="clearfix">
                     <div class="attach">
@@ -134,7 +134,7 @@
             <input type="radio" class="reply-radio" name="reply-radio" id="rec-{{post.id}}_{{c.id}}"/>
             <form class="reply-form" action="/{{post.id}}/r" method="post">
                 <textarea name="text" placeholder="Текст (опционально)"></textarea>
-                <input type="hidden" name="comment_id" value="{{c.id}}"/>
+                <input type="hidden" name="comment_id" value="{{c.id or ''}}"/>
                 <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
                 <div class="clearfix">
                     <input type="submit" value="Рекомендовать"/>

@@ -219,7 +219,7 @@
             <input type="radio" class="reply-radio" name="reply-radio" id="reply-{{p.post.id}}{% if p.rec %}_{{p.rec.comment_id}}{% elif p.comment_id %}{{p.comment_id}}{% endif %}"/>
             <form class="reply-form" action="/{{p.post.id}}" method="post" enctype="multipart/form-data" autocomplete="off">
                 <textarea name="text">{% if p.rec %}@{{p.rec.author.login}}, {% elif p.login %}@{{p.login}}, {% endif %}</textarea>
-                <input type="hidden" name="comment_id" value="{% if p.rec %}{{p.rec.comment_id}}{% elif p.comment_id %}{{p.comment_id}}{% endif %}"/>
+                <input type="hidden" name="comment_id" value="{% if p.rec %}{{p.rec.comment_id or ''}}{% elif p.comment_id %}{{p.comment_id or ''}}{% endif %}"/>
                 <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
                 <div class="clearfix">
                     <div class="attach">
@@ -236,7 +236,7 @@
             <input type="radio" class="reply-radio" name="reply-radio" id="rec-{{p.post.id}}{% if p.rec %}_{{p.rec.comment_id}}{% elif p.comment_id %}{{p.comment_id}}{% endif %}"/>
             <form class="reply-form" action="/{{p.post.id}}/r" method="post">
                 <textarea name="text" placeholder="Текст (опционально)"></textarea>
-                <input type="hidden" name="comment_id" value="{% if p.rec %}{{p.rec.comment_id}}{% elif p.comment_id %}{{p.comment_id}}{% endif %}"/>
+                <input type="hidden" name="comment_id" value="{% if p.rec %}{{p.rec.comment_id or ''}}{% elif p.comment_id %}{{p.comment_id or ''}}{% endif %}"/>
                 <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
                 <div class="clearfix">
                     <input type="submit" value="Рекомендовать"/>
