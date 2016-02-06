@@ -4,13 +4,13 @@ import os
 from jinja2 import environmentfilter
 from urllib import unquote_plus
 from hashlib import md5
-from point.util.env import env
+# from point.util.env import env
 from point.core.user import User, UserNotFound
 from point.util import cache_get, cache_store
 from point.util.imgproc import imgproc_url
 from point.util.md import CodeBacktick, SharpHeader, QuoteBlock, UrlColons, \
                           StrikePattern, ColonLinkPattern
-from geweb import log
+# from geweb import log
 from markdown import Markdown
 from markdown.inlinepatterns import Pattern, LINK_RE
 from markdown.util import etree
@@ -58,7 +58,8 @@ class PostLinkPattern(Pattern):
 
 class CommentLinkPattern(Pattern):
     def __init__(self):
-        Pattern.__init__(self, ur'(?<![-\w]|/)\u0005?(?<=\()?/(?P<c>\d+)(?=[.,;:?!)]|(?:\s|$))')
+        Pattern.__init__(self, ur'(?<![-\w.]|/)\u0005?(?<=\()?/(?P<c>\d+)(?=[.,;:?!)]|(?:\s|$))')
+        # Pattern.__init__(self, ur'(?=\a|\s)/(?P<c>\d+)')
 
     def handleMatch(self, m):
         a = etree.Element('a')
@@ -130,10 +131,10 @@ class UrlPattern(Pattern):
         if um:
             if um.group('id1'):
                 _id = um.group('id1')
-                _params = um.group('params') or ''
+                # _params = um.group('params') or ''
             else:
                 _id = um.group('id2')
-                _params = ''
+                # _params = ''
 
             #wrap = etree.Element('div')
             #wrap.set('class', 'iframe-wrap')
