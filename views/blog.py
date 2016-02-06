@@ -330,7 +330,7 @@ def taglist():
 
 @catch_errors
 def tag_posts(tag, page=1):
-    if not env.owner or not env.owner.id:
+    if env.request.host != settings.domain and (not env.owner or not env.owner.id):
         raise UserNotFound
 
     try:
