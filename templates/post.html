@@ -1,12 +1,12 @@
 {% extends "/blog.html" %}
 
 {% block extra_head %}
-<link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/blog.css"/>
-<link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/post.css"/>
-<link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/code.css"/>
-{#<script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/jquery.autosize.js"></script>
-<script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/jquery.tmpl.min.js"></script>
-<script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/blog.js"></script>#}
+<link rel="stylesheet" type="text/css" href="//{{settings.domain}}/css/blog.css"/>
+<link rel="stylesheet" type="text/css" href="//{{settings.domain}}/css/post.css"/>
+<link rel="stylesheet" type="text/css" href="//{{settings.domain}}/css/code.css"/>
+{#<script type="text/javascript" src="//{{settings.domain}}/js/jquery.autosize.js"></script>
+<script type="text/javascript" src="//{{settings.domain}}/js/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="//{{settings.domain}}/js/blog.js"></script>#}
 {% endblock %}
 
 {% block title %}{{post.text[:64]}} — Блог {{env.owner.login}}{% endblock %}
@@ -19,7 +19,7 @@
             {% if c.author.id==-1 %}
             <img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}/av24.png" alt="{{post.login}}"/>
             {% else %}
-            <a href="{{env.request.protocol}}://{{c.author.login}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if c.author.info.avatar %}/24/{{c.author.info.avatar}}{% else %}/av24.png{% endif %}" alt="{{post.login}}"/></a>
+            <a href="//{{c.author.login}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if c.author.info.avatar %}/24/{{c.author.info.avatar}}{% else %}/av24.png{% endif %}" alt="{{post.login}}"/></a>
             {% endif %}
             <div class="created">
                 <span>{{c.created|strftime("%d %b")}}</span>
@@ -35,7 +35,7 @@
                 {% if c.author.id==-1 %}
                 <span class="user anon">{{c.author.login}}</span>
                 {% else %}
-                <a href="{{env.request.protocol}}://{{c.author.login}}.{{settings.domain}}/" class="user">{{c.author.login}}</a>
+                <a href="//{{c.author.login}}.{{settings.domain}}/" class="user">{{c.author.login}}</a>
                 {% endif %}
             </div>
             <div class="text">
@@ -72,7 +72,7 @@
                     {% endif %}
                     {% if not post.private and c.author.login!=env.user.login %}
                         {% if c.recommended %}
-                        <a class="recommend" href="{{env.request.protocol}}://{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/ur?comment_id={{c.id}}&csrf_token={{csrf_token()}}">не рекомендовать<!--span class="count">8</span--></a>
+                        <a class="recommend" href="//{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/ur?comment_id={{c.id}}&csrf_token={{csrf_token()}}">не рекомендовать<!--span class="count">8</span--></a>
                         {% else %}
                         <label class="reply-label" for="rec-{{post.id}}_{{c.id}}">рекомендовать</label>
                         {% endif %}
@@ -86,7 +86,7 @@
 
             {% if c.author.id==env.user.id or post.author.id==env.user.id %}
             <div class="edit-buttons">
-                <a class="del" href="{{env.request.protocol}}://{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/d?comment_id={{c.id}}&csrf_token={{csrf_token()}}" title="Удалить {% if c.is_rec %}рекомендацию{% else %}комментарий{% endif %}" data-confirm="Вы действительно хотите удалить {% if c.is_rec %}рекомендацию{% else %}комментарий{% endif %} #{{post.id}}/{{c.id}}?"></a>
+                <a class="del" href="//{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/d?comment_id={{c.id}}&csrf_token={{csrf_token()}}" title="Удалить {% if c.is_rec %}рекомендацию{% else %}комментарий{% endif %}" data-confirm="Вы действительно хотите удалить {% if c.is_rec %}рекомендацию{% else %}комментарий{% endif %} #{{post.id}}/{{c.id}}?"></a>
             </div>
             {% endif %}
 
@@ -94,9 +94,9 @@
             <input type="checkbox" class="action-cb" name="action-radio" id="action-{{post.id}}_{{c.id}}"/>
             <div class="action-buttons">
                 {% if c.bookmarked %}
-                <a class="bookmark" href="{{env.request.protocol}}://{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/ub?comment_id={{c.id}}&csrf_token={{csrf_token()}}">из закладок</a>
+                <a class="bookmark" href="//{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/ub?comment_id={{c.id}}&csrf_token={{csrf_token()}}">из закладок</a>
                 {% else %}
-                <a class="bookmark" href="{{env.request.protocol}}://{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/b?comment_id={{c.id}}&csrf_token={{csrf_token()}}">в закладки</a>
+                <a class="bookmark" href="//{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/b?comment_id={{c.id}}&csrf_token={{csrf_token()}}">в закладки</a>
                 {% endif %}
             </div>
 
@@ -164,7 +164,7 @@
     {% endif %}
     <div id="top-post" class="post{% if post.private %} private{% endif %}" data-id="{{post.id}}">
         <div class="info">
-            <a href="{{env.request.protocol}}://{{post.author.login}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if post.author.get_info("avatar") %}/40/{{post.author.get_info("avatar")}}{% else %}/av40.png{% endif %}" alt="{{post.author.login}}"/></a>
+            <a href="//{{post.author.login}}.{{settings.domain}}/"><img class="avatar" src="{{ env.request.protocol }}{{ settings.avatars_root }}{% if post.author.get_info("avatar") %}/40/{{post.author.get_info("avatar")}}{% else %}/av40.png{% endif %}" alt="{{post.author.login}}"/></a>
             <div class="created">
                 <span>{{post.created|strftime("%d %b")}}</span>
                 {% if post.created|strftime("%Y")==__now__|strftime("%Y") %}
@@ -175,7 +175,7 @@
             </div>
         </div>
         <div class="post-content">
-            <a href="{{env.request.protocol}}://{{post.author.login}}.{{settings.domain}}/" class="user author">{{post.author.login}}</a>
+            <a href="//{{post.author.login}}.{{settings.domain}}/" class="user author">{{post.author.login}}</a>
             <div class="text">
                 {% if post.title %}<h1>{% if post.link %}<a href="{{post.link}}">{{post.title}}</a>{% else %}{{post.title}}{% endif %}</h1>{% endif %}
                 {% if env.owner.type=='feed' %}
@@ -193,21 +193,21 @@
                 {% endfor %}
             </div>
             {% endif %}
-            {% if post.tags %}<div class="tags">{% for t in post.tags %}<a class="tag" href="{{env.request.protocol}}://{{post.author.login|lower}}.{{settings.domain}}/?tag={{t|urlencode}}">{{t}}</a>{% endfor %}</div>{% endif %}
+            {% if post.tags %}<div class="tags">{% for t in post.tags %}<a class="tag" href="//{{post.author.login|lower}}.{{settings.domain}}/?tag={{t|urlencode}}">{{t}}</a>{% endfor %}</div>{% endif %}
 
             {% set rec_users = post.recommended_users() %}
             {% if rec_users %}
             <div class="rec-users">
             Рекомендовано: 
             {% for u in rec_users %}
-            <a class="user" href="{{env.request.protocol}}://{{u.login|lower}}.{{settings.domain}}/">{{u.login}}</a>{% if loop.index==rec_users|count %}{% elif loop.index==rec_users|count-1 %} и {% else %}, {% endif %}
+            <a class="user" href="//{{u.login|lower}}.{{settings.domain}}/">{{u.login}}</a>{% if loop.index==rec_users|count %}{% elif loop.index==rec_users|count-1 %} и {% else %}, {% endif %}
             {% endfor %}
             </div>
             {% endif %}
 
             <div class="clearfix">
                 <div class="post-id">
-                    <a href="{{env.request.protocol}}://{{settings.domain}}/{{post.id}}">#{{post.id}}
+                    <a href="//{{settings.domain}}/{{post.id}}">#{{post.id}}
                     {% if comments_count %}<span class="cn">{{comments_count}}</span>{% endif %}</a>
                 </div>
 
@@ -216,7 +216,7 @@
                     <label class="reply-label" for="reply-{{post.id}}"}>ответить</label>
                     {% if not post.private and post.author.login!=env.user.login %}
                         {% if post.check_recommended(env.user) %}
-                        <a class="recommend" href="{{env.request.protocol}}://{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/ur?csrf_token={{csrf_token()}}">не рекомендовать<!--span class="count">8</span--></a>
+                        <a class="recommend" href="//{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/ur?csrf_token={{csrf_token()}}">не рекомендовать<!--span class="count">8</span--></a>
                         {% else %}
                         <label class="reply-label" for="rec-{{post.id}}">рекомендовать</label>
                         {% endif %}
@@ -230,8 +230,8 @@
 
             {% if post.author.id==env.user.id %}
             <div class="edit-buttons">
-                {% if post.editable %}<a class="edit" href="{{env.request.protocol}}://{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/e" title="Редактировать"></a>{% endif %}
-                <a class="del" href="{{env.request.protocol}}://{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/d?csrf_token={{csrf_token()}}" title="Удалить пост" data-confirm="Вы действительно хотите удалить пост #{{post.id}}?"></a>
+                {% if post.editable %}<a class="edit" href="//{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/e" title="Редактировать"></a>{% endif %}
+                <a class="del" href="//{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/d?csrf_token={{csrf_token()}}" title="Удалить пост" data-confirm="Вы действительно хотите удалить пост #{{post.id}}?"></a>
             </div>
             {% endif %}
 
@@ -239,14 +239,14 @@
             <input type="checkbox" class="action-cb" name="action-radio" id="action-{{post.id}}"/>
             <div class="action-buttons">
                 {% if post.check_subscriber(env.user) %}
-                <a class="subscribe active" href="{{env.request.protocol}}://{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/u?csrf_token={{csrf_token()}}">отписаться</a>
+                <a class="subscribe active" href="//{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/u?csrf_token={{csrf_token()}}">отписаться</a>
                 {% else %}
-                <a class="subscribe" href="{{env.request.protocol}}://{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/s?csrf_token={{csrf_token()}}">подписаться</a>
+                <a class="subscribe" href="//{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/s?csrf_token={{csrf_token()}}">подписаться</a>
                 {% endif %}
                 {% if post.check_bookmarked(env.user) %}
-                <a class="bookmark" href="{{env.request.protocol}}://{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/ub?csrf_token={{csrf_token()}}">из закладок</a>
+                <a class="bookmark" href="//{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/ub?csrf_token={{csrf_token()}}">из закладок</a>
                 {% else %}
-                <a class="bookmark" href="{{env.request.protocol}}://{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/b?&csrf_token={{csrf_token()}}">в закладки</a>
+                <a class="bookmark" href="//{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/b?&csrf_token={{csrf_token()}}">в закладки</a>
                 {% endif %}
             </div>
 

@@ -14,25 +14,25 @@
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
-  src: local('Open Sans'), local('OpenSans'), url(//point.im/css/osn.ttf) format('truetype');
+  src: local('Open Sans'), local('OpenSans'), url(/css/osn.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
-  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(//point.im/css/osb.ttf) format('truetype');
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(/css/osb.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: italic;
   font-weight: 400;
-  src: local('Open Sans Italic'), local('OpenSans-Italic'), url(//point.im/css/osi.ttf) format('truetype');
+  src: local('Open Sans Italic'), local('OpenSans-Italic'), url(/css/osi.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: italic;
   font-weight: 700;
-  src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'), url(//point.im/css/osbi.ttf) format('truetype');
+  src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'), url(/css/osbi.ttf) format('truetype');
 }
 
 html,
@@ -194,7 +194,7 @@ input[type="submit"] {
 input[type="submit"] {
     font-weight: bold;
     padding-right: 50px;
-    background-image: url("//point.im/img/submit-arrow.png");
+    background-image: url("/img/submit-arrow.png");
     background-position: right center;
     background-repeat: no-repeat;
 }
@@ -271,11 +271,11 @@ img.avatar {
 }*/
 
 #header #new-post-label {
-    background: url("//point.im/img/menu-new-post.png") center center no-repeat;
+    background: url("/img/menu-new-post.png") center center no-repeat;
 }
 
 #header #search-label {
-    background: url("//point.im/img/menu-search.png") center center no-repeat;
+    background: url("/img/menu-search.png") center center no-repeat;
 }
 
 #header #search-cb {
@@ -355,7 +355,7 @@ img.avatar {
     -o-box-sizing: border-box;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
-    background: transparent url("//point.im/img/search-submit.png") center center no-repeat;
+    background: transparent url("/img/search-submit.png") center center no-repeat;
 }
 
 #content .search-form {
@@ -399,7 +399,7 @@ img.avatar {
     float: left;
     margin: 2px 10px;
     padding-right: 24px;
-    background: transparent url("//point.im/img/user-menu-arrow.png") right center no-repeat;
+    background: transparent url("/img/user-menu-arrow.png") right center no-repeat;
 }
 
 @media (min-width: 800px) {
@@ -465,7 +465,7 @@ img.avatar {
     min-width: 200px;
     height: 100%;
     background-color: #ffffff;
-    background-image: url("//point.im/img/subhead-bg.png");
+    background-image: url("/img/subhead-bg.png");
     border-right: solid 1px #d9d9d9;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -491,7 +491,7 @@ img.avatar {
     height: 40px;
     margin: 0;
     padding: 0;
-    background: url("//point.im/img/garl.png") 8px 8px no-repeat;
+    background: url("/img/garl.png") 8px 8px no-repeat;
     background-size: 24px 24px;
     cursor: pointer;
 }
@@ -554,14 +554,14 @@ img.avatar {
     background-color: rgba(0,0,0,.1);
 }
 
-#user-menu #menu-recent { background-image: url("//point.im/img/left-menu-recent.png"); }
-#user-menu #menu-blog { background-image: url("//point.im/img/left-menu-blog.png"); }
-#user-menu #menu-feeds { background-image: url("//point.im/img/left-menu-feeds.png"); }
-#user-menu #menu-comments { background-image: url("//point.im/img/left-menu-comments.png"); }
-#user-menu #menu-messages { background-image: url("//point.im/img/left-menu-messages.png"); }
-#user-menu #menu-bookmarks { background-image: url("//point.im/img/left-menu-bookmarks.png"); }
-#user-menu #menu-profile { background-image: url("//point.im/img/left-menu-profile.png"); }
-#user-menu #menu-logout { background-image: url("//point.im/img/left-menu-logout.png"); }
+#user-menu #menu-recent { background-image: url("/img/left-menu-recent.png"); }
+#user-menu #menu-blog { background-image: url("/img/left-menu-blog.png"); }
+#user-menu #menu-feeds { background-image: url("/img/left-menu-feeds.png"); }
+#user-menu #menu-comments { background-image: url("/img/left-menu-comments.png"); }
+#user-menu #menu-messages { background-image: url("/img/left-menu-messages.png"); }
+#user-menu #menu-bookmarks { background-image: url("/img/left-menu-bookmarks.png"); }
+#user-menu #menu-profile { background-image: url("/img/left-menu-profile.png"); }
+#user-menu #menu-logout { background-image: url("/img/left-menu-logout.png"); }
 
 #header #login-menu {
     float: right;
@@ -578,8 +578,8 @@ img.avatar {
     padding: 0;
 }
 
-#header #login-menu #menu-login { background-image: url("//point.im/img/left-menu-login.png"); }
-#header #login-menu #menu-register { background-image: url("//point.im/img/left-menu-register.png"); }
+#header #login-menu #menu-login { background-image: url("/img/left-menu-login.png"); }
+#header #login-menu #menu-register { background-image: url("/img/left-menu-register.png"); }
 
 #header #user-menu-hide-back-label {
     display: none;
@@ -600,7 +600,7 @@ img.avatar {
     margin-top: 44px;
     width: 100%;
     height: 4em;
-    background: #eeeeee url("//point.im/img/subhead-bg.png");
+    background: #eeeeee url("/img/subhead-bg.png");
     border-bottom: solid 1px #d9d9d9;
 }
 
@@ -769,32 +769,32 @@ img.avatar {
     text-decoration: inherit;
 }
 
-#main #left-menu #left-menu-my { background-image: url("//point.im/img/left-menu-my.png"); }
-#main #left-menu #menu-recent { background-image: url("//point.im/img/left-menu-recent.png"); }
-#main #left-menu #menu-blog { background-image: url("//point.im/img/left-menu-blog.png"); }
-#main #left-menu #menu-comments { background-image: url("//point.im/img/left-menu-comments.png"); }
-#main #left-menu #menu-messages { background-image: url("//point.im/img/left-menu-messages.png"); }
-#main #left-menu #menu-bookmarks { background-image: url("//point.im/img/left-menu-bookmarks.png"); }
-#main #left-menu #menu-login { background-image: url("//point.im/img/left-menu-login.png"); }
-#main #left-menu #menu-register { background-image: url("//point.im/img/left-menu-register.png"); }
+#main #left-menu #left-menu-my { background-image: url("/img/left-menu-my.png"); }
+#main #left-menu #menu-recent { background-image: url("/img/left-menu-recent.png"); }
+#main #left-menu #menu-blog { background-image: url("/img/left-menu-blog.png"); }
+#main #left-menu #menu-comments { background-image: url("/img/left-menu-comments.png"); }
+#main #left-menu #menu-messages { background-image: url("/img/left-menu-messages.png"); }
+#main #left-menu #menu-bookmarks { background-image: url("/img/left-menu-bookmarks.png"); }
+#main #left-menu #menu-login { background-image: url("/img/left-menu-login.png"); }
+#main #left-menu #menu-register { background-image: url("/img/left-menu-register.png"); }
 
-#main #left-menu #left-menu-feeds { background-image: url("//point.im/img/left-menu-feeds.png"); }
+#main #left-menu #left-menu-feeds { background-image: url("/img/left-menu-feeds.png"); }
 #main #left-menu .left-menu-feed {
-    background-image: url("//point.im/img/left-menu-feed.png");
+    background-image: url("/img/left-menu-feed.png");
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 #main #left-menu #left-menu-new-feed {
-    background-image: url("//point.im/img/left-menu-new-feed.png");
+    background-image: url("/img/left-menu-new-feed.png");
 }
 
 #main #left-menu .more {
     display: inline-block;
     margin-left: 30px;
     padding: .25em 24px .25em 0;
-    background: url("//point.im/img/all-tags.png") right center no-repeat;
+    background: url("/img/all-tags.png") right center no-repeat;
     text-decoration: none;
     white-space: nowrap;
 }
@@ -1029,7 +1029,7 @@ img.avatar {
     float: right;
     padding: .25em;
     padding-left: 48px;
-    background: url("//point.im/img/icon-private-inactive.png") left center no-repeat;
+    background: url("/img/icon-private-inactive.png") left center no-repeat;
     background-size: 32px 32px;
     line-height: 32px;
     cursor: pointer;
@@ -1048,7 +1048,7 @@ img.avatar {
 }
 
 #new-post-form #new-post-private-cb:checked + #new-post-private-label {
-    background: url("//point.im/img/icon-private-active.png") left center no-repeat;
+    background: url("/img/icon-private-active.png") left center no-repeat;
     background-size: 16px 16px;
 }
 

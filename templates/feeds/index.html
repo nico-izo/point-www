@@ -1,13 +1,13 @@
 {% extends "/recent.html" %}
 
 {% block extra_head %}
-<link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/tags.css"/>
-<link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/blog.css"/>
-<link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/feeds.css"/>
-<!--script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/aside.js"></script>
-<script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/jquery.autosize.js"></script>
-<script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/jquery.tmpl.min.js"></script>
-<script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/blog.js"></script-->
+<link rel="stylesheet" type="text/css" href="//{{settings.domain}}/css/tags.css"/>
+<link rel="stylesheet" type="text/css" href="//{{settings.domain}}/css/blog.css"/>
+<link rel="stylesheet" type="text/css" href="//{{settings.domain}}/css/feeds.css"/>
+<!--script type="text/javascript" src="//{{settings.domain}}/js/aside.js"></script>
+<script type="text/javascript" src="//{{settings.domain}}/js/jquery.autosize.js"></script>
+<script type="text/javascript" src="//{{settings.domain}}/js/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="//{{settings.domain}}/js/blog.js"></script-->
 {% endblock %}
 
 {% block title %}
@@ -24,11 +24,11 @@
 
     <div class="aside-content clearfix">
         <div class="feed" id="new-feed">
-            <a href="{{env.request.protocol}}://{{env.user.login|lower}}.{{settings.domain}}/feeds/add">Добавить фид</a>
+            <a href="//{{env.user.login|lower}}.{{settings.domain}}/feeds/add">Добавить фид</a>
         </div>
         {% for feed in feeds %}
         <div class="feed">
-            <a class="name" href="{{env.request.protocol}}://{{feed.login|lower}}.{{settings.domain}}/">{{feed.get_info('name') or feed.login}}</a>
+            <a class="name" href="//{{feed.login|lower}}.{{settings.domain}}/">{{feed.get_info('name') or feed.login}}</a>
             <span class="url">{{feed.get_info('homepage') or '&nbsp;'|safe}}</span>
         </div>
         {% endfor %}
