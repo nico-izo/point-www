@@ -1,10 +1,10 @@
 {% extends "/base.html" %}
 
 {% block extra_head %}
-<link rel="stylesheet" type="text/css" href="{{env.request.protocol}}://{{settings.domain}}/css/blog.css"/>
-<script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/jquery.autosize.js"></script>
-<script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/jquery.tmpl.min.js"></script>
-<script type="text/javascript" src="{{env.request.protocol}}://{{settings.domain}}/js/blog.js"></script>
+<link rel="stylesheet" type="text/css" href="//{{settings.domain}}/css/blog.css"/>
+<script type="text/javascript" src="//{{settings.domain}}/js/jquery.autosize.js"></script>
+<script type="text/javascript" src="//{{settings.domain}}/js/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="//{{settings.domain}}/js/blog.js"></script>
 {% endblock %}
 
 {% block title %}Блог {{env.owner.login}} &mdash; пост #{{post.id}}{% endblock %}
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="footnote">
-                    Для форматирования текста используется <a href="{{env.request.protocol}}://{{settings.domain}}/help/markdown">Markdown</a>.<br/>
+                    Для форматирования текста используется <a href="//{{settings.domain}}/help/markdown">Markdown</a>.<br/>
                     Пост можно изменить один раз и только в течение {{(settings.edit_expire/60)|int}} минут после создания.
                 </div>
                 <input type="hidden" name="csrf_token" value="{{csrf_token()}}"/>
