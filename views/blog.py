@@ -150,6 +150,14 @@ def recent_posts(page=1, unread=False):
                   posts=plist, page=page)
 
 @catch_errors
+@csrf
+@check_auth
+@check_referer
+def clear_unread_posts():
+    posts.clear_unread_posts()
+    return Response(redirect=env.request.referer)
+
+@catch_errors
 @check_auth
 def all_posts(page=1):
     sess = Session()
@@ -313,6 +321,14 @@ def comments(page=1, unread=False):
 
     return render('/comments.html', section='comments',
                   unread=unread, posts=plist, page=page)
+
+@catch_errors
+@csrf
+@check_auth
+@check_referer
+def clear_unread_comments():
+    posts.clear_unread_comments()
+    return Response(redirect=env.request.referer)
 
 @catch_errors
 def taglist():

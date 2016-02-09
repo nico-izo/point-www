@@ -5,10 +5,13 @@
 {% block subheader %}
     {% if unread %}
     <a href="/">Все</a>
-    <a href="/recent/unread" class="active">Непрочитанные{% if unread_posts %} ({{ unread_posts }}){% endif %}</a>
+    <a href="/recent/unread" class="unread-count active">{{ unread_posts or 0 }}</a>
     {% else %}
     <span class="active">Все</span>
-    {% if unread_posts %}<a href="/recent/unread">Непрочитанные ({{ unread_posts }})</a>{% endif %}
+    {% if unread_posts %}
+    <a class="unread-count" href="/recent/unread">{{ unread_posts or 0 }}</a>
+      <a class="clear-unread-btn" href="/recent/clear?csrf_token={{csrf_token()}}" title="Отметить все как прочитанные"></a>
+    {% endif %}
     {% endif %}
 {% endblock %}
 

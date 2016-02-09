@@ -833,3 +833,17 @@ label[for^="edit-"] {
     font-weight: normal !important;
 }
 
+.unread-count {
+  font-weight: bold;
+}
+
+.clear-unread-btn {
+  float: right;
+}
+
+.clear-unread-btn:before {
+  content: '\2611';
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
