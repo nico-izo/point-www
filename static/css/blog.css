@@ -837,13 +837,39 @@ label[for^="edit-"] {
   font-weight: bold;
 }
 
-.clear-unread-btn {
-  float: right;
+#subheader .clear-unread-btn {
+  position: relative;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: solid 1px #35587c;
+  border-radius: 3px;
+  margin-top: 1em
 }
 
-.clear-unread-btn:before {
-  content: '\2611';
-  font-weight: bold;
-  font-size: 1.4em;
+#subheader .clear-unread-btn:before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 40%;
+  left: 20%;
+  top: 25%;
+  border: solid 1px #35587c;
+  border-radius: 2px;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+#subheader .clear-unread-btn:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 100%;
+  left: 75%;
+  top: -20%;
+  border: solid 1px #35587c;
+  border-radius: 2px;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 

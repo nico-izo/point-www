@@ -11,7 +11,7 @@
     {% if unread_posts %}<a class="unread-count" href="/recent/unread">{{ unread_posts or 0 }}</a>{% endif %}
     {% endif %}
     {% if unread_posts %}
-      <a class="clear-unread-btn" href="/recent/clear?csrf_token={{csrf_token()}}" title="Отметить все как прочитанные"></a>
+    <a class="clear-unread-btn" href="/recent/clear?csrf_token={{csrf_token()}}" title="Отметить все как прочитанные"></a>
     {% endif %}
 {% endblock %}
 
