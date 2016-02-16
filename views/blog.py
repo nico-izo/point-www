@@ -441,11 +441,18 @@ def show_post(id):
                 c.to_comment_id = None
         comments = filter(lambda c: not c.to_comment_id, cout.itervalues())
 
+    sess = Session()
+    clear_post_input = sess['clear_post_input']
+    if clear_post_input:
+        sess['clear_post_input'] = False
+        sess.save()
+
     section = 'messages' if post.private else ''
 
     return render('/post.html', post=post, comments=comments,
                   comments_count=comments_count, tree=tree,
-                  errors=errors, section=section)
+                  errors=errors, section=section,
+                  clear_post_input=clear_post_input)
 
 def _files(files):
     if not files:
@@ -540,6 +547,10 @@ def add_post():
     to = parse_logins(m.group('to')) if m else []
 
     files = _files([])
+
+    sess = Session()
+    sess['clear_post_input'] = True
+    sess.save()
 
     try:
         id = posts.add_post(text, tags=tags, to=to, private=private, files=files)

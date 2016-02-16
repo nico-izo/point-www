@@ -7,6 +7,11 @@
 {#<script type="text/javascript" src="//{{settings.domain}}/js/jquery.autosize.js"></script>
 <script type="text/javascript" src="//{{settings.domain}}/js/jquery.tmpl.min.js"></script>
 <script type="text/javascript" src="//{{settings.domain}}/js/blog.js"></script>#}
+{% if clear_post_input %}
+<script>
+var clear_post_input = true;
+</script>
+{% endif %}
 {% endblock %}
 
 {% block title %}{{post.text[:64]}} — Блог {{env.owner.login}}{% endblock %}
