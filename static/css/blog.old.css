@@ -663,7 +663,6 @@ img.avatar {
     display: block;
     z-index: 3;
     /*transition: opacity .25s ease-in-out;*/
-    /*-webkit-transition: opacity .25s visibility .25s ease-in-out;*/
     /*visibility: visible;*/
     /*opacity: 1;*/
     animation: fadeIn .25s;

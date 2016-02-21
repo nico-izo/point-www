@@ -139,10 +139,6 @@ textarea {
     box-sizing: border-box;
     padding: .5em;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1), 0 1px 0 rgba(255, 255, 255, .75);
-    -webkit-transition: all .5s ease;
-    -moz-transition: all .5s ease;
-    -o-transition: all .5s ease;
-    -ms-transition: all .5s ease;
     transition: all .5s ease;
     background: #ffffff;
 }
@@ -456,10 +452,6 @@ img.avatar {
     -o-box-sizing: border-box;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
-    -webkit-transition: left .5s ease;
-    -moz-transition: left .5s ease;
-    -o-transition: left .5s ease;
-    -ms-transition: left .5s ease;
     transition: left .5s ease;
     box-shadow: 0 0 20px rgba(0,0,0,.25);
 }
@@ -942,10 +934,6 @@ img.avatar {
 #footer #menu .secret a {
     /*color: #eeeeee;
     text-shadow: none;*/
-    -webkit-transition: color .2s ease;
-    -moz-transition: color .2s ease;
-    -o-transition: color .2s ease;
-    -ms-transition: color .2s ease;
     transition: color .2s ease;
 }
 #footer #menu .secret a:hover {
