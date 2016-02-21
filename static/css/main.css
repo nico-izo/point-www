@@ -132,10 +132,6 @@ textarea {
     border: solid 1px;
     border-color: #afbfd0;
     outline: 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     box-sizing: border-box;
     padding: .5em;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1), 0 1px 0 rgba(255, 255, 255, .75);
@@ -282,10 +278,6 @@ img.avatar {
     background: #ffffff;
     border: solid 6px #35587c;
     width: 100%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -316,10 +308,6 @@ img.avatar {
     display: block;
     width: 100%;
     height: 100%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     box-sizing: border-box;
     padding: 4px;
     background: transparent;
@@ -334,10 +322,6 @@ img.avatar {
     border: 0;
     margin: 0;
     padding: 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     box-sizing: border-box;
     background: transparent url("/img/search-submit.png") center center no-repeat;
 }
@@ -447,10 +431,6 @@ img.avatar {
     background-color: #ffffff;
     background-image: url("/img/subhead-bg.png");
     border-right: solid 1px #d9d9d9;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     box-sizing: border-box;
     transition: left .5s ease;
     box-shadow: 0 0 20px rgba(0,0,0,.25);
@@ -586,10 +566,6 @@ img.avatar {
     height: 100%;
     margin: 0 auto;
     padding: 0 10px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -667,10 +643,6 @@ img.avatar {
     display: none;
     float: left;
     width: 200px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     box-sizing: border-box;
     padding: 10px;
     height: 0;
@@ -972,10 +944,6 @@ img.avatar {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     box-sizing: border-box;
     padding: 10px;
     background: #ffffff;

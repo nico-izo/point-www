@@ -47,10 +47,6 @@ img.avatar {
 
 #user-info #counters {
     box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     clear: both;
     /*margin: 3em 0;*/
     padding: 10px;
@@ -408,10 +404,6 @@ img.avatar {
     float: left;
     clear: both;
     box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     width: 100%;
     padding-left: 50px;
 }
@@ -421,10 +413,6 @@ img.avatar {
     float: left;
     clear: both;
     box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     width: 100%;
     padding-left: 50px;
 }
@@ -443,10 +431,6 @@ img.avatar {
 .recommendation-form > div {
     position: relative;
     box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     padding: 4px 0 4px 10px;
     margin-top: 10px;
     background: #ffffff;
@@ -578,10 +562,6 @@ img.avatar {
 #pager a {
     display: block;
     box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     text-align: center;
     font-size: 1.5em;
     text-decoration: none;
