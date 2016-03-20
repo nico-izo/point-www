@@ -359,9 +359,11 @@ def tag_posts(login=None):
 @api
 def show_post(id):
     post = posts.show_post(id)
-
+    post_dict = posts.show_post(id).todict()
+    post_dict['unread'] = posts.post_unread(id, env.user.id) if env.user.id \
+        else None
     return {
-        "post": post.todict(),
+        "post": post_dict,
         "comments": post.comments(cuser=env.user),
     }
 
