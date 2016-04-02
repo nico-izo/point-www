@@ -543,7 +543,7 @@ def add_post():
 
     private = bool(env.request.args('private'))
 
-    m = re.search(r'^\s*(?P<to>(?:@[a-z0-9_-]+[,\s]*)+)', text)
+    m = re.search(r'^\s*(?P<to>(?:@[a-zA-Z0-9_-]+[,\s]*)+)', text)
     to = parse_logins(m.group('to')) if m else []
 
     files = _files([])
