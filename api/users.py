@@ -10,7 +10,7 @@ from point.core.user import User, SubscribeError, check_auth, \
 from geweb.util import csrf
 import json
 
-from api import api
+from api import api, write_api
 
 
 @api
@@ -66,150 +66,37 @@ def my_info():
         raise NotAuthorized
     return users.info(login)
 
+@write_api
+def subscribe(login):
+    return users.subscribe(login)
 
-@csrf
-@check_auth
-@check_referer
-def subscribe():
-    if not env.owner or not env.owner.id:
-        raise NotFound
+@write_api
+def unsubscribe(login):
+    users.unsubscribe(login)
 
-    try:
-        res = users.subscribe(env.owner)
-    except SubscribeError:
-        raise Forbidden
-    except (AlreadySubscribed, AlreadyRequested):
-        res = False
+@write_api
+def subscribe_rec(login):
+    users.subscribe_rec(login)
 
-    # TODO: notify user if subscription request is sent
+@write_api
+def unsubscribe_rec(login):
+    users.unsubscribe_rec(login)
 
-    if env.request.is_xhr:
-        return Response(json.dumps({'ok': bool(res)}),
-                        mimetype='application/json')
+@write_api
+def add_to_whitelist(login):
+    users.add_to_whitelist(login)
 
-    return Response(redirect=env.request.referer)
+@write_api
+def del_from_whitelist(login):
+    users.del_from_whitelist(login)
 
-@csrf
-@check_auth
-@check_referer
-def unsubscribe():
-    if not env.owner or not env.owner.id:
-        raise NotFound
+@write_api
+def add_to_blacklist(login):
+    users.add_to_blacklist(login)
 
-    users.unsubscribe(env.owner)
-
-    if env.request.is_xhr:
-        return Response(json.dumps({'ok': True}), mimetype='application/json')
-
-    return Response(redirect=env.request.referer)
-
-@csrf
-@check_auth
-@check_referer
-def subscribe_rec():
-    if not env.owner or not env.owner.id:
-        raise NotFound
-
-    try:
-        res = users.subscribe_rec(env.owner)
-    except SubscribeError:
-        raise Forbidden
-    except (AlreadySubscribed, AlreadyRequested):
-        res = False
-
-    if env.request.is_xhr:
-        return Response(json.dumps({'ok': bool(res)}),
-                        mimetype='application/json')
-
-    return Response(redirect=env.request.referer)
-
-@csrf
-@check_auth
-@check_referer
-def unsubscribe_rec():
-    if not env.owner or not env.owner.id:
-        raise NotFound
-
-    users.unsubscribe_rec(env.owner)
-
-    if env.request.is_xhr:
-        return Response(json.dumps({'ok': True}), mimetype='application/json')
-
-    return Response(redirect=env.request.referer)
-
-@csrf
-@check_auth
-@check_referer
-def add_to_whitelist():
-    if not env.owner or not env.owner.id:
-        raise NotFound
-
-    try:
-        res = users.add_to_whitelist(env.owner)
-    except SubscribeError:
-        raise Forbidden
-    except AlreadySubscribed:
-        raise Forbidden
-
-    if env.request.is_xhr:
-        return Response(json.dumps({'ok': bool(res)}),
-                        mimetype='application/json')
-
-    return Response(redirect=env.request.referer)
-
-@csrf
-@check_auth
-@check_referer
-def del_from_whitelist():
-    if not env.owner or not env.owner.id:
-        raise NotFound
-
-    try:
-        res = users.del_from_whitelist(env.owner)
-    except SubscribeError:
-        raise Forbidden
-
-    if env.request.is_xhr:
-        return Response(json.dumps({'ok': bool(res)}),
-                        mimetype='application/json')
-
-    return Response(redirect=env.request.referer)
-
-@csrf
-@check_auth
-@check_referer
-def add_to_blacklist():
-    if not env.owner or not env.owner.id:
-        raise NotFound
-
-    try:
-        res = users.add_to_blacklist(env.owner)
-    except SubscribeError:
-        raise Forbidden
-
-    if env.request.is_xhr:
-        return Response(json.dumps({'ok': bool(res)}),
-                        mimetype='application/json')
-
-    return Response(redirect=env.request.referer)
-
-@csrf
-@check_auth
-@check_referer
-def del_from_blacklist():
-    if not env.owner or not env.owner.id:
-        raise NotFound
-
-    try:
-        res = users.del_from_blacklist(env.owner)
-    except SubscribeError:
-        raise Forbidden
-
-    if env.request.is_xhr:
-        return Response(json.dumps({'ok': bool(res)}),
-                        mimetype='application/json')
-
-    return Response(redirect=env.request.referer)
+@write_api
+def del_from_blacklist(login):
+    users.del_from_blacklist(login)
 
 @csrf
 @check_auth

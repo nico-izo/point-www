@@ -69,19 +69,19 @@ urls = (
     # WILL BE DEPRECATED soon
     (r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/subscribers/?$' % prefix, users.subscribers),
 
-    #(r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/s$' % prefix, 'POST', users.subscribe),
-    #(r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/s$' % prefix, 'DELETE', users.unsubscribe),
+    (r'^%s/user/s/(?P<login>[-a-zA-Z0-9]+)/?$' % prefix, 'POST', users.subscribe),
+    (r'^%s/user/s/(?P<login>[-a-zA-Z0-9]+)/?$' % prefix, 'DELETE', users.unsubscribe),
 
-    #(r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/sr$' % prefix, 'POST', users.subscribe_rec),
-    #(r'^%s/user/(?P<login>[-a-zA-Z0-9]+)/sr$' % prefix, 'DELETE', users.unsubscribe_rec),
+    (r'^%s/user/sr/(?P<login>[-a-zA-Z0-9]+)/?$' % prefix, 'POST', users.subscribe_rec),
+    (r'^%s/user/sr/(?P<login>[-a-zA-Z0-9]+)/?$' % prefix, 'DELETE', users.unsubscribe_rec),
 
     (r'^%s/user/wl/?$' % prefix, 'GET', users.whitelist),
-    #(r'^%s/user/wl$' % prefix, 'POST', users.add_to_whitelist),
-    #(r'^%s/user/wl$' % prefix, 'DELETE', users.del_from_whitelist),
+    (r'^%s/user/wl/(?P<login>[-a-zA-Z0-9]+)/?$' % prefix, 'POST', users.add_to_whitelist),
+    (r'^%s/user/wl/(?P<login>[-a-zA-Z0-9]+)/?$' % prefix, 'DELETE', users.del_from_whitelist),
 
     (r'^%s/user/bl/?$' % prefix, 'GET', users.blacklist),
-    #(r'^%s/user/bl$' % prefix, 'POST', users.add_to_blacklist),
-    #(r'^%s/user/bl$' % prefix, 'DELETE', users.del_from_blacklist),
+    (r'^%s/user/bl/(?P<login>[-a-zA-Z0-9]+)/?$' % prefix, 'POST', users.add_to_blacklist),
+    (r'^%s/user/bl/(?P<login>[-a-zA-Z0-9]+)/?$' % prefix, 'DELETE', users.del_from_blacklist),
     (r'^%s/user/blers/?$' % prefix, 'GET', users.blacklisters),
     # user info via id
     (r'^%s/user/id/(?P<uid>\d+)/?$' % prefix, users.user_info_byid),
