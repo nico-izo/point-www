@@ -11,6 +11,7 @@ from geweb.exceptions import NotFound, Forbidden
 from geweb.template import render
 from geweb.util import csrf
 from point.util import parse_date, validate_nickname
+from point.util import cache_get, cache_store
 from point.util.www import catch_errors, get_referer
 from user import WebUser
 from point.util.imgproc import make_avatar
@@ -185,8 +186,6 @@ def register():
     sess = Session()
     info = sess['reg_info'] or {}
 
-    print 'INFO', info
-
     if env.request.method == 'GET':
         try:
             del info['network']
@@ -203,6 +202,9 @@ def register():
             info['birthdate'] = None
 
         return render('/auth/register.html', fields=ULOGIN_FIELDS, info=info)
+
+    if cache_get('reg-ok:%s' % env.request.remote_host):
+        raise Forbidden
 
     try:
         network = info['network'] if 'network' in info else None
@@ -309,6 +311,7 @@ def register():
 
         env.user.set_info('avatar', '%s?r=%d' % (filename, randint(1000, 9999)))
 
+    cache_store('reg-ok:%s' % env.request.remote_host, 1, 1800)
     env.user.save()
 
     env.user.authenticate()
