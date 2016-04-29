@@ -297,6 +297,15 @@ var clear_post_input = true;
 
     {{ comments_list(comments) }}
 
+    <div class="pager clearfix">
+        {% if page > 1 %}
+        <a id="older" href="/{{post.id}}/{{page-1}}">Предыдущие</a>
+        {% endif %}
+        {% if page < last_page %}
+        <a id="newer" href="/{{post.id}}/{{page+1}}">Следующие</a>
+        {% endif %}
+    </div>
+
     {% if not post.archive %}
     <div id="post-reply" class="post">
         {% if env.user.id %}

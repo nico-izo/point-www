@@ -21,6 +21,7 @@ from datetime import datetime
 from random import randint
 import os
 from unidecode import unidecode
+import math
 
 from views.filters import markdown_filter
 
@@ -391,7 +392,7 @@ def tag_posts(tag, page=1):
                   tags=tag)
 
 @catch_errors
-def show_post(id):
+def show_post(id, page=None):
     post = posts.show_post(id)
 
     if env.request.method == 'POST':
@@ -418,6 +419,7 @@ def show_post(id):
     sess = Session()
 
     tree = env.request.args('tree')
+
     if tree:
         if tree.lower() in ('0', 'false', 'f'):
             tree = False
@@ -431,6 +433,26 @@ def show_post(id):
         env.user.get_profile('tree')
 
     comments_count = len(comments)
+
+    if comments_count > 1000:
+        climit = 100
+
+        tree = False
+
+        last_page = int(math.ceil(float(comments_count) / climit))
+
+        try:
+            page = int(page)
+        except (TypeError, ValueError):
+            page = last_page
+
+        cstart = (page - 1) * climit
+        cend = page * climit
+        comments = comments[cstart:cend]
+    else:
+        page = None
+        last_page = None
+
     if tree:
         cout = {}
         for c in comments:
@@ -452,6 +474,7 @@ def show_post(id):
     return render('/post.html', post=post, comments=comments,
                   comments_count=comments_count, tree=tree,
                   errors=errors, section=section,
+                  page=page, last_page=last_page,
                   clear_post_input=clear_post_input)
 
 def _files(files):

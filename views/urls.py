@@ -76,7 +76,8 @@ urls = (
 
     (r'/search/?$', search.search_posts),
 
-    (r'^/(?P<id>[a-z]+)$', blog.show_post),
+    (r'^/(?P<id>[a-z]+)/?$', blog.show_post),
+    (r'^/(?P<id>[a-z]+)/(?P<page>\d+)/?$', blog.show_post),
 
     (r'^/(?P<id>[a-z]+)/r$', blog.recommend),
     (r'^/(?P<id>[a-z]+)/ur$', blog.unrecommend),
