@@ -114,7 +114,7 @@ secret = 'my secret phrase'
 recaptcha_public_key = ''
 recaptcha_private_key = ''
 
-cache_markdown = True
+cache_markdown = 86400 * 3
 
 cache_expire_max = 86400 * 3
 

@@ -377,7 +377,7 @@ def tag_posts(tag, page=1):
         tag = [tag]
     tag = [t.decode('utf-8', 'ignore').replace(u"\xa0", " ") for t in tag]
 
-    plist = posts.select_posts(author=author, private=private, 
+    plist = posts.select_posts(author=author, private=private,
                                deny_anonymous=deny_anonymous, tags=tag,
                                offset=offset, limit=settings.page_limit+1)
 
@@ -403,13 +403,6 @@ def show_post(id, page=None):
                         (env.request.protocol,
                          post.author.login.lower(), settings.domain, id))
 
-    comments = post.comments(cuser=env.user)
-
-    if env.user.is_authorized():
-        posts.clear_unread_posts(id)
-        if comments:
-            posts.clear_unread_comments(id)
-
     errors = []
     if env.request.args('expired'):
         errors.append('expired')
@@ -432,7 +425,7 @@ def show_post(id, page=None):
     else:
         env.user.get_profile('tree')
 
-    comments_count = len(comments)
+    comments_count = post.comments_count()
 
     if comments_count > 1000:
         climit = 100
@@ -447,11 +440,16 @@ def show_post(id, page=None):
             page = last_page
 
         cstart = (page - 1) * climit
-        cend = page * climit
-        comments = comments[cstart:cend]
+        comments = post.comments(cuser=env.user, offset=cstart, limit=climit)
     else:
+        comments = post.comments(cuser=env.user)
         page = None
         last_page = None
+
+    if env.user.is_authorized():
+        posts.clear_unread_posts(id)
+        if comments:
+            posts.clear_unread_comments(id)
 
     if tree:
         cout = {}

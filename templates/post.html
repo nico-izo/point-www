@@ -44,7 +44,7 @@ var clear_post_input = true;
                 {% endif %}
             </div>
             <div class="text">
-                {{c.text|markdown|safe}}
+                {{c.text|markdown(post=post.id, comment=c.id)|safe}}
             </div>
             {% if c.files %}
             <div class="files clearfix">
@@ -186,7 +186,7 @@ var clear_post_input = true;
                 {% if env.owner.type=='feed' %}
                 {{ post.text|safe }}
                 {% else %}
-                {{post.text|markdown|safe}}
+                {{post.text|markdown(post=post.id)|safe}}
                 {% endif %}
             </div>
             {% if post.files %}

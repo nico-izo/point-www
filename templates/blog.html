@@ -140,7 +140,7 @@
             {% endif %}
             <div class="text"><div class="text-content">
                 {% if p.post.title %}<h1>{% if p.post.link %}<a href="{{p.post.link}}">{{p.post.title}}</a>{% else %}{{p.post.title}}{% endif %}</h1>{% endif %}
-                {{p.post.text|markdown|safe}}
+                {{p.post.text|markdown(post=p.post.id)|safe}}
             </div>
             {% if p.post.files %}
             <div class="files clearfix">

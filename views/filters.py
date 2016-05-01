@@ -259,13 +259,22 @@ md.inlinePatterns['link'] = ColonLinkPattern(LINK_RE, md)
 
 
 @environmentfilter
-def markdown_filter(environ, text, img=False):
+def markdown_filter(environ, text, post=None, comment=None, img=False):
     if not text:
         return ''
 
     if settings.cache_markdown:
-        h = md5(text.encode('utf-8')).hexdigest()
-        mdstring = cache_get('md:%s' % h)
+        key = 'md:'
+        if post:
+            key = '%s%s' % (key, post)
+
+            if comment:
+                key = '%s.%s' % (key, comment)
+
+        else:
+            key = '%s%s' % (key, md5(text.encode('utf-8')).hexdigest())
+
+        mdstring = cache_get(key)
 
         if mdstring:
             return mdstring
@@ -278,7 +287,7 @@ def markdown_filter(environ, text, img=False):
     md.reset()
 
     if settings.cache_markdown:
-        cache_store('md:%s' % h, mdstring, 3600)
+        cache_store(key, mdstring, settings.cache_markdown)
     return mdstring
 
 _nl_re = re.compile(r'[\r\n]+')
