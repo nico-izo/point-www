@@ -38,6 +38,10 @@
                 {% if info.homepage %}<p>
                 <a href="{% if not info.homepage.startswith('http://') and not info.homepage.startswith('https://') %}http://{% endif %}{{info.homepage}}" rel="nofollow">{{info.homepage}}</a>
                 </p>{% endif %}
+                {% set tune = env.owner.get_tune() %}
+                {% if tune %}
+                <p>Слушает: {{tune['artist']}} &mdash; {{tune['title']}}</p>
+                {% endif %}
             </div>
 
             <div id="counters">
