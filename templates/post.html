@@ -198,6 +198,9 @@ var clear_post_input = true;
                 {% endfor %}
             </div>
             {% endif %}
+            {% if post.tune %}
+            <div class="post-tune">Текущий трек: {{post.tune['artist']}} &mdash; {{post.tune['title']}}</div>
+            {% endif %}
             {% if post.tags %}<div class="tags">{% for t in post.tags %}<a class="tag" href="//{{post.author.login|lower}}.{{settings.domain}}/?tag={{t|urlencode}}">{{t}}</a>{% endfor %}</div>{% endif %}
 
             {% set rec_users = post.recommended_users() %}
