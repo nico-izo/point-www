@@ -178,6 +178,15 @@ def subscribers_byid(uid):
     return env.owner.subscribers()
 
 @api
+def unread():
+    return {
+        'posts': env.user.unread_posts_count('post'),
+        'comments': env.user.unread_comments_count('post'),
+        'private_posts': env.user.unread_posts_count('private'),
+        'private_comments': env.user.unread_comments_count('private')
+    }
+
+@api
 @check_auth
 def blacklist():
     env.owner = env.user
