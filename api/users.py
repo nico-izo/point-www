@@ -178,7 +178,7 @@ def subscribers_byid(uid):
     return env.owner.subscribers()
 
 @api
-def unread():
+def unread_counters():
     if not env.user or not env.user.id:
         raise NotAuthorized
     return {
