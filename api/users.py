@@ -180,7 +180,7 @@ def subscribers_byid(uid):
 @api
 def unread():
     if not env.user or not env.user.id:
-        raise NotFound
+        raise NotAuthorized
     return {
         'posts': env.user.unread_posts_count('post'),
         'comments': env.user.unread_comments_count('post'),
