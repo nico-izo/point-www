@@ -61,3 +61,14 @@
     background: #404040;
     color: #ffffff;
 }
+
+.post-tune {
+    color: #a0a0a0;
+    margin-bottom: .5em;
+}
+
+.post-tune:before {
+    content: '\266a';
+    font-size: 1.2em;
+    margin-right: .25em;
+}
