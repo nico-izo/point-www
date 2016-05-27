@@ -12,6 +12,7 @@ from geweb.template import render
 from geweb.util import csrf
 from point.util import parse_date, validate_nickname
 from point.util import cache_get, cache_store
+from point.util import timestamp
 from point.util.www import catch_errors, get_referer
 from user import WebUser
 from point.util.imgproc import make_avatar
@@ -193,6 +194,7 @@ def register():
         except (KeyError, TypeError):
             pass
         sess['reg_info'] = info
+        sess['reg_start'] = timestamp(datetime.now())
         sess.save()
 
         try:
@@ -204,6 +206,21 @@ def register():
         return render('/auth/register.html', fields=ULOGIN_FIELDS, info=info)
 
     if cache_get('reg-ok:%s' % env.request.remote_host):
+        raise Forbidden
+
+    hi1 = env.request.args('hi1')
+    try:
+        hi2 = int(env.request.args('hi2', 0))
+    except ValueError:
+        hi2 = 0
+
+    #try:
+    #    h = hi2 / (timestamp(datetime.now()) - int(sess['reg_start']))
+    #except:
+    #    raise Forbidden
+    #finally:
+    #    pass
+    if hi2 < 5:
         raise Forbidden
 
     try:
@@ -221,6 +238,10 @@ def register():
     info['gender'] = _gender(env.request.args('gender'))
 
     login = env.request.args('login', '').strip()
+
+    if hi1 != login:
+        raise Forbidden
+
     if login and validate_nickname(login):
         try:
             u = User('login', login)
@@ -275,6 +296,8 @@ def register():
         else:
             tmpl = '/auth/register.html'
 
+        sess['reg_start'] = timestamp(datetime.now())
+        sess.save()
         return render(tmpl, fields=ULOGIN_FIELDS, info=info, errors=errors)
 
     for p in ['name', 'email', 'birthdate', 'gender', 'location', 'about', 'homepage']:
