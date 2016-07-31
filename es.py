@@ -14,7 +14,8 @@ import elasticsearch
 import geweb.db.pgsql as db
 from point.util import b26
 from pprint import pprint
-es = elasticsearch.Elasticsearch()
+#es = elasticsearch.Elasticsearch()
+es = Elasticsearch(host=settings.elasticsearch_host, port=settings.elasticsearch_port)
 
 def indices():
     idx_settings = {

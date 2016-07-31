@@ -18,9 +18,11 @@ def search_posts():
 
     user = env.owner if env.owner else None
 
-    results, has_next, total = search.search_posts(search_text, user=user,
-                               offset=offset, limit=settings.page_limit)
+    try:
+        results, has_next, total = search.search_posts(search_text, user=user,
+                           offset=offset, limit=settings.page_limit)
 
-    return render('/search.html', search_text=search_text, results=results,
-                  page=page, has_next=has_next, total=total)
-
+        return render('/search.html', search_text=search_text, results=results,
+                      page=page, has_next=has_next, total=total)
+    except:
+        return render('/search-error.html')

@@ -37,6 +37,9 @@ websocket_port = 8089
 websocket_url = '/ws'
 websocket_timeout = 60 #540
 
+elasticsearch_host = '127.0.0.1'
+elasticsearch_port = 9200
+
 domain = 'point.im'
 
 lang = 'en'
