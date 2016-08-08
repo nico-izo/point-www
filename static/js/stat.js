@@ -12,7 +12,7 @@ function dates (list) {
 }
 
 $(function () {
-    $.getJSON("/files/stat/posters_weekly.json").success(function (users) {
+    $.getJSON("/stat/posters_weekly.json").success(function (users) {
         $("#stat-posters-weekly").highcharts({
             chart: {type: "bar"},
             title: {text: "Топ 20 постеров", x: -20},
@@ -42,7 +42,7 @@ $(function () {
         });
     });
 
-    $.getJSON("/files/stat/commenters_weekly.json").success(function (users) {
+    $.getJSON("/stat/commenters_weekly.json").success(function (users) {
         $("#stat-commenters-weekly").highcharts({
             chart: {type: "bar"},
             title: {text: "Топ 20 комментаторов", x: -20},
@@ -72,7 +72,7 @@ $(function () {
         });
     });
 
-    $.getJSON("/files/stat/most_commented_weekly.json").success(function (users) {
+    $.getJSON("/stat/most_commented_weekly.json").success(function (users) {
         $("#stat-most-commented-weekly").highcharts({
             chart: {type: "bar"},
             title: {text: "Топ 20 обсуждаемых пользователей", x: -20},
@@ -103,8 +103,8 @@ $(function () {
     });
 
     $.when(
-        $.getJSON("/files/stat/posts_avg.json"),
-        $.getJSON("/files/stat/comments_avg.json")
+        $.getJSON("/stat/posts_avg.json"),
+        $.getJSON("/stat/comments_avg.json")
     ).done(function (posts, comments) {
         $("#stat-avg").highcharts({
             chart: {type: "column"},
@@ -139,7 +139,7 @@ $(function () {
         });
     });
 
-    $.getJSON("/files/stat/users.json").success(function (users) {
+    $.getJSON("/stat/users.json").success(function (users) {
         $("#stat-users").highcharts({
             title: {text: "Зарегистрировавшиеся пользователи", x: -20},
             xAxis: {
@@ -169,8 +169,8 @@ $(function () {
     });
 
     $.when(
-        $.getJSON("/files/stat/posts.json"),
-        $.getJSON("/files/stat/comments.json")
+        $.getJSON("/stat/posts.json"),
+        $.getJSON("/stat/comments.json")
     ).done(function (posts, comments) {
         $("#stat-posts").highcharts({
             title: {text: "Посты и комментарии", x: -20},
@@ -208,7 +208,7 @@ $(function () {
         });
     });
 
-    $.getJSON("/files/stat/blacklisted.json").success(function (users) {
+    $.getJSON("/stat/blacklisted.json").success(function (users) {
         $("#stat-blacklisted").highcharts({
             chart: {type: "bar"},
             title: {text: "Топ 20 ненавидимых", x: -20},
@@ -237,7 +237,7 @@ $(function () {
         });
     });
 
-    $.getJSON("/files/stat/blacklisters.json").success(function (users) {
+    $.getJSON("/stat/blacklisters.json").success(function (users) {
         $("#stat-blacklisters").highcharts({
             chart: {type: "bar"},
             title: {text: "Топ 20 обидчивых и ранимых", x: -20},
