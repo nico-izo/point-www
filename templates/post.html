@@ -221,7 +221,7 @@ var clear_post_input = true;
 
                 {% if env.user.id and not post.archive %}
                 <div class="action-labels">
-                    <label class="reply-label" for="reply-{{post.id}}"}>ответить</label>
+                    <label class="reply-label" for="reply-{{post.id}}">ответить</label>
                     {% if not post.private and post.author.login!=env.user.login %}
                         {% if post.check_recommended(env.user) %}
                         <a class="recommend" href="//{{post.author.login|lower}}.{{settings.domain}}/{{post.id}}/ur?csrf_token={{csrf_token()}}">не рекомендовать<!--span class="count">8</span--></a>
